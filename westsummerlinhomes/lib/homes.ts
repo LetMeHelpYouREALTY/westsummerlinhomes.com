@@ -1,4 +1,5 @@
 import 'server-only';
+import { propertyImage } from './images';
 
 // Sample home data - in production, this would come from your MLS API or database
 const sampleHomes = [
@@ -305,7 +306,10 @@ export async function getHomes(): Promise<Home[]> {
   // In production, this would fetch from your MLS API or database
   // const homes = await fetchMLSHomes();
   
-  return sampleHomes;
+  return sampleHomes.map((home) => ({
+    ...home,
+    imageUrl: propertyImage(home.mlsNumber),
+  }));
 }
 
 export async function getHomeByMLS(mlsNumber: string): Promise<Home | null> {
@@ -319,7 +323,10 @@ export async function getHomeByMLS(mlsNumber: string): Promise<Home | null> {
     return null;
   }
   
-  return home;
+  return {
+    ...home,
+    imageUrl: propertyImage(home.mlsNumber),
+  };
 }
 
 // Future function for real MLS API integration

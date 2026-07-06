@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { Bed, Bath, Square, MapPin, Heart, Share2 } from 'lucide-react'
+import { siteImages } from '@/lib/images'
 
 interface Property {
   id: string
@@ -26,7 +27,7 @@ const sampleProperties: Property[] = [
     beds: 4,
     baths: 3.5,
     sqft: 3200,
-    image: '/property-1.jpg',
+    image: siteImages.property(1),
     status: 'for-sale',
     featured: true
   },
@@ -38,7 +39,7 @@ const sampleProperties: Property[] = [
     beds: 3,
     baths: 2.5,
     sqft: 2400,
-    image: '/property-2.jpg',
+    image: siteImages.property(2),
     status: 'for-sale',
     featured: true
   },
@@ -50,7 +51,7 @@ const sampleProperties: Property[] = [
     beds: 5,
     baths: 4,
     sqft: 3800,
-    image: '/property-3.jpg',
+    image: siteImages.property(3),
     status: 'for-sale',
     featured: true
   }

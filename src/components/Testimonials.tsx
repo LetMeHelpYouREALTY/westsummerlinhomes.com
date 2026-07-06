@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
+import { siteImages } from '@/lib/images'
 
 interface Testimonial {
   id: string
@@ -20,7 +21,7 @@ const testimonials: Testimonial[] = [
     id: '1',
     name: 'Sarah Johnson',
     role: 'Home Buyer',
-    image: '/testimonial-1.jpg',
+    image: siteImages.testimonial(1),
     rating: 5,
     content: 'Working with West Summerlin Homes was an absolute pleasure. They found us the perfect home in Red Rock Country Club within our budget and timeline. Their knowledge of the area and attention to detail made the entire process seamless.',
     property: 'Red Rock Country Club Villa',
@@ -30,7 +31,7 @@ const testimonials: Testimonial[] = [
     id: '2',
     name: 'Michael Chen',
     role: 'Home Seller',
-    image: '/testimonial-2.jpg',
+    image: siteImages.testimonial(2),
     rating: 5,
     content: 'I was amazed at how quickly they sold my home above asking price. Their marketing strategy and professional photography showcased my property perfectly. The entire team was responsive and kept me informed every step of the way.',
     property: 'Summerlin West Contemporary',
@@ -40,7 +41,7 @@ const testimonials: Testimonial[] = [
     id: '3',
     name: 'Jennifer Rodriguez',
     role: 'Investor',
-    image: '/testimonial-3.jpg',
+    image: siteImages.testimonial(3),
     rating: 5,
     content: 'As a real estate investor, I appreciate working with agents who understand market trends and investment potential. West Summerlin Homes provided invaluable insights that helped me make informed decisions and maximize my returns.',
     property: 'The Ridges Luxury Estate',
@@ -50,7 +51,7 @@ const testimonials: Testimonial[] = [
     id: '4',
     name: 'David Thompson',
     role: 'First-time Buyer',
-    image: '/testimonial-4.jpg',
+    image: siteImages.testimonial(4),
     rating: 5,
     content: 'Being a first-time homebuyer, I had many questions and concerns. The team at West Summerlin Homes patiently guided me through every step, explaining the process clearly and ensuring I felt confident in my decision.',
     property: 'Summerlin Starter Home',

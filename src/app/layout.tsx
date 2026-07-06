@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
+import { siteImages } from '@/lib/images'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.jpg',
+        url: siteImages.og,
         width: 1200,
         height: 630,
         alt: 'West Summerlin Homes - Luxury Real Estate',
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'West Summerlin Homes | Luxury Real Estate in Summerlin, Las Vegas',
     description: 'Discover luxury homes for sale in West Summerlin, Las Vegas.',
-    images: ['/og-image.jpg'],
+    images: [siteImages.og],
   },
   robots: {
     index: true,
