@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
+      { protocol: 'https', hostname: 'cdn.jsdelivr.net', pathname: '/gh/**' },
       { protocol: 'https', hostname: 'cdn.westsummerlinhomes.com', pathname: '/**' },
       { protocol: 'https', hostname: 'images.westsummerlinhomes.com', pathname: '/**' },
       { protocol: 'https', hostname: 'imagedelivery.net', pathname: '/**' },

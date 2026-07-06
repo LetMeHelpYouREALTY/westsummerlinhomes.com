@@ -1,14 +1,12 @@
-/**
- * Image URLs — local /public by default; Cloudflare CDN when NEXT_PUBLIC_IMAGE_CDN_URL is set.
- */
-const IMAGE_CDN = process.env.NEXT_PUBLIC_IMAGE_CDN_URL
+/** Canonical image base — jsDelivr serves repo assets until Vercel /images/ is live. */
+export const IMAGE_REPO_BASE =
+  'https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main'
+
+const IMAGE_CDN = process.env.NEXT_PUBLIC_IMAGE_CDN_URL ?? IMAGE_REPO_BASE
 
 export function cdnImage(path: string): string {
   const normalized = path.startsWith('/') ? path : `/${path}`
-  if (IMAGE_CDN) {
-    return `${IMAGE_CDN.replace(/\/$/, '')}${normalized}`
-  }
-  return normalized
+  return `${IMAGE_CDN.replace(/\/$/, '')}${normalized}`
 }
 
 export function propertyImage(mlsNumber: string): string {
