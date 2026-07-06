@@ -1,11 +1,10 @@
 /**
  * Image URL helper for static HTML pages.
- * Serves from jsDelivr (GitHub repo) so images work before Vercel redeploys /images/.
+ * Default CDN: Cloudflare R2 at cdn.westsummerlinhomes.com
  * Override: window.IMAGE_CDN = 'https://your-cdn.com' before this script loads.
  */
 (function () {
-  var DEFAULT_CDN =
-    'https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main';
+  var DEFAULT_CDN = 'https://cdn.westsummerlinhomes.com';
   var CDN = window.IMAGE_CDN || DEFAULT_CDN;
 
   window.IMAGE_CDN = CDN;
