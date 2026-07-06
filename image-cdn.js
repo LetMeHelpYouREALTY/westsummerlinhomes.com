@@ -1,15 +1,13 @@
 /**
- * Cloudflare image CDN helper for static HTML pages.
- * Override by setting window.IMAGE_CDN before this script loads.
+ * Image URL helper for static HTML pages.
+ * Uses local /images/ by default; set window.IMAGE_CDN before load for Cloudflare.
  */
 (function () {
-  var CDN = window.IMAGE_CDN || 'https://cdn.westsummerlinhomes.com';
-
-  window.IMAGE_CDN = CDN;
+  var CDN = window.IMAGE_CDN || '';
 
   window.cdnImage = function (path) {
     var normalized = path.charAt(0) === '/' ? path : '/' + path;
-    return CDN + normalized;
+    return CDN ? CDN.replace(/\/$/, '') + normalized : normalized;
   };
 
   window.siteImages = {

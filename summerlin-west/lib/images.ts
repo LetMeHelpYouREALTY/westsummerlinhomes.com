@@ -1,13 +1,14 @@
 /**
- * Cloudflare R2 / Images CDN configuration.
- * Photos are stored on Cloudflare — set NEXT_PUBLIC_IMAGE_CDN_URL to your bucket's custom domain.
+ * Image URLs — local /public by default; Cloudflare CDN when NEXT_PUBLIC_IMAGE_CDN_URL is set.
  */
-const IMAGE_CDN =
-  process.env.NEXT_PUBLIC_IMAGE_CDN_URL ?? 'https://cdn.westsummerlinhomes.com'
+const IMAGE_CDN = process.env.NEXT_PUBLIC_IMAGE_CDN_URL
 
 export function cdnImage(path: string): string {
   const normalized = path.startsWith('/') ? path : `/${path}`
-  return `${IMAGE_CDN}${normalized}`
+  if (IMAGE_CDN) {
+    return `${IMAGE_CDN.replace(/\/$/, '')}${normalized}`
+  }
+  return normalized
 }
 
 export function propertyImage(mlsNumber: string): string {

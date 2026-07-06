@@ -7,7 +7,9 @@
     { "src": "services.html", "use": "@vercel/static" },
     { "src": "sitemap.xml", "use": "@vercel/static" },
     { "src": "robots.txt", "use": "@vercel/static" },
-    { "src": "image-cdn.js", "use": "@vercel/static" }
+    { "src": "image-cdn.js", "use": "@vercel/static" },
+    { "src": "images/**", "use": "@vercel/static" },
+    { "src": "properties/**", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/about", "dest": "/about.html" },
@@ -19,6 +21,8 @@
     { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
     { "src": "/robots.txt", "dest": "/robots.txt" },
     { "src": "/image-cdn.js", "dest": "/image-cdn.js" },
+    { "src": "/images/(.*)", "dest": "/images/$1" },
+    { "src": "/properties/(.*)", "dest": "/properties/$1" },
     { "src": "/", "dest": "/index.html" }
   ]
 }
