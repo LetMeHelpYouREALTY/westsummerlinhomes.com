@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Dr. Janet Duffy - Premium Real Estate Services</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
     <style>
       realscout-office-listings {
@@ -54,6 +55,23 @@
             color: #3498db;
         }
 
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: white;
+            padding: 2px;
+        }
+
         .nav-links {
             display: flex;
             list-style: none;
@@ -72,7 +90,7 @@
 
         /* Page Header */
         .page-header {
-            background: linear-gradient(rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8)), url('/images/hero-bg.jpg');
+            background: linear-gradient(rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8)), url('https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg');
             background-size: cover;
             background-position: center;
             background-size: cover;
@@ -321,7 +339,10 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo">Dr. Janet Duffy</div>
+            <a href="index.html" class="logo">
+                <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" alt="Dr. Janet Duffy Real Estate" width="42" height="42" loading="eager">
+                <span>Dr. Janet Duffy</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -345,7 +366,7 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <img src="/images/dr-janet-duffy.jpg" alt="Dr. Janet Duffy, Las Vegas real estate agent" width="300" height="300" loading="lazy">
+                    <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/dr-janet-duffy.jpg" alt="Dr. Janet Duffy, Las Vegas real estate agent" width="300" height="300" loading="lazy">
                 </div>
                 <div class="about-text">
                     <h3>Licensed Professional with a Doctorate in Excellence</h3>
