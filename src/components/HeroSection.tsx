@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { Search, MapPin, Home, DollarSign } from 'lucide-react'
+import { siteImages } from '@/lib/images'
 
 export default function HeroSection() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -19,7 +20,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-bg.jpg"
+          src={siteImages.hero}
           alt="Luxury homes in West Summerlin, Las Vegas"
           fill
           priority

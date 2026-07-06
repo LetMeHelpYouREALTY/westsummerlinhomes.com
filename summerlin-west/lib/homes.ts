@@ -1,6 +1,8 @@
 // This will eventually integrate with RealScout API and Google Sheets
 // For now, using mock data to get the site running
 
+import { propertyImage } from './images';
+
 export interface Home {
   mlsNumber: string;
   address: string;
@@ -123,7 +125,12 @@ export async function getHomes(): Promise<Home[]> {
   // return mergeHomeData(realScoutHomes, incentives);
   
   // For now, return mock data
-  return mockHomes.sort((a, b) => a.trueCost - b.trueCost);
+  return mockHomes
+    .map((home) => ({
+      ...home,
+      photoUrl: propertyImage(home.mlsNumber),
+    }))
+    .sort((a, b) => a.trueCost - b.trueCost);
 }
 
 // Future RealScout integration
