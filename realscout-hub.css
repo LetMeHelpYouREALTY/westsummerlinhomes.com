@@ -1,0 +1,63 @@
+/* Shared RealScout buyer engagement sections */
+.search-section {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 3rem 0;
+}
+
+.search-container {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.search-container h3 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.realscout-search-container {
+    width: 100% !important;
+}
+
+realscout-advanced-search {
+    --rs-as-button-text-color: #ffffff;
+    --rs-as-background-color: transparent;
+    --rs-as-button-color: #3498db;
+    --rs-as-widget-width: 100% !important;
+    --rs-as-border-radius: 0.5rem;
+    --rs-as-font-family: Arial, sans-serif;
+    --rs-as-input-height: 48px;
+    --rs-as-button-hover-color: #2980b9;
+}
+
+realscout-advanced-search input {
+    border: 1px solid #d1d5db !important;
+    border-radius: 0.5rem !important;
+    padding: 0.75rem !important;
+    font-size: 1rem !important;
+}
+
+realscout-advanced-search button {
+    background-color: #3498db !important;
+    border-radius: 0.5rem !important;
+    font-weight: 500 !important;
+}
+
+realscout-advanced-search button:hover {
+    background-color: #2980b9 !important;
+}
+
+.realscout-listings {
+    background: #f8f9fa;
+    padding: 60px 0;
+}
+
+.realscout-listings .section-title {
+    margin-bottom: 2rem;
+}
