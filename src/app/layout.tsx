@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import { siteImages } from '@/lib/images'
 
@@ -81,8 +82,23 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
         <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              realscout-office-listings {
+                --rs-listing-divider-color: rgb(101, 141, 172);
+                width: 100%;
+              }
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.className} antialiased bg-white text-neutral-900`}>
+        <Script
+          src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
+          type="module"
+          strategy="afterInteractive"
+        />
         {children}
       </body>
     </html>
