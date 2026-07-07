@@ -6,6 +6,7 @@
     <title>Services - Dr. Janet Duffy Real Estate</title>
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <style>
       realscout-office-listings {
         --rs-listing-divider-color: rgb(101, 141, 172);
@@ -246,6 +247,24 @@
             margin-bottom: 3rem;
         }
 
+        .calendly-section {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .calendly-section .calendly-inline-widget {
+            margin: 2rem auto 0;
+            max-width: 1000px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .calendly-popup {
+            cursor: pointer;
+        }
+
         .section-title {
             text-align: center;
             font-size: 2.5rem;
@@ -301,6 +320,7 @@
                 <li><a href="neighborhoods.html">Neighborhoods</a></li>
                 <li><a href="testimonials.html">Testimonials</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="calendly-popup">Schedule</a></li>
             </ul>
         </nav>
     </header>
@@ -326,7 +346,7 @@
                         <li>Closing coordination and support</li>
                         <li>Post-purchase assistance</li>
                     </ul>
-                    <a href="#contact" class="service-cta">Get Started</a>
+                    <a href="#" class="service-cta calendly-popup">Get Started</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">💰</div>
@@ -338,7 +358,7 @@
                         <li>Strategic marketing campaigns</li>
                         <li>Multiple offer management</li>
                     </ul>
-                    <a href="#contact" class="service-cta">Learn More</a>
+                    <a href="#" class="service-cta calendly-popup">Learn More</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📊</div>
@@ -350,7 +370,7 @@
                         <li>Market trend forecasting</li>
                         <li>Property value optimization</li>
                     </ul>
-                    <a href="#contact" class="service-cta">Request Analysis</a>
+                    <a href="#" class="service-cta calendly-popup">Request Analysis</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🏢</div>
@@ -362,7 +382,7 @@
                         <li>Property management referrals</li>
                         <li>Portfolio diversification strategy</li>
                     </ul>
-                    <a href="#contact" class="service-cta">Explore Options</a>
+                    <a href="#" class="service-cta calendly-popup">Explore Options</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🤝</div>
@@ -374,7 +394,7 @@
                         <li>Local amenities and services</li>
                         <li>Transition support and guidance</li>
                     </ul>
-                    <a href="#contact" class="service-cta">Plan Relocation</a>
+                    <a href="#" class="service-cta calendly-popup">Plan Relocation</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">⚖️</div>
@@ -386,7 +406,7 @@
                         <li>Dispute resolution support</li>
                         <li>Regulatory compliance assistance</li>
                     </ul>
-                    <a href="#contact" class="service-cta">Get Consultation</a>
+                    <a href="#" class="service-cta calendly-popup">Get Consultation</a>
                 </div>
             </div>
         </div>
@@ -429,10 +449,21 @@
         </div>
     </section>
 
+    <section id="contact" class="calendly-section">
+        <div class="container">
+            <h2 class="section-title">Schedule a Consultation</h2>
+            <p>Book an in-person real estate consultation with Dr. Janet Duffy.</p>
+            <p><a href="#" class="service-cta calendly-popup">Schedule time with me</a></p>
+            <div class="calendly-inline-widget" data-url="https://calendly.com/drjanduffy/in-person-real-estate-consultation" style="min-width:320px;height:700px;"></div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved.</p>
+            <p>&copy; 2025 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
         </div>
     </footer>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script src="/calendly.js"></script>
 </body>
 </html>
