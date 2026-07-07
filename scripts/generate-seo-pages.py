@@ -10,10 +10,10 @@ NAP = {
     "phone": "702-222-1964",
     "phone_tel": "7022221964",
     "email": "janet@westsummerlinhomes.com",
-    "street": "1234 Summerlin Parkway",
+    "street": "12446 Weather Ridge Pl",
     "city": "Las Vegas",
     "state": "NV",
-    "zip": "89134",
+    "zip": "89138",
     "license": "S.0197614.LLC",
 }
 

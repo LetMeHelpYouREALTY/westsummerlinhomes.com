@@ -30,7 +30,7 @@ export interface Home {
 const mockHomes: Home[] = [
   {
     mlsNumber: "MLS123456",
-    address: "1234 Summerlin Parkway",
+    address: "12446 Weather Ridge Pl",
     community: "The Vistas",
     builder: "Lennar",
     listPrice: 725000,

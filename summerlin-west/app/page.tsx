@@ -140,7 +140,7 @@ export default async function HomePage() {
       {/* Sticky CTA Bar */}
       <div className="sticky-cta">
         <button className="sticky-cta-button">
-          📞 Call Now: (702) 555-0123
+          📞 Call Now: (702) 222-1964
         </button>
         <button className="sticky-cta-button">
           📧 Get Daily Updates
