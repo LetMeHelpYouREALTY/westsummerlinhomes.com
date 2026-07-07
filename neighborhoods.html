@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>West Summerlin Neighborhoods | Dr. Janet Duffy Real Estate</title>
+    <meta name="description" content="Explore West Summerlin and Summerlin West neighborhoods with Dr. Janet Duffy. Compare price ranges, amenities, and homes for sale in Red Rock, The Ridges, The Trails, and more.">
+    <link rel="canonical" href="https://www.westsummerlinhomes.com/neighborhoods.html">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
+    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <style>
+      realscout-office-listings {
+        --rs-listing-divider-color: rgb(101, 141, 172);
+        width: 100%;
+      }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: white;
+            padding: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #3498db;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8)), url('https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .intro {
+            padding: 60px 0 20px;
+            text-align: center;
+        }
+
+        .intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .neighborhoods {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .neighborhoods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .neighborhood-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .neighborhood-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .neighborhood-image {
+            height: 200px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .neighborhood-info {
+            padding: 1.5rem;
+        }
+
+        .neighborhood-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .neighborhood-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .neighborhood-price {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .neighborhood-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .neighborhood-tag {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .neighborhood-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #6b7280;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        .realscout-listings {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #3498db;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .calendly-popup {
+            cursor: pointer;
+        }
+
+        .cta .calendly-inline-widget {
+            margin: 2rem auto 0;
+            max-width: 1000px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .neighborhood-actions {
+                flex-direction: column;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" alt="Dr. Janet Duffy Real Estate" width="42" height="42" loading="eager">
+                <span>Dr. Janet Duffy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="properties.html">Properties</a></li>
+                <li><a href="neighborhoods.html" class="active">Neighborhoods</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="calendly-popup">Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>West Summerlin Neighborhoods</h1>
+            <p>Compare master-planned communities, price ranges, and amenities across Summerlin West and the greater Las Vegas valley.</p>
+        </div>
+    </section>
+
+    <section class="intro">
+        <div class="container">
+            <p>Dr. Janet Duffy helps buyers and sellers navigate West Summerlin's distinct villages — from golf-course estates to walkable retail hubs. Call <a href="tel:7022221964">702-222-1964</a> or <a href="#" class="calendly-popup">schedule a consultation</a> to tour a neighborhood.</p>
+        </div>
+    </section>
+
+    <section class="neighborhoods">
+        <div class="container">
+            <h2 class="section-title">Featured Neighborhoods</h2>
+            <div class="neighborhoods-grid">
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">Red Rock Country Club</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">Red Rock Country Club</h3>
+                        <p class="neighborhood-description">Golf-course living with resort-style pools, tennis, and dining near Red Rock Canyon.</p>
+                        <p class="neighborhood-price">$800K – $3M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Golf course</span>
+                            <span class="neighborhood-tag">Country club</span>
+                            <span class="neighborhood-tag">Tennis</span>
+                        </div>
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">The Ridges</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">The Ridges</h3>
+                        <p class="neighborhood-description">Custom luxury homes on elevated lots with Strip and mountain views.</p>
+                        <p class="neighborhood-price">$1.2M – $5M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Mountain views</span>
+                            <span class="neighborhood-tag">Luxury</span>
+                            <span class="neighborhood-tag">Custom homes</span>
+                        </div>
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">Summerlin Centre</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">Summerlin Centre</h3>
+                        <p class="neighborhood-description">Urban-style living steps from Downtown Summerlin shopping, dining, and entertainment.</p>
+                        <p class="neighborhood-price">$400K – $1.2M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Walkable</span>
+                            <span class="neighborhood-tag">Shopping</span>
+                            <span class="neighborhood-tag">Entertainment</span>
+                        </div>
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">The Trails</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">The Trails</h3>
+                        <p class="neighborhood-description">Established Summerlin village with mature landscaping, parks, and trail access.</p>
+                        <p class="neighborhood-price">$500K – $1.5M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Trails</span>
+                            <span class="neighborhood-tag">Parks</span>
+                            <span class="neighborhood-tag">Established</span>
+                        </div>
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">The Paseos</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">The Paseos</h3>
+                        <p class="neighborhood-description">Village center with community pool, parks, and quick access to Summerlin Parkway.</p>
+                        <p class="neighborhood-price">$450K – $900K</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Pool</span>
+                            <span class="neighborhood-tag">Parks</span>
+                            <span class="neighborhood-tag">Commute access</span>
+                        </div>
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">Reverence</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">Reverence</h3>
+                        <p class="neighborhood-description">Newer village with contemporary architecture and proximity to Mount Charleston views.</p>
+                        <p class="neighborhood-price">$550K – $1.3M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Newer builds</span>
+                            <span class="neighborhood-tag">Mountain views</span>
+                            <span class="neighborhood-tag">Summerlin West</span>
+                        </div>
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="realscout-listings">
+        <div class="container">
+            <h2 class="section-title">Homes for Sale by Neighborhood</h2>
+            <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="STATUS_AND_SIGNIFICANT_CHANGE" listing-status="For Sale" property-types="SFR,MF" price-min="400000" price-max="3000000"></realscout-office-listings>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Explore a Neighborhood?</h2>
+            <p>Book an in-person consultation with Dr. Janet Duffy to compare villages, price trends, and available inventory.</p>
+            <a href="#" class="cta-button calendly-popup">Schedule time with me</a>
+            <div class="calendly-inline-widget" data-url="https://calendly.com/drjanduffy/in-person-real-estate-consultation" style="min-width:320px;height:700px;"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
+        </div>
+    </footer>
+
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script src="/calendly.js"></script>
+</body>
+</html>
