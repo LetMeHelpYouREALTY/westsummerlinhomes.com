@@ -6,6 +6,7 @@
     <title>Contact - Dr. Janet Duffy Real Estate</title>
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <style>
       realscout-office-listings {
         --rs-listing-divider-color: rgb(101, 141, 172);
@@ -160,6 +161,16 @@
             border-radius: 15px;
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
+        }
+
+        .calendly-embed .calendly-inline-widget {
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .calendly-popup {
+            cursor: pointer;
         }
 
         .form-group {
@@ -335,6 +346,7 @@
                 <li><a href="neighborhoods.html">Neighborhoods</a></li>
                 <li><a href="testimonials.html">Testimonials</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="calendly-popup">Schedule</a></li>
             </ul>
         </nav>
     </header>
@@ -342,7 +354,8 @@
     <section class="page-header">
         <div class="container">
             <h1>Get In Touch</h1>
-            <p>Ready to start your real estate journey? Let's connect and discuss your needs.</p>
+            <p>Ready to start your real estate journey? Book an in-person consultation with Dr. Duffy.</p>
+            <p style="margin-top: 1rem;"><a href="#" class="cta-button calendly-popup">Schedule time with me</a></p>
         </div>
     </section>
 
@@ -388,48 +401,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <h3>Send a Message</h3>
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="first-name">First Name *</label>
-                                <input type="text" id="first-name" name="first-name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="last-name">Last Name *</label>
-                                <input type="text" id="last-name" name="last-name" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="tel" id="phone" name="phone">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service Interest</label>
-                            <select id="service" name="service">
-                                <option value="">Select a service</option>
-                                <option value="buying">Home Buying</option>
-                                <option value="selling">Home Selling</option>
-                                <option value="investment">Investment Properties</option>
-                                <option value="market-analysis">Market Analysis</option>
-                                <option value="relocation">Relocation Services</option>
-                                <option value="consultation">Legal Consultation</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" name="message" placeholder="Tell me about your real estate needs, timeline, and any specific questions you have..." required></textarea>
-                        </div>
-                        <button type="submit" class="cta-button">Send Message</button>
-                    </form>
+                <div class="contact-form calendly-embed">
+                    <h3>Schedule a Consultation</h3>
+                    <p><a href="#" class="calendly-popup">Schedule time with me</a></p>
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/drjanduffy/in-person-real-estate-consultation" style="min-width:320px;height:700px;"></div>
                 </div>
             </div>
         </div>
@@ -478,28 +453,11 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved.</p>
+            <p>&copy; 2026 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
         </div>
     </footer>
 
-    <script>
-        // Form submission handling
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! Dr. Duffy will contact you within 24 hours.');
-            this.reset();
-        });
-
-        // Auto-format phone number
-        document.getElementById('phone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 6) {
-                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-            } else if (value.length >= 3) {
-                value = value.replace(/(\d{3})(\d{0,3})/, '($1) $2');
-            }
-            e.target.value = value;
-        });
-    </script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script src="/calendly.js"></script>
 </body>
 </html>

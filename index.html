@@ -47,6 +47,7 @@
     
     <!-- RealScout Integration -->
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <style>
       realscout-office-listings {
         --rs-listing-divider-color: rgb(101, 141, 172);
@@ -672,6 +673,16 @@
             border-radius: 15px;
         }
 
+        .calendly-embed .calendly-inline-widget {
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .calendly-popup {
+            cursor: pointer;
+        }
+
         .form-group {
             margin-bottom: 1rem;
         }
@@ -1137,6 +1148,7 @@
                 <li><a href="neighborhoods.html">Neighborhoods</a></li>
                 <li><a href="testimonials.html">Testimonials</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="calendly-popup">Schedule</a></li>
             </ul>
         </nav>
     </header>
@@ -1158,7 +1170,7 @@
             <div class="hero-content">
                 <h1>Your Dream Home Awaits</h1>
                 <p>Experience premium real estate services with Dr. Janet Duffy - where expertise meets excellence in every transaction.</p>
-                <a href="#search" class="cta-button">Start Your Journey</a>
+                <a href="#" class="cta-button calendly-popup">Schedule Consultation</a>
             </div>
         </div>
     </section>
@@ -1361,7 +1373,7 @@
                         </div>
                         <p>Stunning colonial home in prime location with modern updates and beautiful landscaping.</p>
                         <div class="property-actions">
-                            <button class="btn-primary">Schedule Tour</button>
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
                             <button class="btn-secondary">Get Directions</button>
                         </div>
                     </div>
@@ -1382,7 +1394,7 @@
                         </div>
                         <p>Modern waterfront condo with panoramic views and premium amenities.</p>
                         <div class="property-actions">
-                            <button class="btn-primary">Schedule Tour</button>
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
                             <button class="btn-secondary">Get Directions</button>
                         </div>
                     </div>
@@ -1403,7 +1415,7 @@
                         </div>
                         <p>Great investment property in growing neighborhood with excellent rental potential.</p>
                         <div class="property-actions">
-                            <button class="btn-primary">Schedule Tour</button>
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
                             <button class="btn-secondary">Get Directions</button>
                         </div>
                     </div>
@@ -1502,27 +1514,10 @@
                         <span>Available 7 days a week<br>8:00 AM - 8:00 PM</span>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <h3>Send a Message</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" placeholder="Tell me about your real estate needs..." required></textarea>
-                        </div>
-                        <button type="submit" class="cta-button">Send Message</button>
-                    </form>
+                <div class="contact-form calendly-embed">
+                    <h3>Schedule a Consultation</h3>
+                    <p><a href="#" class="calendly-popup">Schedule time with me</a></p>
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/drjanduffy/in-person-real-estate-consultation" style="min-width:320px;height:700px;"></div>
                 </div>
             </div>
         </div>
@@ -1530,7 +1525,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved.</p>
+            <p>&copy; 2026 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
         </div>
     </footer>
 
@@ -1568,12 +1563,7 @@
             observer.observe(el);
         });
 
-        // Form submission handling
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! Dr. Duffy will contact you within 24 hours.');
-            this.reset();
-        });
+        // Form submission handling removed — Calendly handles scheduling
 
         // Header background change on scroll
         window.addEventListener('scroll', function() {
@@ -1596,5 +1586,7 @@
             }, 1000);
         });
     </script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script src="/calendly.js"></script>
 </body>
 </html>
