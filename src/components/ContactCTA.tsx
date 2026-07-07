@@ -61,13 +61,13 @@ export default function ContactCTA() {
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['+1 (702) 555-0123', '+1 (702) 555-0124'],
+      details: ['702-222-1964'],
       action: 'Call Now'
     },
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['info@westsummerlinhomes.com', 'sales@westsummerlinhomes.com'],
+      details: ['janet@westsummerlinhomes.com'],
       action: 'Send Email'
     },
     {
@@ -79,7 +79,7 @@ export default function ContactCTA() {
     {
       icon: Clock,
       title: 'Office Hours',
-      details: ['Mon-Fri: 9AM-6PM', 'Sat: 10AM-4PM', 'Sun: By Appointment'],
+      details: ['Available 7 days a week', '8:00 AM - 8:00 PM'],
       action: 'Schedule Meeting'
     }
   ]
