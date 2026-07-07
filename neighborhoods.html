@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>West Summerlin Homes for Sale | Dr. Janet Duffy Real Estate</title>
-    <meta name="description" content="Browse homes for sale in West Summerlin and Las Vegas. Dr. Janet Duffy lists luxury estates, modern builds, and investment properties with live MLS search.">
-    <link rel="canonical" href="https://www.westsummerlinhomes.com/properties.html">
+    <title>West Summerlin Neighborhoods | Dr. Janet Duffy Real Estate</title>
+    <meta name="description" content="Explore West Summerlin and Summerlin West neighborhoods with Dr. Janet Duffy. Compare price ranges, amenities, and homes for sale in Red Rock, The Ridges, The Trails, and more.">
+    <link rel="canonical" href="https://www.westsummerlinhomes.com/neighborhoods.html">
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
     <link rel="stylesheet" href="/realscout-hub.css">
@@ -128,7 +128,7 @@
             color: #555;
         }
 
-        .properties {
+        .neighborhoods {
             background: #f8f9fa;
             padding: 60px 0;
         }
@@ -140,13 +140,13 @@
             color: #2c3e50;
         }
 
-        .properties-grid {
+        .neighborhoods-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .property-card {
+        .neighborhood-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
@@ -154,78 +154,70 @@
             transition: transform 0.3s ease;
         }
 
-        .property-card:hover {
+        .neighborhood-card:hover {
             transform: translateY(-5px);
         }
 
-        .property-image {
-            height: 250px;
-            background: #2c3e50;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .property-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .property-badge {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            background: #27ae60;
+        .neighborhood-image {
+            height: 200px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
         }
 
-        .property-details {
+        .neighborhood-info {
             padding: 1.5rem;
         }
 
-        .property-price {
-            font-size: 1.8rem;
+        .neighborhood-name {
+            font-size: 1.3rem;
             font-weight: bold;
             color: #2c3e50;
             margin-bottom: 0.5rem;
         }
 
-        .property-address {
-            color: #7f8c8d;
+        .neighborhood-description {
+            color: #6b7280;
             margin-bottom: 1rem;
         }
 
-        .property-features {
+        .neighborhood-price {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .neighborhood-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
         }
 
-        .feature {
-            background: #ecf0f1;
-            padding: 5px 10px;
+        .neighborhood-tag {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 0.25rem 0.75rem;
             border-radius: 15px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
-        .property-actions {
+        .neighborhood-actions {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .btn-primary {
-            flex: 1;
-            display: inline-block;
-            text-align: center;
             background: #3498db;
             color: white;
-            padding: 0.75rem;
+            padding: 0.75rem 1.25rem;
             border: none;
             border-radius: 8px;
             font-weight: 500;
@@ -238,12 +230,10 @@
         }
 
         .btn-secondary {
-            flex: 1;
-            display: inline-block;
-            text-align: center;
             background: #ecf0f1;
             color: #6b7280;
-            padding: 0.75rem;
+            padding: 0.75rem 1.25rem;
+            border: none;
             border-radius: 8px;
             font-weight: 500;
             text-decoration: none;
@@ -255,41 +245,43 @@
         }
 
         .realscout-listings {
+            background: white;
             padding: 80px 0;
         }
 
         .cta {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: white;
-            padding: 80px 0;
+            padding: 4rem 0;
             text-align: center;
         }
 
         .cta h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
         .cta p {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
         }
 
         .cta-button {
             display: inline-block;
-            background: #3498db;
-            color: white;
+            background: white;
+            color: #3498db;
             padding: 15px 30px;
             text-decoration: none;
             border-radius: 50px;
             font-size: 1.1rem;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .cta-button:hover {
-            background: #2980b9;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
 
         .calendly-popup {
@@ -323,7 +315,7 @@
                 font-size: 2rem;
             }
 
-            .property-actions {
+            .neighborhood-actions {
                 flex-direction: column;
             }
         }
@@ -344,8 +336,8 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
-                <li><a href="properties.html" class="active">Properties</a></li>
-                <li><a href="neighborhoods.html">Neighborhoods</a></li>
+                <li><a href="properties.html">Properties</a></li>
+                <li><a href="neighborhoods.html" class="active">Neighborhoods</a></li>
                 <li><a href="testimonials.html">Testimonials</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="#" class="calendly-popup">Schedule</a></li>
@@ -355,8 +347,8 @@
 
     <section class="page-header">
         <div class="container">
-            <h1>West Summerlin Homes for Sale</h1>
-            <p>Luxury estates, modern builds, and investment opportunities across Summerlin West and the Las Vegas valley.</p>
+            <h1>West Summerlin Neighborhoods</h1>
+            <p>Compare master-planned communities, price ranges, and amenities across Summerlin West and the greater Las Vegas valley.</p>
         </div>
     </section>
 
@@ -373,143 +365,125 @@
 
     <section class="realscout-listings">
         <div class="container">
-            <h2 class="section-title">Live MLS Search</h2>
+            <h2 class="section-title">Homes for Sale by Neighborhood</h2>
             <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="STATUS_AND_SIGNIFICANT_CHANGE" listing-status="For Sale" property-types="SFR,MF" price-min="400000" price-max="3000000"></realscout-office-listings>
         </div>
     </section>
 
     <section class="intro">
         <div class="container">
-            <p>Explore featured listings below or search live MLS inventory. Call <a href="tel:7022221964">702-222-1964</a> to schedule a private showing with Dr. Janet Duffy.</p>
+            <p>Dr. Janet Duffy helps buyers and sellers navigate West Summerlin's distinct villages — from golf-course estates to walkable retail hubs. Call <a href="tel:7022221964">702-222-1964</a> or <a href="#" class="calendly-popup">schedule a consultation</a> to tour a neighborhood.</p>
         </div>
     </section>
 
-    <section class="properties">
+    <section class="neighborhoods">
         <div class="container">
-            <h2 class="section-title">Featured Listings</h2>
-            <div class="properties-grid">
-                <article class="property-card">
-                    <div class="property-image">
-                        <img src="/properties/mls001-main.jpg" alt="Luxury Mediterranean villa in West Summerlin" loading="lazy" width="400" height="250">
-                        <div class="property-badge">For Sale</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$1,250,000</div>
-                        <div class="property-address">1234 Summerlin Pkwy, Las Vegas, NV 89134</div>
-                        <div class="property-features">
-                            <span class="feature">4 Beds</span>
-                            <span class="feature">3.5 Baths</span>
-                            <span class="feature">3,200 sq ft</span>
+            <h2 class="section-title">Featured Neighborhoods</h2>
+            <div class="neighborhoods-grid">
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">Red Rock Country Club</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">Red Rock Country Club</h3>
+                        <p class="neighborhood-description">Golf-course living with resort-style pools, tennis, and dining near Red Rock Canyon.</p>
+                        <p class="neighborhood-price">$800K – $3M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Golf course</span>
+                            <span class="neighborhood-tag">Country club</span>
+                            <span class="neighborhood-tag">Tennis</span>
                         </div>
-                        <p>Mediterranean villa with pool, mountain views, and premium Summerlin West finishes.</p>
-                        <div class="property-actions">
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
                             <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <a href="tel:7022221964" class="btn-secondary">Call Now</a>
                         </div>
                     </div>
                 </article>
 
-                <article class="property-card">
-                    <div class="property-image">
-                        <img src="/properties/mls002-main.jpg" alt="Modern contemporary home in Red Rock" loading="lazy" width="400" height="250">
-                        <div class="property-badge">For Sale</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$875,000</div>
-                        <div class="property-address">5678 Red Rock Dr, Las Vegas, NV 89135</div>
-                        <div class="property-features">
-                            <span class="feature">3 Beds</span>
-                            <span class="feature">2.5 Baths</span>
-                            <span class="feature">2,400 sq ft</span>
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">The Ridges</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">The Ridges</h3>
+                        <p class="neighborhood-description">Custom luxury homes on elevated lots with Strip and mountain views.</p>
+                        <p class="neighborhood-price">$1.2M – $5M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Mountain views</span>
+                            <span class="neighborhood-tag">Luxury</span>
+                            <span class="neighborhood-tag">Custom homes</span>
                         </div>
-                        <p>Contemporary design with open floor plan and Red Rock Canyon views.</p>
-                        <div class="property-actions">
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
                             <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <a href="tel:7022221964" class="btn-secondary">Call Now</a>
                         </div>
                     </div>
                 </article>
 
-                <article class="property-card">
-                    <div class="property-image">
-                        <img src="/properties/mls003-main.jpg" alt="Spanish revival estate in Summerlin" loading="lazy" width="400" height="250">
-                        <div class="property-badge">For Sale</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$1,450,000</div>
-                        <div class="property-address">9012 Desert Foothills Dr, Las Vegas, NV 89135</div>
-                        <div class="property-features">
-                            <span class="feature">5 Beds</span>
-                            <span class="feature">4 Baths</span>
-                            <span class="feature">3,800 sq ft</span>
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">Summerlin Centre</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">Summerlin Centre</h3>
+                        <p class="neighborhood-description">Urban-style living steps from Downtown Summerlin shopping, dining, and entertainment.</p>
+                        <p class="neighborhood-price">$400K – $1.2M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Walkable</span>
+                            <span class="neighborhood-tag">Shopping</span>
+                            <span class="neighborhood-tag">Entertainment</span>
                         </div>
-                        <p>Spanish revival estate on a cul-de-sac with resort-style backyard.</p>
-                        <div class="property-actions">
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
                             <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <a href="tel:7022221964" class="btn-secondary">Call Now</a>
                         </div>
                     </div>
                 </article>
 
-                <article class="property-card">
-                    <div class="property-image">
-                        <img src="/properties/mls004-main.jpg" alt="Single-family home in The Trails" loading="lazy" width="400" height="250">
-                        <div class="property-badge">For Sale</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$725,000</div>
-                        <div class="property-address">3421 Trails Canyon Dr, Las Vegas, NV 89138</div>
-                        <div class="property-features">
-                            <span class="feature">4 Beds</span>
-                            <span class="feature">3 Baths</span>
-                            <span class="feature">2,650 sq ft</span>
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">The Trails</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">The Trails</h3>
+                        <p class="neighborhood-description">Established Summerlin village with mature landscaping, parks, and trail access.</p>
+                        <p class="neighborhood-price">$500K – $1.5M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Trails</span>
+                            <span class="neighborhood-tag">Parks</span>
+                            <span class="neighborhood-tag">Established</span>
                         </div>
-                        <p>Updated kitchen, three-car garage, and walking distance to Summerlin parks.</p>
-                        <div class="property-actions">
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
                             <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <a href="tel:7022221964" class="btn-secondary">Call Now</a>
                         </div>
                     </div>
                 </article>
 
-                <article class="property-card">
-                    <div class="property-image">
-                        <img src="/properties/mls005-main.jpg" alt="Townhome in The Paseos" loading="lazy" width="400" height="250">
-                        <div class="property-badge">For Sale</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$525,000</div>
-                        <div class="property-address">1180 Paseos Verde Pl, Las Vegas, NV 89138</div>
-                        <div class="property-features">
-                            <span class="feature">3 Beds</span>
-                            <span class="feature">2.5 Baths</span>
-                            <span class="feature">1,950 sq ft</span>
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">The Paseos</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">The Paseos</h3>
+                        <p class="neighborhood-description">Village center with community pool, parks, and quick access to Summerlin Parkway.</p>
+                        <p class="neighborhood-price">$450K – $900K</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Pool</span>
+                            <span class="neighborhood-tag">Parks</span>
+                            <span class="neighborhood-tag">Commute access</span>
                         </div>
-                        <p>Low-maintenance townhome with community pool and Summerlin amenities.</p>
-                        <div class="property-actions">
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
                             <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <a href="tel:7022221964" class="btn-secondary">Call Now</a>
                         </div>
                     </div>
                 </article>
 
-                <article class="property-card">
-                    <div class="property-image">
-                        <img src="/properties/mls006-main.jpg" alt="Investment property near Downtown Summerlin" loading="lazy" width="400" height="250">
-                        <div class="property-badge">For Sale</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$649,000</div>
-                        <div class="property-address">2215 Town Square Pl, Las Vegas, NV 89135</div>
-                        <div class="property-features">
-                            <span class="feature">3 Beds</span>
-                            <span class="feature">2 Baths</span>
-                            <span class="feature">1,780 sq ft</span>
+                <article class="neighborhood-card">
+                    <div class="neighborhood-image">Reverence</div>
+                    <div class="neighborhood-info">
+                        <h3 class="neighborhood-name">Reverence</h3>
+                        <p class="neighborhood-description">Newer village with contemporary architecture and proximity to Mount Charleston views.</p>
+                        <p class="neighborhood-price">$550K – $1.3M</p>
+                        <div class="neighborhood-tags">
+                            <span class="neighborhood-tag">Newer builds</span>
+                            <span class="neighborhood-tag">Mountain views</span>
+                            <span class="neighborhood-tag">Summerlin West</span>
                         </div>
-                        <p>Strong rental potential near Downtown Summerlin dining and retail.</p>
-                        <div class="property-actions">
+                        <div class="neighborhood-actions">
+                            <a href="properties.html" class="btn-secondary">View Listings</a>
                             <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <a href="tel:7022221964" class="btn-secondary">Call Now</a>
                         </div>
                     </div>
                 </article>
@@ -519,8 +493,8 @@
 
     <section class="cta">
         <div class="container">
-            <h2>Ready to Tour a Home?</h2>
-            <p>Dr. Janet Duffy provides private showings seven days a week across West Summerlin and the greater Las Vegas market.</p>
+            <h2>Ready to Explore a Neighborhood?</h2>
+            <p>Book an in-person consultation with Dr. Janet Duffy to compare villages, price trends, and available inventory.</p>
             <a href="#" class="cta-button calendly-popup">Schedule time with me</a>
             <div class="calendly-inline-widget" data-url="https://calendly.com/drjanduffy/in-person-real-estate-consultation" style="min-width:320px;height:700px;"></div>
         </div>
@@ -531,6 +505,7 @@
             <p>&copy; 2026 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
         </div>
     </footer>
+
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <script src="/calendly.js"></script>
 </body>

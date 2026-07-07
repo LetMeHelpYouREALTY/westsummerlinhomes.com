@@ -48,6 +48,7 @@
     <!-- RealScout Integration -->
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <link rel="stylesheet" href="/realscout-hub.css">
     <style>
       realscout-office-listings {
         --rs-listing-divider-color: rgb(101, 141, 172);
@@ -1175,11 +1176,107 @@
         </div>
     </section>
 
+    <section id="search" class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <h3>Find Your Perfect Home</h3>
+                <div class="realscout-search-container">
+                    <realscout-advanced-search agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-advanced-search>
+                </div>
+                <div class="search-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Open Houses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">14</div>
+                        <div class="stat-label">Avg Days</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="realscout-listings">
         <div class="container">
             <h2 class="section-title fade-in">Current Listings</h2>
             <div class="fade-in">
-                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="STATUS_AND_SIGNIFICANT_CHANGE" listing-status="For Sale" property-types="SFR,MF" price-min="600000" price-max="750000"></realscout-office-listings>
+                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="STATUS_AND_SIGNIFICANT_CHANGE" listing-status="For Sale" property-types="SFR,MF" price-min="400000" price-max="3000000"></realscout-office-listings>
+            </div>
+        </div>
+    </section>
+
+    <section id="properties" class="properties">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Properties</h2>
+            <div class="properties-grid fade-in">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-1.jpg" alt="Luxury family home in Summerlin West, Las Vegas" loading="lazy">
+                        <div class="property-badge">New This Weekend!</div>
+                        <div class="property-time">Saturday 1-4 PM</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-price">$650,000</div>
+                        <div class="property-address">123 Maple Street, Downtown</div>
+                        <div class="property-features">
+                            <span class="feature">4 Beds</span>
+                            <span class="feature">3 Baths</span>
+                            <span class="feature">2,400 sq ft</span>
+                        </div>
+                        <p>Stunning colonial home in prime location with modern updates and beautiful landscaping.</p>
+                        <div class="property-actions">
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                            <button class="btn-secondary">Get Directions</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-2.jpg" alt="Luxury condo with mountain views in Summerlin" loading="lazy">
+                        <div class="property-badge">New This Weekend!</div>
+                        <div class="property-time">Sunday 12-3 PM</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-price">$425,000</div>
+                        <div class="property-address">456 Ocean View Drive</div>
+                        <div class="property-features">
+                            <span class="feature">2 Beds</span>
+                            <span class="feature">2 Baths</span>
+                            <span class="feature">1,200 sq ft</span>
+                        </div>
+                        <p>Modern waterfront condo with panoramic views and premium amenities.</p>
+                        <div class="property-actions">
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                            <button class="btn-secondary">Get Directions</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-3.jpg" alt="Investment property in Summerlin West, Las Vegas" loading="lazy">
+                        <div class="property-badge">New This Weekend!</div>
+                        <div class="property-time">Saturday 10-1 PM</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-price">$320,000</div>
+                        <div class="property-address">789 Pine Valley Road</div>
+                        <div class="property-features">
+                            <span class="feature">3 Beds</span>
+                            <span class="feature">2 Baths</span>
+                            <span class="feature">1,800 sq ft</span>
+                        </div>
+                        <p>Great investment property in growing neighborhood with excellent rental potential.</p>
+                        <div class="property-actions">
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                            <button class="btn-secondary">Get Directions</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1234,31 +1331,6 @@
                     <div class="trust-item">
                         <span class="trust-icon">✓</span>
                         <span>Local Chamber Member</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="search" class="search-section">
-        <div class="container">
-            <div class="search-container">
-                <h3>Find Your Perfect Home</h3>
-                <div class="realscout-search-container">
-                    <realscout-advanced-search agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-advanced-search>
-                </div>
-                <div class="search-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">6</div>
-                        <div class="stat-label">Open Houses</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">14</div>
-                        <div class="stat-label">Avg Days</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Success Rate</div>
                     </div>
                 </div>
             </div>
@@ -1348,77 +1420,6 @@
                     <div class="service-icon">⚖️</div>
                     <h3>Legal Consultation</h3>
                     <p>Navigate complex real estate transactions with confidence, backed by professional expertise and attention to detail.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="properties" class="properties">
-        <div class="container">
-            <h2 class="section-title fade-in">Featured Properties</h2>
-            <div class="properties-grid fade-in">
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-1.jpg" alt="Luxury family home in Summerlin West, Las Vegas" loading="lazy">
-                        <div class="property-badge">New This Weekend!</div>
-                        <div class="property-time">Saturday 1-4 PM</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$650,000</div>
-                        <div class="property-address">123 Maple Street, Downtown</div>
-                        <div class="property-features">
-                            <span class="feature">4 Beds</span>
-                            <span class="feature">3 Baths</span>
-                            <span class="feature">2,400 sq ft</span>
-                        </div>
-                        <p>Stunning colonial home in prime location with modern updates and beautiful landscaping.</p>
-                        <div class="property-actions">
-                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <button class="btn-secondary">Get Directions</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-2.jpg" alt="Luxury condo with mountain views in Summerlin" loading="lazy">
-                        <div class="property-badge">New This Weekend!</div>
-                        <div class="property-time">Sunday 12-3 PM</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$425,000</div>
-                        <div class="property-address">456 Ocean View Drive</div>
-                        <div class="property-features">
-                            <span class="feature">2 Beds</span>
-                            <span class="feature">2 Baths</span>
-                            <span class="feature">1,200 sq ft</span>
-                        </div>
-                        <p>Modern waterfront condo with panoramic views and premium amenities.</p>
-                        <div class="property-actions">
-                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <button class="btn-secondary">Get Directions</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-3.jpg" alt="Investment property in Summerlin West, Las Vegas" loading="lazy">
-                        <div class="property-badge">New This Weekend!</div>
-                        <div class="property-time">Saturday 10-1 PM</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$320,000</div>
-                        <div class="property-address">789 Pine Valley Road</div>
-                        <div class="property-features">
-                            <span class="feature">3 Beds</span>
-                            <span class="feature">2 Baths</span>
-                            <span class="feature">1,800 sq ft</span>
-                        </div>
-                        <p>Great investment property in growing neighborhood with excellent rental potential.</p>
-                        <div class="property-actions">
-                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <button class="btn-secondary">Get Directions</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

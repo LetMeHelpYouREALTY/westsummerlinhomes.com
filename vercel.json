@@ -7,7 +7,9 @@
     { "source": "/about", "destination": "/about.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/services", "destination": "/services.html" },
-    { "source": "/properties", "destination": "/properties.html" }
+    { "source": "/properties", "destination": "/properties.html" },
+    { "source": "/neighborhoods", "destination": "/neighborhoods.html" },
+    { "source": "/testimonials", "destination": "/testimonials.html" }
   ],
   "headers": [
     {
