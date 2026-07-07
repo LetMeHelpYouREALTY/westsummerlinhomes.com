@@ -9,6 +9,7 @@
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
     <link rel="stylesheet" href="/realscout-hub.css">
+    <link rel="stylesheet" href="/seo-page.css">
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <style>
       realscout-office-listings {
@@ -340,13 +341,13 @@
                 <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" alt="Dr. Janet Duffy Real Estate" width="42" height="42" loading="eager">
                 <span>Dr. Janet Duffy</span>
             </a>
-            <ul class="nav-links">
+                        <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="properties.html" class="active">Properties</a></li>
+                <li><a href="buyers.html">Buy</a></li>
+                <li><a href="sellers.html">Sell</a></li>
+                <li><a href="properties.html">Properties</a></li>
                 <li><a href="neighborhoods.html">Neighborhoods</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="#" class="calendly-popup">Schedule</a></li>
             </ul>
@@ -526,11 +527,53 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
+    <!-- Include before closing body on SEO pages; also inject into legacy pages via build script -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4>Dr. Janet Duffy</h4>
+                <p>BHHS Nevada Properties<br>Las Vegas, NV 89134<br>
+                <a href="tel:7022221964">702-222-1964</a><br>
+                <a href="mailto:janet@westsummerlinhomes.com">janet@westsummerlinhomes.com</a></p>
+            </div>
+            <div>
+                <h4>Buy &amp; Sell</h4>
+                <ul>
+                    <li><a href="buyers.html">Buy a Home</a></li>
+                    <li><a href="sellers.html">Sell Your Home</a></li>
+                    <li><a href="home-valuation.html">Home Valuation</a></li>
+                    <li><a href="properties.html">Current Listings</a></li>
+                    <li><a href="luxury-homes.html">Luxury Homes</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Neighborhoods</h4>
+                <ul>
+                    <li><a href="neighborhoods.html">All Neighborhoods</a></li>
+                    <li><a href="the-ridges.html">The Ridges</a></li>
+                    <li><a href="red-rock-country-club.html">Red Rock Country Club</a></li>
+                    <li><a href="summerlin-centre.html">Summerlin Centre</a></li>
+                    <li><a href="relocating-to-summerlin.html">Relocating Guide</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="market-update.html">Market Update</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Dr. Janet Duffy — Real Estate Services. License #S.0197614.LLC. <a href="#" class="calendly-popup">Schedule a consultation</a></p>
+        </div>
+    </div>
+</footer>
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <script src="/calendly.js"></script>
 </body>
