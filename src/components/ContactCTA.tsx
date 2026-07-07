@@ -23,9 +23,9 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Visit Our Office',
-    details: ['1234 Summerlin Pkwy', 'Las Vegas, NV 89134'],
+    details: ['12446 Weather Ridge Pl', 'Las Vegas, NV 89138'],
     action: 'Get Directions',
-    href: 'https://maps.google.com/?q=1234+Summerlin+Parkway+Las+Vegas+NV+89134',
+    href: 'https://maps.google.com/?q=12446+Weather+Ridge+Pl+Las+Vegas+NV+89138',
   },
   {
     icon: Clock,

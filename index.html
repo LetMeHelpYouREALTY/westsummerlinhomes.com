@@ -48,6 +48,8 @@
     <!-- RealScout Integration -->
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <link rel="stylesheet" href="/realscout-hub.css">
+    <link rel="stylesheet" href="/seo-page.css">
     <style>
       realscout-office-listings {
         --rs-listing-divider-color: rgb(101, 141, 172);
@@ -951,14 +953,14 @@
       "jobTitle": "Real Estate Agent",
       "description": "Premium real estate services in Las Vegas and Summerlin with 15+ years of experience",
       "url": "https://westsummerlinhomes.com",
-      "telephone": "+1-702-555-0123",
+      "telephone": "+1-702-222-1964",
       "email": "janet@westsummerlinhomes.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "1234 Summerlin Parkway",
+        "streetAddress": "12446 Weather Ridge Pl",
         "addressLocality": "Las Vegas",
         "addressRegion": "NV",
-        "postalCode": "89134",
+        "postalCode": "89138",
         "addressCountry": "US"
       },
       "areaServed": [
@@ -1023,15 +1025,15 @@
       "description": "Premium real estate services in Las Vegas and Summerlin",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "1234 Summerlin Parkway",
+        "streetAddress": "12446 Weather Ridge Pl",
         "addressLocality": "Las Vegas",
         "addressRegion": "NV",
-        "postalCode": "89134",
+        "postalCode": "89138",
         "addressCountry": "US"
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+1-702-555-0123",
+        "telephone": "+1-702-222-1964",
         "contactType": "customer service",
         "areaServed": "US-NV",
         "availableLanguage": "English"
@@ -1140,13 +1142,13 @@
                 <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" alt="Dr. Janet Duffy Real Estate" width="42" height="42" loading="eager">
                 <span>Dr. Janet Duffy</span>
             </a>
-            <ul class="nav-links">
+                                    <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
+                <li><a href="buyers.html">Buy</a></li>
+                <li><a href="sellers.html">Sell</a></li>
                 <li><a href="properties.html">Properties</a></li>
                 <li><a href="neighborhoods.html">Neighborhoods</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="#" class="calendly-popup">Schedule</a></li>
             </ul>
@@ -1175,11 +1177,106 @@
         </div>
     </section>
 
+    <section id="search" class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <h3>Find Your Perfect Home</h3>
+                <div class="realscout-search-container">
+                    <realscout-advanced-search agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-advanced-search>
+                </div>
+                <div class="search-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Open Houses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">14</div>
+                        <div class="stat-label">Avg Days</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="realscout-listings">
         <div class="container">
             <h2 class="section-title fade-in">Current Listings</h2>
             <div class="fade-in">
-                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="STATUS_AND_SIGNIFICANT_CHANGE" listing-status="For Sale" property-types="SFR,MF" price-min="600000" price-max="750000"></realscout-office-listings>
+                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="STATUS_AND_SIGNIFICANT_CHANGE" listing-status="For Sale" property-types="SFR,MF" price-min="400000" price-max="3000000"></realscout-office-listings>
+            </div>
+        </div>
+    </section>
+
+    <section id="properties" class="properties">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Properties</h2>
+            <div class="properties-grid fade-in">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg" alt="12446 Weather Ridge Pl, Landings at Alton Summerlin" loading="lazy">
+                        <div class="property-badge">New Construction</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-price">Contact for Pricing</div>
+                        <div class="property-address">12446 Weather Ridge Pl, Las Vegas, NV 89138</div>
+                        <div class="property-features">
+                            <span class="feature">4 Beds</span>
+                            <span class="feature">2.5 Baths</span>
+                            <span class="feature">2,454 sq ft</span>
+                        </div>
+                        <p>Landings at Alton in Grand Park — 2025 two-story home with backyard and mountain views.</p>
+                        <div class="property-actions">
+                            <a href="12446-weather-ridge-pl.html" class="btn-primary">View Details</a>
+                            <a href="tel:7022221964" class="btn-secondary">Call Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-2.jpg" alt="Luxury condo with mountain views in Summerlin" loading="lazy">
+                        <div class="property-badge">New This Weekend!</div>
+                        <div class="property-time">Sunday 12-3 PM</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-price">$425,000</div>
+                        <div class="property-address">456 Ocean View Drive</div>
+                        <div class="property-features">
+                            <span class="feature">2 Beds</span>
+                            <span class="feature">2 Baths</span>
+                            <span class="feature">1,200 sq ft</span>
+                        </div>
+                        <p>Modern waterfront condo with panoramic views and premium amenities.</p>
+                        <div class="property-actions">
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                            <button class="btn-secondary">Get Directions</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-3.jpg" alt="Investment property in Summerlin West, Las Vegas" loading="lazy">
+                        <div class="property-badge">New This Weekend!</div>
+                        <div class="property-time">Saturday 10-1 PM</div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-price">$320,000</div>
+                        <div class="property-address">789 Pine Valley Road</div>
+                        <div class="property-features">
+                            <span class="feature">3 Beds</span>
+                            <span class="feature">2 Baths</span>
+                            <span class="feature">1,800 sq ft</span>
+                        </div>
+                        <p>Great investment property in growing neighborhood with excellent rental potential.</p>
+                        <div class="property-actions">
+                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
+                            <button class="btn-secondary">Get Directions</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1234,31 +1331,6 @@
                     <div class="trust-item">
                         <span class="trust-icon">✓</span>
                         <span>Local Chamber Member</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="search" class="search-section">
-        <div class="container">
-            <div class="search-container">
-                <h3>Find Your Perfect Home</h3>
-                <div class="realscout-search-container">
-                    <realscout-advanced-search agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-advanced-search>
-                </div>
-                <div class="search-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">6</div>
-                        <div class="stat-label">Open Houses</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">14</div>
-                        <div class="stat-label">Avg Days</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Success Rate</div>
                     </div>
                 </div>
             </div>
@@ -1353,77 +1425,6 @@
         </div>
     </section>
 
-    <section id="properties" class="properties">
-        <div class="container">
-            <h2 class="section-title fade-in">Featured Properties</h2>
-            <div class="properties-grid fade-in">
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-1.jpg" alt="Luxury family home in Summerlin West, Las Vegas" loading="lazy">
-                        <div class="property-badge">New This Weekend!</div>
-                        <div class="property-time">Saturday 1-4 PM</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$650,000</div>
-                        <div class="property-address">123 Maple Street, Downtown</div>
-                        <div class="property-features">
-                            <span class="feature">4 Beds</span>
-                            <span class="feature">3 Baths</span>
-                            <span class="feature">2,400 sq ft</span>
-                        </div>
-                        <p>Stunning colonial home in prime location with modern updates and beautiful landscaping.</p>
-                        <div class="property-actions">
-                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <button class="btn-secondary">Get Directions</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-2.jpg" alt="Luxury condo with mountain views in Summerlin" loading="lazy">
-                        <div class="property-badge">New This Weekend!</div>
-                        <div class="property-time">Sunday 12-3 PM</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$425,000</div>
-                        <div class="property-address">456 Ocean View Drive</div>
-                        <div class="property-features">
-                            <span class="feature">2 Beds</span>
-                            <span class="feature">2 Baths</span>
-                            <span class="feature">1,200 sq ft</span>
-                        </div>
-                        <p>Modern waterfront condo with panoramic views and premium amenities.</p>
-                        <div class="property-actions">
-                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <button class="btn-secondary">Get Directions</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/property-3.jpg" alt="Investment property in Summerlin West, Las Vegas" loading="lazy">
-                        <div class="property-badge">New This Weekend!</div>
-                        <div class="property-time">Saturday 10-1 PM</div>
-                    </div>
-                    <div class="property-details">
-                        <div class="property-price">$320,000</div>
-                        <div class="property-address">789 Pine Valley Road</div>
-                        <div class="property-features">
-                            <span class="feature">3 Beds</span>
-                            <span class="feature">2 Baths</span>
-                            <span class="feature">1,800 sq ft</span>
-                        </div>
-                        <p>Great investment property in growing neighborhood with excellent rental potential.</p>
-                        <div class="property-actions">
-                            <a href="#" class="btn-primary calendly-popup">Schedule Tour</a>
-                            <button class="btn-secondary">Get Directions</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="neighborhoods" class="neighborhoods">
         <div class="container">
             <h2 class="section-title fade-in">Featured Neighborhoods</h2>
@@ -1439,10 +1440,7 @@
                             <span class="neighborhood-tag">Country club</span>
                             <span class="neighborhood-tag">Tennis</span>
                         </div>
-                    </div>
-                </div>
-                <div class="neighborhood-card">
-                    <div class="neighborhood-image">🏔️ The Ridges</div>
+                        <p style="margin-top:1rem;"><a href="red-rock-country-club.html" style="color:#3498db;font-weight:600;">View village guide →</a></p>
                     <div class="neighborhood-info">
                         <h4 class="neighborhood-name">The Ridges</h4>
                         <p class="neighborhood-description">Luxury mountain view homes with premium amenities</p>
@@ -1452,10 +1450,7 @@
                             <span class="neighborhood-tag">Luxury</span>
                             <span class="neighborhood-tag">Privacy</span>
                         </div>
-                    </div>
-                </div>
-                <div class="neighborhood-card">
-                    <div class="neighborhood-image">🏙️ Summerlin Centre</div>
+                        <p style="margin-top:1rem;"><a href="the-ridges.html" style="color:#3498db;font-weight:600;">View village guide →</a></p>
                     <div class="neighborhood-info">
                         <h4 class="neighborhood-name">Summerlin Centre</h4>
                         <p class="neighborhood-description">Urban living with shopping, dining, and entertainment</p>
@@ -1465,9 +1460,7 @@
                             <span class="neighborhood-tag">Shopping</span>
                             <span class="neighborhood-tag">Entertainment</span>
                         </div>
-                    </div>
-                </div>
-            </div>
+                        <p style="margin-top:1rem;"><a href="summerlin-centre.html" style="color:#3498db;font-weight:600;">View village guide →</a></p>
         </div>
     </section>
 
@@ -1499,15 +1492,15 @@
                     <h3>Contact Information</h3>
                     <div class="contact-item">
                         <i>📞</i>
-                        <span>(555) 123-4567</span>
+                        <span>(702) 222-1964</span>
                     </div>
                     <div class="contact-item">
                         <i>✉️</i>
-                        <span>janet.duffy@realestate.com</span>
+                        <span>janet@westsummerlinhomes.com</span>
                     </div>
                     <div class="contact-item">
                         <i>📍</i>
-                        <span>123 Real Estate Plaza, Suite 100<br>Your City, State 12345</span>
+                        <span><a href="https://maps.google.com/?q=12446+Weather+Ridge+Pl+Las+Vegas+NV+89138" style="color:inherit;">12446 Weather Ridge Pl<br>Las Vegas, NV 89138</a></span>
                     </div>
                     <div class="contact-item">
                         <i>🕒</i>
@@ -1523,11 +1516,53 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Dr. Janet Duffy - Real Estate Services. License #S.0197614.LLC. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
+    <!-- Include before closing body on SEO pages; also inject into legacy pages via build script -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4>Dr. Janet Duffy</h4>
+                <p>BHHS Nevada Properties<br>Las Vegas, NV 89138<br>
+                <a href="tel:7022221964">702-222-1964</a><br>
+                <a href="mailto:janet@westsummerlinhomes.com">janet@westsummerlinhomes.com</a></p>
+            </div>
+            <div>
+                <h4>Buy &amp; Sell</h4>
+                <ul>
+                    <li><a href="buyers.html">Buy a Home</a></li>
+                    <li><a href="sellers.html">Sell Your Home</a></li>
+                    <li><a href="home-valuation.html">Home Valuation</a></li>
+                    <li><a href="properties.html">Current Listings</a></li>
+                    <li><a href="luxury-homes.html">Luxury Homes</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Neighborhoods</h4>
+                <ul>
+                    <li><a href="neighborhoods.html">All Neighborhoods</a></li>
+                    <li><a href="the-ridges.html">The Ridges</a></li>
+                    <li><a href="red-rock-country-club.html">Red Rock Country Club</a></li>
+                    <li><a href="summerlin-centre.html">Summerlin Centre</a></li>
+                    <li><a href="relocating-to-summerlin.html">Relocating Guide</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="market-update.html">Market Update</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Dr. Janet Duffy — Real Estate Services. License #S.0197614.LLC. <a href="#" class="calendly-popup">Schedule a consultation</a></p>
+        </div>
+    </div>
+</footer>
 
     <script>
         // Smooth scrolling for navigation links

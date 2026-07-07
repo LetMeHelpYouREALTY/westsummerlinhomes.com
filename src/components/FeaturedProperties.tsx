@@ -22,7 +22,7 @@ const sampleProperties: Property[] = [
   {
     id: '1',
     title: 'Luxury Mediterranean Villa',
-    address: '1234 Summerlin Pkwy, Las Vegas, NV 89134',
+    address: '12446 Weather Ridge Pl, Las Vegas, NV 89138',
     price: '$1,250,000',
     beds: 4,
     baths: 3.5,

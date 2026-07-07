@@ -7,7 +7,21 @@
     { "source": "/about", "destination": "/about.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/services", "destination": "/services.html" },
-    { "source": "/properties", "destination": "/properties.html" }
+    { "source": "/properties", "destination": "/properties.html" },
+    { "source": "/neighborhoods", "destination": "/neighborhoods.html" },
+    { "source": "/testimonials", "destination": "/testimonials.html" },
+    { "source": "/buyers", "destination": "/buyers.html" },
+    { "source": "/sellers", "destination": "/sellers.html" },
+    { "source": "/market-update", "destination": "/market-update.html" },
+    { "source": "/faq", "destination": "/faq.html" },
+    { "source": "/home-valuation", "destination": "/home-valuation.html" },
+    { "source": "/luxury-homes", "destination": "/luxury-homes.html" },
+    { "source": "/relocating-to-summerlin", "destination": "/relocating-to-summerlin.html" },
+    { "source": "/the-ridges", "destination": "/the-ridges.html" },
+    { "source": "/red-rock-country-club", "destination": "/red-rock-country-club.html" },
+    { "source": "/summerlin-centre", "destination": "/summerlin-centre.html" },
+    { "source": "/alton-landings", "destination": "/alton-landings.html" },
+    { "source": "/12446-weather-ridge-pl", "destination": "/12446-weather-ridge-pl.html" }
   ],
   "headers": [
     {
