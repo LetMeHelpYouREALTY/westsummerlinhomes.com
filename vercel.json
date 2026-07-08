@@ -5,17 +5,36 @@
   "outputDirectory": ".",
   "redirects": [
     {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/services.html",
+      "permanent": true
+    },
+    {
+      "source": "/properties",
+      "destination": "/properties.html",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "westsummerlinhomes.com" }],
       "destination": "https://www.westsummerlinhomes.com/:path*",
       "permanent": true
     }
-  ],
-  "rewrites": [
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/services", "destination": "/services.html" },
-    { "source": "/properties", "destination": "/properties.html" }
   ],
   "headers": [
     {

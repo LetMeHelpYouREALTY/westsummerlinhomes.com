@@ -31,7 +31,7 @@ REALSCOUT_AGENT_ID = "QWdlbnQtMjI1MDUw"
 REALSCOUT_PORTAL_URL = "https://drjanduffy.realscout.com/"
 
 NAV_LINKS = [
-    ("index.html", "Home", "index.html"),
+    ("/", "Home", "/"),
     ("about.html", "About", "about.html"),
     ("buyers.html", "Buy", "buyers.html"),
     ("sellers.html", "Sell", "sellers.html"),
@@ -43,7 +43,7 @@ NAV_LINKS = [
 ]
 
 FOOTER_EXPLORE = [
-    ("index.html", "Home"),
+    ("/", "Home"),
     ("buyers.html", "Buyers Guide"),
     ("sellers.html", "Sellers Guide"),
     ("properties.html", "Properties"),
@@ -521,7 +521,7 @@ def header_html(active: str) -> str:
     nav_items.append('                <li><a href="#" class="calendly-popup nav-schedule">Schedule</a></li>')
     return f"""    <header>
         <nav class="container">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" alt="West Summerlin Homes by Dr. Jan Duffy" width="42" height="42" loading="eager">
                 <span class="logo-text">
                     <span class="logo-title">West Summerlin Homes</span>
@@ -638,7 +638,7 @@ def breadcrumb_html(items: list) -> str:
 
         if href.startswith(NAP["url"]):
             path = href[len(NAP["url"]) :].lstrip("/")
-            href = "index.html" if not path else path
+            href = "/" if not path else path
 
         if i == len(items) - 1:
             crumbs.append(f'                <li class="breadcrumb-item" aria-current="page">{label}</li>')
@@ -1222,7 +1222,7 @@ def patch_existing_pages():
     footer_pattern = re.compile(r'<footer class="site-footer">.*?</html>', re.DOTALL)
 
     active_map = {
-        "index.html": "index.html",
+        "index.html": "/",
         "about.html": "about.html",
         "services.html": "services.html",
         "properties.html": "properties.html",
