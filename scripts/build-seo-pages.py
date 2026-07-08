@@ -2,10 +2,15 @@
 """Generate SEO/geo pages and sync shared site chrome across all HTML pages."""
 
 import json
+import os
 import re
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+GSC_VERIFICATION = os.environ.get("GSC_VERIFICATION", "").strip()
+SITEMAP_URL = "https://westsummerlinhomes.com/sitemap.xml"
+TODAY = date.today().isoformat()
 
 NAP = {
     "business": "West Summerlin Homes by Dr. Jan Duffy",
@@ -111,83 +116,396 @@ NEIGHBORHOOD_PAGES = [
 ]
 
 
-def schema_graph(page_type: str, title: str, description: str, url: str, breadcrumb: list, extra: list | None = None) -> str:
-    graph = [
+def format_phone_e164(phone: str) -> str:
+    digits = "".join(ch for ch in phone if ch.isdigit())
+    if len(digits) == 10:
+        return f"+1-{digits[:3]}-{digits[3:6]}-{digits[6:]}"
+    return phone
+
+
+def postal_address() -> dict:
+    return {
+        "@type": "PostalAddress",
+        "streetAddress": NAP["street"],
+        "addressLocality": NAP["city"],
+        "addressRegion": NAP["region"],
+        "postalCode": NAP["postal"],
+        "addressCountry": "US",
+    }
+
+
+def website_entity() -> dict:
+    return {
+        "@type": "WebSite",
+        "@id": f"{NAP['url']}/#website",
+        "url": NAP["url"],
+        "name": NAP["business"],
+        "description": "Premium real estate services in West Summerlin and Las Vegas",
+        "publisher": {"@id": f"{NAP['url']}/#organization"},
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": REALSCOUT_PORTAL_URL,
+            },
+            "query-input": "required name=search_term_string",
+        },
+    }
+
+
+def organization_entity() -> dict:
+    return {
+        "@type": "Organization",
+        "@id": f"{NAP['url']}/#organization",
+        "name": NAP["business"],
+        "url": NAP["url"],
+        "logo": "https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png",
+        "description": "Premium real estate services in West Summerlin and Las Vegas",
+        "address": postal_address(),
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": format_phone_e164(NAP["phone"]),
+            "contactType": "customer service",
+            "areaServed": "US-NV",
+            "availableLanguage": "English",
+        },
+    }
+
+
+def agent_entity() -> dict:
+    return {
+        "@type": "RealEstateAgent",
+        "@id": f"{NAP['url']}/#agent",
+        "name": NAP["agent"],
+        "url": NAP["url"],
+        "telephone": format_phone_e164(NAP["phone"]),
+        "email": NAP["email"],
+        "image": "https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
+        "address": postal_address(),
+        "areaServed": [
+            {"@type": "City", "name": "Las Vegas"},
+            {"@type": "City", "name": "Summerlin"},
+            "West Summerlin",
+        ],
+        "memberOf": {"@type": "Organization", "name": NAP["brokerage"]},
+        "identifier": NAP["license"],
+        "hasOfferCatalog": services_catalog(),
+    }
+
+
+def local_business_entity() -> dict:
+    return {
+        "@type": ["LocalBusiness", "RealEstateAgent"],
+        "@id": f"{NAP['url']}/#localbusiness",
+        "name": NAP["business"],
+        "url": NAP["url"],
+        "telephone": format_phone_e164(NAP["phone"]),
+        "email": NAP["email"],
+        "address": postal_address(),
+        "geo": {"@type": "GeoCoordinates", "latitude": 36.1699, "longitude": -115.3338},
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                ],
+                "opens": "08:00",
+                "closes": "20:00",
+            }
+        ],
+        "priceRange": "$$$",
+    }
+
+
+def services_catalog() -> dict:
+    return {
+        "@type": "OfferCatalog",
+        "name": "Real Estate Services",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Home Buying Services",
+                    "description": "Expert guidance through the West Summerlin home buying process",
+                    "provider": {"@id": f"{NAP['url']}/#agent"},
+                    "areaServed": "West Summerlin, Las Vegas",
+                },
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Home Selling Services",
+                    "description": "Professional home selling and marketing in Summerlin",
+                    "provider": {"@id": f"{NAP['url']}/#agent"},
+                    "areaServed": "West Summerlin, Las Vegas",
+                },
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Investment Property Services",
+                    "description": "Real estate investment consultation in Las Vegas",
+                    "provider": {"@id": f"{NAP['url']}/#agent"},
+                    "areaServed": "Las Vegas",
+                },
+            },
+        ],
+    }
+
+
+def breadcrumb_entity(breadcrumb: list, url: str) -> dict:
+    return {
+        "@type": "BreadcrumbList",
+        "@id": f"{url}#breadcrumb",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": i + 1,
+                "name": item["name"],
+                "item": item.get("item", url if i == len(breadcrumb) - 1 else NAP["url"]),
+            }
+            for i, item in enumerate(breadcrumb)
+        ],
+    }
+
+
+def homepage_faq_entity() -> dict:
+    faqs = [
+        (
+            "What areas does Dr. Jan Duffy serve for real estate?",
+            "Dr. Jan Duffy specializes in West Summerlin, Summerlin West, and the greater Las Vegas valley, including Red Rock Country Club, The Ridges, Summerlin Centre, and The Trails.",
+        ),
+        (
+            "How do I search MLS listings in West Summerlin?",
+            f"Search live MLS inventory on {REALSCOUT_PORTAL_URL} or call {NAP['phone']} for a curated list from Dr. Jan Duffy.",
+        ),
+        (
+            "What services does Dr. Jan Duffy offer?",
+            "Home buying, home selling, luxury estates, investment properties, market analysis, and private showings seven days a week.",
+        ),
+        (
+            "How do I schedule a consultation?",
+            f"Call {NAP['phone']} or use the Schedule Consultation button to book an in-person meeting with Dr. Jan Duffy.",
+        ),
+        (
+            "Does Dr. Jan Duffy handle luxury properties?",
+            "Yes — Dr. Jan Duffy specializes in luxury homes throughout West Summerlin, including guard-gated golf communities and custom estates.",
+        ),
+    ]
+    return {
+        "@type": "FAQPage",
+        "@id": f"{NAP['url']}/#faq",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": q,
+                "acceptedAnswer": {"@type": "Answer", "text": a},
+            }
+            for q, a in faqs
+        ],
+    }
+
+
+def testimonials_schema() -> list:
+    reviews = [
+        (
+            "Sarah & Mike Johnson",
+            "Dr. Duffy made our home buying experience seamless and stress-free. Her expertise and dedication are unmatched — we closed on our Red Rock home in 21 days.",
+        ),
+        (
+            "Robert Chen",
+            "Sold our home in two weeks at asking price. Dr. Duffy's marketing strategy and negotiation skills are exceptional.",
+        ),
+        (
+            "Maria Rodriguez",
+            "Professional, knowledgeable, and truly cares about her clients. We couldn't have asked for a better realtor.",
+        ),
+        (
+            "David Park",
+            "As an investor, I appreciate agents who understand cap rates and rental demand. Dr. Duffy delivered on both.",
+        ),
+        (
+            "Jennifer & Tom Walsh",
+            "First-time buyers with a lot of questions. She explained every step clearly and never rushed us.",
+        ),
+    ]
+    entities = [
         {
-            "@type": "WebPage",
+            "@type": "AggregateRating",
+            "@id": f"{NAP['url']}/testimonials.html#aggregate",
+            "ratingValue": "4.9",
+            "bestRating": "5",
+            "ratingCount": str(len(reviews)),
+            "itemReviewed": {"@id": f"{NAP['url']}/#agent"},
+        }
+    ]
+    for author, text in reviews:
+        entities.append(
+            {
+                "@type": "Review",
+                "author": {"@type": "Person", "name": author},
+                "reviewBody": text,
+                "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+                "itemReviewed": {"@id": f"{NAP['url']}/#agent"},
+            }
+        )
+    return entities
+
+
+def neighborhoods_item_list() -> dict:
+    return {
+        "@type": "ItemList",
+        "@id": f"{NAP['url']}/neighborhoods.html#neighborhoods",
+        "name": "West Summerlin Neighborhoods",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": i + 1,
+                "name": page["name"],
+                "url": f"{NAP['url']}/{page['slug']}.html",
+            }
+            for i, page in enumerate(NEIGHBORHOOD_PAGES)
+        ],
+    }
+
+
+def schema_graph(
+    page_type: str,
+    title: str,
+    description: str,
+    url: str,
+    breadcrumb: list,
+    extra: list | None = None,
+) -> str:
+    webpage_types = ["WebPage"] if page_type == "WebPage" else [page_type, "WebPage"]
+    graph = [
+        website_entity(),
+        organization_entity(),
+        agent_entity(),
+        local_business_entity(),
+        {
+            "@type": webpage_types,
             "@id": f"{url}#webpage",
             "url": url,
             "name": title,
             "description": description,
             "isPartOf": {"@id": f"{NAP['url']}/#website"},
             "about": {"@id": f"{NAP['url']}/#agent"},
+            "breadcrumb": {"@id": f"{url}#breadcrumb"},
         },
-        {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": i + 1,
-                    "name": item["name"],
-                    "item": item.get("item", url if i == len(breadcrumb) - 1 else NAP["url"]),
-                }
-                for i, item in enumerate(breadcrumb)
-            ],
-        },
-        {
-            "@type": "RealEstateAgent",
-            "@id": f"{NAP['url']}/#agent",
-            "name": NAP["agent"],
-            "url": NAP["url"],
-            "telephone": format_phone_e164(NAP["phone"]),
-            "email": NAP["email"],
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": NAP["street"],
-                "addressLocality": NAP["city"],
-                "addressRegion": NAP["region"],
-                "postalCode": NAP["postal"],
-                "addressCountry": "US",
-            },
-            "areaServed": ["Las Vegas", "Summerlin", "West Summerlin"],
-            "memberOf": {"@type": "Organization", "name": NAP["brokerage"]},
-            "identifier": NAP["license"],
-        },
-        {
-            "@type": ["LocalBusiness", "RealEstateAgent"],
-            "@id": f"{NAP['url']}/#localbusiness",
-            "name": NAP["business"],
-            "url": NAP["url"],
-            "telephone": format_phone_e164(NAP["phone"]),
-            "email": NAP["email"],
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": NAP["street"],
-                "addressLocality": NAP["city"],
-                "addressRegion": NAP["region"],
-                "postalCode": NAP["postal"],
-                "addressCountry": "US",
-            },
-            "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": 36.1699,
-                "longitude": -115.3338,
-            },
-            "openingHoursSpecification": [
-                {
-                    "@type": "OpeningHoursSpecification",
-                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                    "opens": "08:00",
-                    "closes": "20:00",
-                }
-            ],
-            "priceRange": "$$$",
-        },
+        breadcrumb_entity(breadcrumb, url),
     ]
     if extra:
         graph.extend(extra)
     payload = {"@context": "https://schema.org", "@graph": graph}
     return json.dumps(payload, indent=2)
+
+
+def schema_for_homepage() -> str:
+    url = f"{NAP['url']}/"
+    title = "West Summerlin Homes by Dr. Jan Duffy | Las Vegas & Summerlin Real Estate"
+    description = (
+        "Expert real estate services in West Summerlin and Las Vegas. "
+        "Dr. Jan Duffy provides personalized home buying, selling, and investment guidance."
+    )
+    breadcrumb = [{"name": "Home", "item": NAP["url"]}]
+    return schema_graph("WebPage", title, description, url, breadcrumb, [homepage_faq_entity()])
+
+
+MANUAL_PAGE_SEO = {
+    "about.html": {
+        "title": "About Dr. Jan Duffy | West Summerlin Real Estate Agent",
+        "description": "Meet Dr. Jan Duffy, licensed West Summerlin real estate agent with BHHS Nevada Properties. Local expertise in Las Vegas and Summerlin.",
+        "page_type": "AboutPage",
+        "breadcrumb": [
+            {"name": "Home", "item": NAP["url"]},
+            {"name": "About", "item": f"{NAP['url']}/about.html"},
+        ],
+        "extra": [
+            {
+                "@type": "Person",
+                "@id": f"{NAP['url']}/about.html#person",
+                "name": NAP["agent"],
+                "jobTitle": "Real Estate Agent",
+                "worksFor": {"@id": f"{NAP['url']}/#organization"},
+                "url": f"{NAP['url']}/about.html",
+                "image": "https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
+            }
+        ],
+    },
+    "contact.html": {
+        "title": "Contact Dr. Jan Duffy | West Summerlin Real Estate",
+        "description": "Contact Dr. Jan Duffy for West Summerlin real estate. Call 702-222-1964 or schedule an in-person consultation seven days a week.",
+        "page_type": "ContactPage",
+        "breadcrumb": [
+            {"name": "Home", "item": NAP["url"]},
+            {"name": "Contact", "item": f"{NAP['url']}/contact.html"},
+        ],
+        "extra": [],
+    },
+    "services.html": {
+        "title": "Real Estate Services | West Summerlin Homes by Dr. Jan Duffy",
+        "description": "Home buying, selling, investment, and relocation services in West Summerlin and Las Vegas from Dr. Jan Duffy.",
+        "page_type": "WebPage",
+        "breadcrumb": [
+            {"name": "Home", "item": NAP["url"]},
+            {"name": "Services", "item": f"{NAP['url']}/services.html"},
+        ],
+        "extra": [services_catalog()],
+    },
+    "properties.html": {
+        "title": "Homes for Sale in West Summerlin | MLS Listings | Dr. Jan Duffy",
+        "description": "Browse live MLS homes for sale in West Summerlin and Las Vegas. Luxury estates, modern builds, and investment properties with Dr. Jan Duffy.",
+        "page_type": "CollectionPage",
+        "breadcrumb": [
+            {"name": "Home", "item": NAP["url"]},
+            {"name": "Properties", "item": f"{NAP['url']}/properties.html"},
+        ],
+        "extra": [
+            {
+                "@type": "SearchAction",
+                "@id": f"{NAP['url']}/properties.html#search",
+                "target": REALSCOUT_PORTAL_URL,
+                "query-input": "required name=search_term_string",
+            }
+        ],
+    },
+    "neighborhoods.html": {
+        "title": "West Summerlin Neighborhoods | Dr. Jan Duffy",
+        "description": "Explore West Summerlin neighborhoods including Red Rock Country Club, The Ridges, Summerlin Centre, and more with Dr. Jan Duffy.",
+        "page_type": "CollectionPage",
+        "breadcrumb": [
+            {"name": "Home", "item": NAP["url"]},
+            {"name": "Neighborhoods", "item": f"{NAP['url']}/neighborhoods.html"},
+        ],
+        "extra": [neighborhoods_item_list()],
+    },
+    "testimonials.html": {
+        "title": "Client Testimonials | Dr. Jan Duffy | West Summerlin Real Estate",
+        "description": "Read client reviews for Dr. Jan Duffy, West Summerlin real estate agent. 4.9-star service across buying, selling, and investment transactions.",
+        "page_type": "WebPage",
+        "breadcrumb": [
+            {"name": "Home", "item": NAP["url"]},
+            {"name": "Testimonials", "item": f"{NAP['url']}/testimonials.html"},
+        ],
+        "extra": testimonials_schema(),
+    },
+}
+
+LD_JSON_RE = re.compile(r"\s*<script type=\"application/ld\+json\">.*?</script>", re.DOTALL)
+BODY_LD_JSON_RE = re.compile(
+    r"\s*<!--[^>]*Structured Data[^>]*-->\s*<script type=\"application/ld\+json\">.*?</script>",
+    re.DOTALL,
+)
 
 
 def header_html(active: str) -> str:
@@ -270,6 +588,26 @@ def footer_html() -> str:
 </html>"""
 
 
+def gsc_meta_block() -> str:
+    if GSC_VERIFICATION:
+        return f'    <meta name="google-site-verification" content="{GSC_VERIFICATION}">'
+    return "    <!-- google-site-verification: set GSC_VERIFICATION env var at deploy time -->"
+
+
+def seo_meta_block(title: str, description: str, canonical: str) -> str:
+    return f"""    <meta name="description" content="{description}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{canonical}">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{SITEMAP_URL}">
+    {gsc_meta_block()}
+    <meta name="geo.region" content="US-NV">
+    <meta name="geo.placename" content="Las Vegas, Summerlin">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="{description}">
+    <meta property="og:url" content="{canonical}">
+    <meta property="og:type" content="website">"""
+
+
 def head_block(title: str, description: str, canonical: str, schema: str) -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -277,15 +615,7 @@ def head_block(title: str, description: str, canonical: str, schema: str) -> str
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-    <meta name="description" content="{description}">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{canonical}">
-    <meta name="geo.region" content="US-NV">
-    <meta name="geo.placename" content="Las Vegas, Summerlin">
-    <meta property="og:title" content="{title}">
-    <meta property="og:description" content="{description}">
-    <meta property="og:url" content="{canonical}">
-    <meta property="og:type" content="website">
+{seo_meta_block(title, description, canonical)}
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
     <link rel="stylesheet" href="/site.css">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
@@ -295,13 +625,6 @@ def head_block(title: str, description: str, canonical: str, schema: str) -> str
     </script>
 </head>
 <body>"""
-
-
-def format_phone_e164(phone: str) -> str:
-    digits = "".join(ch for ch in phone if ch.isdigit())
-    if len(digits) == 10:
-        return f"+1-{digits[:3]}-{digits[3:6]}-{digits[6:]}"
-    return phone
 
 
 def breadcrumb_html(items: list) -> str:
@@ -417,9 +740,18 @@ def nap_block() -> str:
             </div>"""
 
 
-def write_page(filename: str, active: str, title: str, description: str, breadcrumb: list, body: str, schema_extra: list | None = None):
-    url = f"{NAP['url']}/{filename}"
-    schema = schema_graph("WebPage", title, description, url, breadcrumb, schema_extra)
+def write_page(
+    filename: str,
+    active: str,
+    title: str,
+    description: str,
+    breadcrumb: list,
+    body: str,
+    schema_extra: list | None = None,
+    page_type: str = "WebPage",
+):
+    url = f"{NAP['url']}/{filename}" if filename != "index.html" else f"{NAP['url']}/"
+    schema = schema_graph(page_type, title, description, url, breadcrumb, schema_extra)
     content = "\n".join([
         head_block(title, description, url, schema),
         header_html(active),
@@ -688,6 +1020,167 @@ def generate_neighborhood(page: dict):
                body, [place_schema])
 
 
+def extract_title_description(html: str) -> tuple[str, str]:
+    title_match = re.search(r"<title>(.*?)</title>", html, re.DOTALL)
+    desc_match = re.search(
+        r'<meta name="description" content="([^"]*)"',
+        html,
+    )
+    title = title_match.group(1).strip() if title_match else NAP["business"]
+    description = desc_match.group(1).strip() if desc_match else NAP["business"]
+    return title, description
+
+
+def ensure_seo_head_tags(html: str, title: str, description: str, canonical: str) -> str:
+    head_match = re.search(r"<head>(.*?)</head>", html, re.DOTALL)
+    if not head_match:
+        return html
+    head = head_match.group(1)
+
+    if 'name="description"' not in head:
+        head = head.replace(
+            "</title>",
+            f"</title>\n    <meta name=\"description\" content=\"{description}\">",
+            1,
+        )
+    if 'name="robots"' not in head:
+        head = head.replace(
+            '<meta name="description"',
+            '    <meta name="robots" content="index, follow">\n    <meta name="description"',
+            1,
+        )
+    if 'rel="canonical"' not in head:
+        head = head.replace(
+            '<meta name="robots"',
+            f'    <link rel="canonical" href="{canonical}">\n    <meta name="robots"',
+            1,
+        )
+    if 'rel="sitemap"' not in head:
+        head = head.replace(
+            '<link rel="canonical"',
+            f'    <link rel="sitemap" type="application/xml" title="Sitemap" href="{SITEMAP_URL}">\n    <link rel="canonical"',
+            1,
+        )
+    if "google-site-verification" not in head and "google-site-verification:" not in head:
+        head = head.replace(
+            '<link rel="sitemap"',
+            f"{gsc_meta_block()}\n    <link rel=\"sitemap\"",
+            1,
+        )
+    if 'property="og:title"' not in head:
+        og_block = f"""
+    <meta name="geo.region" content="US-NV">
+    <meta name="geo.placename" content="Las Vegas, Summerlin">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="{description}">
+    <meta property="og:url" content="{canonical}">
+    <meta property="og:type" content="website">"""
+        head = head.replace(
+            '<link rel="icon"',
+            f"{og_block}\n    <link rel=\"icon\"",
+            1,
+        )
+
+    head = re.sub(
+        r'<link rel="canonical" href="[^"]*"',
+        f'<link rel="canonical" href="{canonical}"',
+        head,
+        count=1,
+    )
+
+    html = html[: head_match.start(1)] + head + html[head_match.end(1) :]
+    return html
+
+
+def inject_schema_script(html: str, schema_json: str) -> str:
+    script = f"\n    <script type=\"application/ld+json\">\n{schema_json}\n    </script>"
+    html = LD_JSON_RE.sub("", html)
+    html = BODY_LD_JSON_RE.sub("", html)
+    # Remove remaining body ld+json blocks (index.html legacy)
+    body_match = re.search(r"<body>(.*)</body>", html, re.DOTALL)
+    if body_match:
+        body = body_match.group(1)
+        cleaned_body = LD_JSON_RE.sub("", body)
+        if cleaned_body != body:
+            html = html.replace(body, cleaned_body, 1)
+    return html.replace("</head>", f"{script}\n</head>", 1)
+
+
+def canonical_for(filename: str) -> str:
+    if filename == "index.html":
+        return f"{NAP['url']}/"
+    return f"{NAP['url']}/{filename}"
+
+
+def inject_manual_pages_schema():
+    for filename, meta in MANUAL_PAGE_SEO.items():
+        path = ROOT / filename
+        if not path.exists():
+            continue
+        url = canonical_for(filename)
+        schema = schema_graph(
+            meta["page_type"],
+            meta["title"],
+            meta["description"],
+            url,
+            meta["breadcrumb"],
+            meta.get("extra"),
+        )
+        html = path.read_text(encoding="utf-8")
+        html = html.replace("Dr. Janet Duffy", "Dr. Jan Duffy")
+        html = ensure_seo_head_tags(html, meta["title"], meta["description"], url)
+        if re.search(r"<title>.*?</title>", html):
+            html = re.sub(r"<title>.*?</title>", f"<title>{meta['title']}</title>", html, count=1)
+        html = inject_schema_script(html, schema)
+        path.write_text(html, encoding="utf-8")
+        print(f"Injected schema for {filename}")
+
+
+def inject_index_schema():
+    path = ROOT / "index.html"
+    if not path.exists():
+        return
+    title = "West Summerlin Homes by Dr. Jan Duffy | Las Vegas & Summerlin Real Estate"
+    description = (
+        "Expert real estate services in West Summerlin and Las Vegas. "
+        "Dr. Jan Duffy provides personalized home buying, selling, and investment guidance."
+    )
+    canonical = f"{NAP['url']}/"
+    schema = schema_for_homepage()
+    html = path.read_text(encoding="utf-8")
+    html = html.replace("Dr. Janet Duffy", "Dr. Jan Duffy")
+    html = ensure_seo_head_tags(html, title, description, canonical)
+    html = inject_schema_script(html, schema)
+    html = re.sub(
+        r"\s*<!-- Structured Data[^>]*-->\s*",
+        "\n",
+        html,
+    )
+    html = re.sub(
+        r"\s*<!-- FAQ Schema[^>]*-->\s*",
+        "\n",
+        html,
+    )
+    html = re.sub(
+        r"\s*<!-- Breadcrumb Schema[^>]*-->\s*",
+        "\n",
+        html,
+    )
+    path.write_text(html, encoding="utf-8")
+    print("Injected unified schema for index.html")
+
+
+def inject_gsc_sitemap_all_pages():
+    for path in sorted(ROOT.glob("*.html")):
+        html = path.read_text(encoding="utf-8")
+        title, description = extract_title_description(html)
+        canonical = canonical_for(path.name)
+        updated = ensure_seo_head_tags(html, title, description, canonical)
+        if updated != html:
+            path.write_text(updated, encoding="utf-8")
+            print(f"Updated SEO head tags for {path.name}")
+
+
 def patch_existing_pages():
     calendly_replacements = [
         (r'<p><a href="#" class="calendly-popup">Schedule time with me</a></p>',
@@ -736,7 +1229,7 @@ def write_sitemap():
             priority = "0.85"
         urls.append(f"""  <url>
     <loc>{loc}</loc>
-    <lastmod>2026-07-08</lastmod>
+    <lastmod>{TODAY}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>{priority}</priority>
   </url>""")
@@ -755,6 +1248,9 @@ def main():
     for nbh in NEIGHBORHOOD_PAGES:
         generate_neighborhood(nbh)
     patch_existing_pages()
+    inject_gsc_sitemap_all_pages()
+    inject_manual_pages_schema()
+    inject_index_schema()
     write_sitemap()
 
 

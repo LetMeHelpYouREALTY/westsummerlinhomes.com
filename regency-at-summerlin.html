@@ -7,6 +7,8 @@
     <meta name="description" content="Homes for sale in Regency at Summerlin — active-adult living with clubhouse, fitness, and low-maintenance homes in West Summerlin.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://westsummerlinhomes.com/regency-at-summerlin.html">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://westsummerlinhomes.com/sitemap.xml">
+        <!-- google-site-verification: set GSC_VERIFICATION env var at deploy time -->
     <meta name="geo.region" content="US-NV">
     <meta name="geo.placename" content="Las Vegas, Summerlin">
     <meta property="og:title" content="Regency at Summerlin Homes for Sale | 55+ West Summerlin">
@@ -22,40 +24,45 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://westsummerlinhomes.com/regency-at-summerlin.html#webpage",
-      "url": "https://westsummerlinhomes.com/regency-at-summerlin.html",
-      "name": "Regency at Summerlin Homes for Sale | 55+ West Summerlin",
-      "description": "Homes for sale in Regency at Summerlin \u2014 active-adult living with clubhouse, fitness, and low-maintenance homes in West Summerlin.",
-      "isPartOf": {
-        "@id": "https://westsummerlinhomes.com/#website"
+      "@type": "WebSite",
+      "@id": "https://westsummerlinhomes.com/#website",
+      "url": "https://westsummerlinhomes.com",
+      "name": "West Summerlin Homes by Dr. Jan Duffy",
+      "description": "Premium real estate services in West Summerlin and Las Vegas",
+      "publisher": {
+        "@id": "https://westsummerlinhomes.com/#organization"
       },
-      "about": {
-        "@id": "https://westsummerlinhomes.com/#agent"
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://drjanduffy.realscout.com/"
+        },
+        "query-input": "required name=search_term_string"
       }
     },
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://westsummerlinhomes.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Neighborhoods",
-          "item": "https://westsummerlinhomes.com/neighborhoods.html"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Regency at Summerlin",
-          "item": "https://westsummerlinhomes.com/regency-at-summerlin.html"
-        }
-      ]
+      "@type": "Organization",
+      "@id": "https://westsummerlinhomes.com/#organization",
+      "name": "West Summerlin Homes by Dr. Jan Duffy",
+      "url": "https://westsummerlinhomes.com",
+      "logo": "https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png",
+      "description": "Premium real estate services in West Summerlin and Las Vegas",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1234 Summerlin Parkway",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "NV",
+        "postalCode": "89134",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-702-222-1964",
+        "contactType": "customer service",
+        "areaServed": "US-NV",
+        "availableLanguage": "English"
+      }
     },
     {
       "@type": "RealEstateAgent",
@@ -64,6 +71,7 @@
       "url": "https://westsummerlinhomes.com",
       "telephone": "+1-702-222-1964",
       "email": "janet@westsummerlinhomes.com",
+      "image": "https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "1234 Summerlin Parkway",
@@ -73,15 +81,63 @@
         "addressCountry": "US"
       },
       "areaServed": [
-        "Las Vegas",
-        "Summerlin",
+        {
+          "@type": "City",
+          "name": "Las Vegas"
+        },
+        {
+          "@type": "City",
+          "name": "Summerlin"
+        },
         "West Summerlin"
       ],
       "memberOf": {
         "@type": "Organization",
         "name": "BHHS Nevada Properties"
       },
-      "identifier": "S.0197614.LLC"
+      "identifier": "S.0197614.LLC",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Real Estate Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Home Buying Services",
+              "description": "Expert guidance through the West Summerlin home buying process",
+              "provider": {
+                "@id": "https://westsummerlinhomes.com/#agent"
+              },
+              "areaServed": "West Summerlin, Las Vegas"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Home Selling Services",
+              "description": "Professional home selling and marketing in Summerlin",
+              "provider": {
+                "@id": "https://westsummerlinhomes.com/#agent"
+              },
+              "areaServed": "West Summerlin, Las Vegas"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Investment Property Services",
+              "description": "Real estate investment consultation in Las Vegas",
+              "provider": {
+                "@id": "https://westsummerlinhomes.com/#agent"
+              },
+              "areaServed": "Las Vegas"
+            }
+          }
+        ]
+      }
     },
     {
       "@type": [
@@ -123,6 +179,48 @@
         }
       ],
       "priceRange": "$$$"
+    },
+    {
+      "@type": [
+        "WebPage"
+      ],
+      "@id": "https://westsummerlinhomes.com/regency-at-summerlin.html#webpage",
+      "url": "https://westsummerlinhomes.com/regency-at-summerlin.html",
+      "name": "Regency at Summerlin Homes for Sale | 55+ West Summerlin",
+      "description": "Homes for sale in Regency at Summerlin \u2014 active-adult living with clubhouse, fitness, and low-maintenance homes in West Summerlin.",
+      "isPartOf": {
+        "@id": "https://westsummerlinhomes.com/#website"
+      },
+      "about": {
+        "@id": "https://westsummerlinhomes.com/#agent"
+      },
+      "breadcrumb": {
+        "@id": "https://westsummerlinhomes.com/regency-at-summerlin.html#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://westsummerlinhomes.com/regency-at-summerlin.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://westsummerlinhomes.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Neighborhoods",
+          "item": "https://westsummerlinhomes.com/neighborhoods.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Regency at Summerlin",
+          "item": "https://westsummerlinhomes.com/regency-at-summerlin.html"
+        }
+      ]
     },
     {
       "@type": "Place",
