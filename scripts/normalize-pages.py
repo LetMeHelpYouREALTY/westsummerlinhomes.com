@@ -18,11 +18,16 @@ FOOTER = """
                 <h4>Explore</h4>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
+                    <li><a href="buyers.html">Buyers Guide</a></li>
+                    <li><a href="sellers.html">Sellers Guide</a></li>
                     <li><a href="properties.html">Properties</a></li>
                     <li><a href="neighborhoods.html">Neighborhoods</a></li>
+                    <li><a href="luxury-homes.html">Luxury Homes</a></li>
+                    <li><a href="market-update.html">Market Update</a></li>
+                    <li><a href="home-valuation.html">Home Valuation</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
                     <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
@@ -34,7 +39,7 @@ FOOTER = """
             </div>
         </div>
         <div class="footer-bottom container">
-            <p>&copy; 2026 West Summerlin Homes by Dr. Jan Duffy. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
+            <p>&copy; 2026 West Summerlin Homes by Dr. Jan Duffy. All rights reserved. <a href="#" class="calendly-popup calendly-link-btn">Schedule time with me</a></p>
         </div>
     </footer>
 

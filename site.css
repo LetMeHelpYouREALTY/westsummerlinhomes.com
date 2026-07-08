@@ -414,35 +414,55 @@ section {
 }
 
 /* Primary CTA on dark backgrounds: white fill, dark text */
-.hero .cta-button,
-.page-header .cta-button,
-.contact .cta-button,
-.cta .cta-button {
+.hero .cta-button:not(.cta-button-outline),
+.page-header .cta-button:not(.cta-button-outline),
+.contact .cta-button:not(.cta-button-outline),
+.cta .cta-button:not(.cta-button-outline) {
   background: var(--white);
   color: var(--navy) !important;
   border-color: var(--white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.hero .cta-button:hover,
-.page-header .cta-button:hover,
-.contact .cta-button:hover,
-.cta .cta-button:hover {
+.hero .cta-button:not(.cta-button-outline):hover,
+.page-header .cta-button:not(.cta-button-outline):hover,
+.contact .cta-button:not(.cta-button-outline):hover,
+.cta .cta-button:not(.cta-button-outline):hover {
   background: #f3f4f6;
   color: var(--navy) !important;
 }
 
-.cta-button-outline {
+/* Outline CTA on dark backgrounds: white border + white text */
+.hero .cta-button-outline,
+.page-header .cta-button-outline,
+.contact .cta-button-outline,
+.cta .cta-button-outline {
   background: transparent !important;
   color: var(--white) !important;
-  border: 2px solid var(--white);
+  border: 2px solid var(--white) !important;
+  box-shadow: none;
+}
+
+.hero .cta-button-outline:hover,
+.page-header .cta-button-outline:hover,
+.contact .cta-button-outline:hover,
+.cta .cta-button-outline:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: var(--white) !important;
+  border-color: var(--white) !important;
+}
+
+.cta-button-outline {
+  background: transparent !important;
+  color: var(--navy) !important;
+  border: 2px solid var(--navy);
   box-shadow: none;
 }
 
 .cta-button-outline:hover {
-  background: rgba(255, 255, 255, 0.16) !important;
-  color: var(--white) !important;
-  border-color: var(--white);
+  background: var(--bg) !important;
+  color: var(--navy) !important;
+  border-color: var(--navy);
 }
 
 /* Primary CTA on light backgrounds */
@@ -870,6 +890,7 @@ realscout-advanced-search {
   font-family: var(--font-display);
   font-size: 1.5rem;
   margin-bottom: 1.25rem;
+  color: var(--on-dark);
 }
 
 .contact-item {
@@ -929,25 +950,81 @@ realscout-advanced-search {
 
 .calendly-popup {
   cursor: pointer;
-  color: var(--blue-bright);
-  font-weight: 600;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* High-contrast Calendly trigger — use on dark sections */
+.calendly-link-btn {
+  display: inline-block;
+  background: var(--white);
+  color: var(--navy) !important;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.calendly-link-btn:hover {
+  background: #f3f4f6;
+  color: var(--navy) !important;
+  transform: translateY(-1px);
+}
+
+/* Calendly trigger on light backgrounds */
+.calendly-link-btn-dark {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--white) !important;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: background 0.2s;
+}
+
+.calendly-link-btn-dark:hover {
+  background: var(--blue-dark);
+  color: var(--white) !important;
+}
+
+.contact .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark),
+.cta .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark),
+.hero .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark),
+.page-header .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark),
+.site-footer .calendly-popup,
+.sticky-call-bar .calendly-popup,
+.nav-links .calendly-popup {
+  color: var(--white) !important;
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
 
-.contact .calendly-popup,
-.cta .calendly-popup,
-.hero .calendly-popup,
-.page-header .calendly-popup {
-  color: var(--white) !important;
+.site-footer .calendly-popup.calendly-link-btn,
+.contact .calendly-popup.calendly-link-btn {
+  text-decoration: none !important;
+}
+
+.calendly-popup-light {
+  color: var(--blue-dark) !important;
   text-decoration: underline;
+  text-underline-offset: 0.15em;
+  font-weight: 700;
 }
 
 .contact .calendly-popup:hover,
 .cta .calendly-popup:hover,
 .hero .calendly-popup:hover,
-.page-header .calendly-popup:hover {
+.page-header .calendly-popup:hover,
+.site-footer .calendly-popup:hover {
   color: var(--blue-light) !important;
+}
+
+.contact a,
+.contact-form a:not(.calendly-link-btn) {
+  color: var(--white);
 }
 
 .form-group {
@@ -1270,7 +1347,194 @@ realscout-advanced-search {
 }
 
 .service-cta:hover {
-  color: var(--blue-bright);
+  color: var(--blue-dark);
+}
+
+/* Content & SEO pages */
+.content-page {
+  background: var(--white);
+}
+
+.content-body {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.content-body h2 {
+  font-family: var(--font-display);
+  color: var(--navy-mid);
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+}
+
+.content-body h3 {
+  color: var(--navy-mid);
+  font-size: 1.15rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.content-body p,
+.content-body li {
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.content-body ul,
+.content-body ol {
+  margin: 0 0 1.25rem 1.25rem;
+}
+
+.content-body a {
+  color: var(--blue-dark);
+  font-weight: 600;
+}
+
+.geo-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.geo-stat {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.geo-stat strong {
+  display: block;
+  font-size: 1.35rem;
+  color: var(--navy);
+  margin-bottom: 0.25rem;
+}
+
+.geo-stat span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.faq-item h3 {
+  font-family: var(--font-display);
+  color: var(--navy-mid);
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.faq-item p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.related-links a {
+  background: var(--bg);
+  color: var(--navy) !important;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid #e5e7eb;
+}
+
+.related-links a:hover {
+  background: var(--navy);
+  color: var(--white) !important;
+}
+
+.neighborhood-hero-card {
+  background: linear-gradient(135deg, var(--navy-mid), var(--navy-dark));
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.neighborhood-hero-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+}
+
+.neighborhood-hero-card p {
+  color: var(--on-dark-muted);
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+}
+
+.valuation-form {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 520px;
+  margin: 2rem auto 0;
+  box-shadow: var(--shadow-soft);
+}
+
+.valuation-form input,
+.valuation-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-family: inherit;
+}
+
+.nap-block {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.nap-block strong {
+  display: block;
+  font-family: var(--font-display);
+  color: var(--navy-mid);
+  margin-bottom: 0.5rem;
+}
+
+.neighborhood-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.footer-bottom .calendly-link-btn {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  margin-left: 0.35rem;
+  vertical-align: middle;
 }
 
 /* Animations */

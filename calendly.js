@@ -18,7 +18,7 @@
     Calendly.initBadgeWidget({
       url: CALENDLY_URL,
       text: 'Schedule time with me',
-      color: '#0069ff',
+      color: '#0a2540',
       textColor: '#ffffff',
       branding: false,
     });
