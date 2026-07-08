@@ -583,9 +583,9 @@ def footer_html() -> str:
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <script src="/site.js"></script>
-    <script src="/calendly.js"></script>
+    <script src="/site.js" defer></script>
+    <script src="/realscout-loader.js" defer></script>
+    <script src="/calendly.js" defer></script>
 </body>
 </html>"""
 
@@ -610,7 +610,22 @@ def seo_meta_block(title: str, description: str, canonical: str) -> str:
     <meta property="og:type" content="website">"""
 
 
-def head_block(title: str, description: str, canonical: str, schema: str) -> str:
+def perf_head_snippets(preload_hero: bool = False) -> str:
+    hero_preload = ""
+    if preload_hero:
+        hero_preload = """
+    <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg" fetchpriority="high">"""
+    return f"""    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://em.realscout.com">
+    <link rel="preconnect" href="https://www.realscout.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.westsummerlinhomes.com" crossorigin>{hero_preload}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap"></noscript>"""
+
+
+def head_block(title: str, description: str, canonical: str, schema: str, preload_hero: bool = False) -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -618,10 +633,9 @@ def head_block(title: str, description: str, canonical: str, schema: str) -> str
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
 {seo_meta_block(title, description, canonical)}
+{perf_head_snippets(preload_hero)}
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
     <link rel="stylesheet" href="/site.css">
-    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script type="application/ld+json">
 {schema}
     </script>
@@ -1596,6 +1610,147 @@ def generate_neighborhoods_hub():
     )
 
 
+def patch_index_performance():
+    path = ROOT / "index.html"
+    if not path.exists():
+        return
+    html = path.read_text(encoding="utf-8")
+
+    # Remove render-blocking third-party assets from head
+    html = re.sub(
+        r'\s*<script src="https://em\.realscout\.com/widgets/realscout-web-components\.umd\.js" type="module"></script>',
+        "",
+        html,
+    )
+    html = re.sub(
+        r'\s*<link href="https://assets\.calendly\.com/assets/external/widget\.css" rel="stylesheet">',
+        "",
+        html,
+    )
+
+    if 'fetchpriority="high"' not in html:
+        if "preconnect" not in html:
+            html = html.replace(
+                '<link rel="stylesheet" href="/site.css">',
+                perf_head_snippets(preload_hero=True) + '\n    <link rel="stylesheet" href="/site.css">',
+                1,
+            )
+        else:
+            hero_preload = '    <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg" fetchpriority="high">\n'
+            html = html.replace(
+                '<link rel="stylesheet" href="/site.css">',
+                hero_preload + '    <link rel="stylesheet" href="/site.css">',
+                1,
+            )
+
+    # Homepage breadcrumb is unnecessary weight above the fold
+    html = re.sub(
+        r"\s*<!-- Breadcrumb Navigation for SEO.*?-->\s*<nav class=\"breadcrumb-nav\".*?</nav>",
+        "",
+        html,
+        flags=re.DOTALL,
+    )
+
+    # Drop duplicate listings carousel — keep featured luxury block only
+    duplicate_listings = re.search(
+        r'<section class="realscout-listings">\s*<div class="container">\s*<h2 class="section-title fade-in">Current Listings</h2>.*?</section>',
+        html,
+        flags=re.DOTALL,
+    )
+    if duplicate_listings:
+        html = html.replace(duplicate_listings.group(0), "", 1)
+
+    # Replace heavy inline Calendly iframe with lightweight CTA
+    html = html.replace(
+        """                <div class="contact-form calendly-embed">
+                    <h3>Schedule a Consultation</h3>
+                    <p><a href="#" class="calendly-popup calendly-link-btn">Schedule time with me</a></p>
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/drjanduffy/in-person-real-estate-consultation" style="min-width:320px;height:700px;"></div>
+                </div>""",
+        """                <div class="contact-form calendly-embed">
+                    <h3>Schedule a Consultation</h3>
+                    <p>Book an in-person meeting with Dr. Jan Duffy — seven days a week.</p>
+                    <div class="contact-cta-group">
+                        <a href="#" class="cta-button calendly-popup">Schedule time with me</a>
+                        <a href="contact.html" class="cta-button cta-button-outline">Full contact page</a>
+                    </div>
+                </div>""",
+    )
+
+    # Defer local scripts; remove blocking Calendly host script
+    html = re.sub(
+        r'\s*<script src="https://assets\.calendly\.com/assets/external/widget\.js" async></script>',
+        "",
+        html,
+    )
+    html = re.sub(r'<script src="/site\.js"></script>', '<script src="/site.js" defer></script>', html)
+    html = re.sub(
+        r'<script src="/calendly\.js"></script>',
+        '<script src="/realscout-loader.js" defer></script>\n    <script src="/calendly.js" defer></script>',
+        html,
+    )
+    if "realscout-loader.js" not in html:
+        html = html.replace(
+            '<script src="/calendly.js" defer></script>',
+            '<script src="/realscout-loader.js" defer></script>\n    <script src="/calendly.js" defer></script>',
+        )
+
+    path.write_text(html, encoding="utf-8")
+    print("Patched index.html performance")
+
+
+def patch_performance_heads_all():
+    head_cleanup = [
+        (
+            r'\s*<script src="https://em\.realscout\.com/widgets/realscout-web-components\.umd\.js" type="module"></script>',
+            "",
+        ),
+        (
+            r'\s*<link href="https://assets\.calendly\.com/assets/external/widget\.css" rel="stylesheet">',
+            "",
+        ),
+        (
+            r'\s*<script src="https://assets\.calendly\.com/assets/external/widget\.js" async></script>',
+            "",
+        ),
+    ]
+    footer_scripts = """    <script src="/site.js" defer></script>
+    <script src="/realscout-loader.js" defer></script>
+    <script src="/calendly.js" defer></script>"""
+
+    for path in sorted(ROOT.glob("*.html")):
+        if path.name == "index.html":
+            continue
+        html = path.read_text(encoding="utf-8")
+        original = html
+        for pattern, repl in head_cleanup:
+            html = re.sub(pattern, repl, html)
+        if "preconnect" not in html:
+            html = html.replace(
+                '<link rel="stylesheet" href="/site.css">',
+                perf_head_snippets() + '\n    <link rel="stylesheet" href="/site.css">',
+                1,
+            )
+        html = re.sub(
+            r'<script src="/site\.js"></script>\s*<script src="/calendly\.js"></script>',
+            footer_scripts,
+            html,
+        )
+        html = re.sub(
+            r'<script src="/site\.js" defer></script>\s*<script src="/calendly\.js" defer></script>',
+            footer_scripts,
+            html,
+        )
+        if "realscout-loader.js" not in html and "/site.js" in html:
+            html = html.replace(
+                '<script src="/site.js" defer></script>',
+                '<script src="/site.js" defer></script>\n    <script src="/realscout-loader.js" defer></script>',
+            )
+        if html != original:
+            path.write_text(html, encoding="utf-8")
+            print(f"Patched performance head/footer for {path.name}")
+
+
 def patch_index_internal_links():
     path = ROOT / "index.html"
     if not path.exists():
@@ -1904,6 +2059,8 @@ def main():
     for nbh in NEIGHBORHOOD_PAGES:
         generate_neighborhood(nbh)
     patch_existing_pages()
+    patch_performance_heads_all()
+    patch_index_performance()
     patch_index_internal_links()
     inject_gsc_sitemap_all_pages()
     inject_manual_pages_schema()

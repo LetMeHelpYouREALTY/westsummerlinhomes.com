@@ -14,9 +14,16 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.westsummerlinhomes.com/">
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://em.realscout.com">
+    <link rel="preconnect" href="https://www.realscout.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.westsummerlinhomes.com" crossorigin>
+    <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg" fetchpriority="high">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap"></noscript>
     <link rel="stylesheet" href="/site.css">
-    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <!-- Sitemap -->
         <!-- google-site-verification: set GSC_VERIFICATION env var at deploy time -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.westsummerlinhomes.com/sitemap.xml">
@@ -292,7 +299,7 @@
     </script>
 </head>
 <body>
-                <header>
+                    <header>
         <nav class="container">
             <a href="/" class="logo">
                 <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" alt="West Summerlin Homes by Dr. Jan Duffy" width="42" height="42" loading="eager">
@@ -323,18 +330,6 @@
         </nav>
     </header>
 
-    <!-- Breadcrumb Navigation for SEO - 2025 Core Update -->
-    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <div class="container">
-            <ol class="breadcrumb-list">
-                <li class="breadcrumb-item">
-                    <a href="https://www.westsummerlinhomes.com" aria-label="Home">Home</a>
-                </li>
-                <li class="breadcrumb-item" aria-current="page">Real Estate Services</li>
-            </ol>
-        </div>
-    </nav>
-
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content fade-in">
@@ -355,15 +350,7 @@
         </div>
     </section>
 
-    <section class="realscout-listings">
-        <div class="container">
-            <h2 class="section-title fade-in">Current Listings</h2>
-            <div class="fade-in">
-                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="STATUS_AND_SIGNIFICANT_CHANGE" listing-status="For Sale" property-types="SFR,MF" price-min="600000" price-max="750000"></realscout-office-listings>
-            </div>
-            <p class="realscout-portal-note">Listing data courtesy of GLVAR · <a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">Open full MLS search on RealScout</a></p>
-        </div>
-    </section>
+    
 
     <section id="search" class="search-section">
         <div class="container">
@@ -623,14 +610,17 @@
                 </div>
                 <div class="contact-form calendly-embed">
                     <h3>Schedule a Consultation</h3>
-                    <p><a href="#" class="calendly-popup calendly-link-btn">Schedule time with me</a></p>
-                    <div class="calendly-inline-widget" data-url="https://calendly.com/drjanduffy/in-person-real-estate-consultation" style="min-width:320px;height:700px;"></div>
+                    <p>Book an in-person meeting with Dr. Jan Duffy — seven days a week.</p>
+                    <div class="contact-cta-group">
+                        <a href="#" class="cta-button calendly-popup">Schedule time with me</a>
+                        <a href="contact.html" class="cta-button cta-button-outline">Full contact page</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-                                            <footer class="site-footer">
+                                                <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
                 <strong>West Summerlin Homes</strong>
@@ -673,8 +663,8 @@
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <script src="/site.js"></script>
-    <script src="/calendly.js"></script>
+    <script src="/site.js" defer></script>
+    <script src="/realscout-loader.js" defer></script>
+    <script src="/calendly.js" defer></script>
 </body>
 </html>

@@ -56,10 +56,16 @@ FOOTER = """
 </html>
 """
 
-HEAD_TEMPLATE = """    <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
+HEAD_TEMPLATE = """    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://em.realscout.com">
+    <link rel="preconnect" href="https://www.realscout.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.westsummerlinhomes.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"></noscript>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
     <link rel="stylesheet" href="/site.css">
-    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>"""
 
 
