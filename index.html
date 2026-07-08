@@ -14,8 +14,9 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://westsummerlinhomes.com/">
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
-    <link rel="stylesheet" href="/header.css">
-    
+    <link rel="stylesheet" href="/site.css">
+    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://westsummerlinhomes.com/sitemap.xml">
     
@@ -46,842 +47,7 @@
     <meta name="DC.description" content="Premium real estate services in Las Vegas and Summerlin">
     <meta name="DC.subject" content="Real Estate, Las Vegas, Summerlin, Home Buying, Home Selling">
     
-    <!-- RealScout Integration -->
-    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <style>
-      realscout-office-listings {
-        --rs-listing-divider-color: rgb(101, 141, 172);
-        width: 100%;
-      }
-    </style>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header styles in /header.css */
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8)), url('https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: white;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .cta-button:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
-        }
-
-        /* RealScout Search Integration */
-        .search-section {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            padding: 4rem 0;
-        }
-
-        .search-container {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .search-container h3 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .realscout-search-container {
-            width: 100% !important;
-        }
-
-        realscout-advanced-search {
-            --rs-as-button-text-color: #ffffff;
-            --rs-as-background-color: transparent;
-            --rs-as-button-color: #3498db;
-            --rs-as-widget-width: 100% !important;
-            --rs-as-border-radius: 0.5rem;
-            --rs-as-font-family: Arial, sans-serif;
-            --rs-as-input-height: 48px;
-            --rs-as-button-hover-color: #2980b9;
-        }
-
-        realscout-advanced-search input {
-            border: 1px solid #D1D5DB !important;
-            border-radius: 0.5rem !important;
-            padding: 0.75rem !important;
-            font-size: 1rem !important;
-        }
-
-        realscout-advanced-search button {
-            background-color: #3498db !important;
-            border-radius: 0.5rem !important;
-            font-weight: 500 !important;
-            transition: background-color 0.2s !important;
-        }
-
-        realscout-advanced-search button:hover {
-            background-color: #2980b9 !important;
-        }
-
-        .search-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: #6b7280;
-        }
-
-        /* Market Statistics Section */
-        .market-stats {
-            background: #f8f9fa;
-            padding: 3rem 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #3498db;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            color: #6b7280;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-change {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .stat-change.positive {
-            color: #10b981;
-        }
-
-        .stat-change.negative {
-            color: #ef4444;
-        }
-
-        .stat-change.neutral {
-            color: #f59e0b;
-        }
-
-        /* Sections */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #2c3e50;
-        }
-
-        /* About Section */
-        .about {
-            background: #f8f9fa;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-image {
-            text-align: center;
-        }
-
-        .about-image img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .credentials {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .credential {
-            background: #3498db;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-        }
-
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        /* Properties Section */
-        .properties {
-            background: #f8f9fa;
-        }
-
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .property-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .property-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .property-image {
-            height: 250px;
-            background: #2c3e50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .property-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            inset: 0;
-        }
-
-        .property-badge {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            background: #e74c3c;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .property-time {
-            position: absolute;
-            bottom: 1rem;
-            left: 1rem;
-            background: #3498db;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .property-details {
-            padding: 1.5rem;
-        }
-
-        .property-price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-
-        .property-address {
-            color: #7f8c8d;
-            margin-bottom: 1rem;
-        }
-
-        .property-features {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature {
-            background: #ecf0f1;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-        }
-
-        .property-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-primary {
-            flex: 1;
-            background: #3498db;
-            color: white;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .btn-primary:hover {
-            background: #2980b9;
-        }
-
-        .btn-secondary {
-            flex: 1;
-            background: #ecf0f1;
-            color: #6b7280;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .btn-secondary:hover {
-            background: #d1d5db;
-        }
-
-        /* Neighborhoods Section */
-        .neighborhoods {
-            background: white;
-        }
-
-        .neighborhoods-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .neighborhood-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .neighborhood-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .neighborhood-image {
-            height: 200px;
-            background: linear-gradient(45deg, #3498db, #2ecc71);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.1rem;
-        }
-
-        .neighborhood-info {
-            padding: 1.5rem;
-        }
-
-        .neighborhood-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-
-        .neighborhood-description {
-            color: #6b7280;
-            margin-bottom: 1rem;
-        }
-
-        .neighborhood-price {
-            color: #3498db;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .neighborhood-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .neighborhood-tag {
-            background: #dbeafe;
-            color: #1e40af;
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-
-        /* RealScout Listings Section */
-        .realscout-listings {
-            background: #f8f9fa;
-            padding: 80px 0;
-        }
-
-        .realscout-listings .section-title {
-            margin-bottom: 3rem;
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .testimonial-author {
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .contact-item i {
-            margin-right: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .contact-form {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 15px;
-        }
-
-        .calendly-embed .calendly-inline-widget {
-            border-radius: 12px;
-            overflow: hidden;
-            margin-top: 1rem;
-        }
-
-        .calendly-popup {
-            cursor: pointer;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255,255,255,0.9);
-        }
-
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .search-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Animation for scroll reveal */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Enhanced Author Credentials Section - 2025 Core Update E-E-A-T */
-        .author-credentials {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 4rem 0;
-            margin-top: -80px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .credentials-container {
-            background: white;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .expert-badge {
-            margin-bottom: 2rem;
-        }
-
-        .expert-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .expert-badge h3 {
-            color: #2c3e50;
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .credentials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .credential-item {
-            display: flex;
-            align-items: flex-start;
-            text-align: left;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .credential-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .credential-icon {
-            font-size: 2rem;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
-
-        .credential-content h4 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .credential-content p {
-            color: #6b7280;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin: 0;
-        }
-
-        .trust-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            padding-top: 2rem;
-            border-top: 2px solid #e9ecef;
-        }
-
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #10b981;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .trust-icon {
-            background: #10b981;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        /* Responsive adjustments for credentials */
-        @media (max-width: 768px) {
-            .credentials-container {
-                padding: 2rem 1.5rem;
-            }
-            
-            .credentials-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .trust-indicators {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-
-        /* Breadcrumb Navigation Styles - 2025 Core Update */
-        .breadcrumb-nav {
-            background: #f8f9fa;
-            padding: 1rem 0;
-            border-bottom: 1px solid #e9ecef;
-            margin-top: 80px;
-        }
-
-        .breadcrumb-list {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            align-items: center;
-        }
-
-        .breadcrumb-item {
-            display: flex;
-            align-items: center;
-        }
-
-        .breadcrumb-item:not(:last-child)::after {
-            content: '>';
-            margin: 0 0.5rem;
-            color: #6b7280;
-            font-weight: bold;
-        }
-
-        .breadcrumb-item a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .breadcrumb-item a:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-
-        .breadcrumb-item[aria-current="page"] {
-            color: #6b7280;
-            font-weight: 500;
-        }
-
-        /* Responsive breadcrumb */
-        @media (max-width: 768px) {
-            .breadcrumb-nav {
-                padding: 0.75rem 0;
-            }
-            
-            .breadcrumb-list {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <!-- RealScout Integration (loaded in head) -->
 </head>
 <body>
     <!-- Structured Data for 2025 Core Update - E-E-A-T & AI Overviews -->
@@ -893,7 +59,7 @@
       "jobTitle": "Real Estate Agent",
       "description": "Premium real estate services in Las Vegas and Summerlin with 15+ years of experience",
       "url": "https://westsummerlinhomes.com",
-      "telephone": "+1-702-555-0123",
+      "telephone": "+1-702-222-1964",
       "email": "janet@westsummerlinhomes.com",
       "address": {
         "@type": "PostalAddress",
@@ -973,7 +139,7 @@
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+1-702-555-0123",
+        "telephone": "+1-702-222-1964",
         "contactType": "customer service",
         "areaServed": "US-NV",
         "availableLanguage": "English"
@@ -1085,6 +251,7 @@
                     <span class="logo-subtitle">by Dr. Jan Duffy</span>
                 </span>
             </a>
+            <a href="tel:7022221964" class="nav-call">📞 702-222-1964</a>
             <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
                 <span class="nav-toggle-bar"></span>
                 <span class="nav-toggle-bar"></span>
@@ -1117,10 +284,20 @@
 
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Your Dream Home Awaits</h1>
-                <p>Experience premium real estate services with Dr. Janet Duffy - where expertise meets excellence in every transaction.</p>
-                <a href="#" class="cta-button calendly-popup">Schedule Consultation</a>
+            <div class="hero-content fade-in">
+                <p class="section-eyebrow">West Summerlin · Las Vegas</p>
+                <h1>Your Dream Home Awaits in <span class="text-accent">West Summerlin</span></h1>
+                <p>Expert real estate with Dr. Jan Duffy — buying, selling, and investment guidance across Summerlin West.</p>
+                <div class="hero-actions">
+                    <a href="#" class="cta-button calendly-popup">Schedule Consultation</a>
+                    <a href="properties.html" class="cta-button cta-button-outline">Browse Listings</a>
+                </div>
+                <div class="hero-trust">
+                    <div class="hero-trust-item"><strong>500+</strong><span>Homes Sold</span></div>
+                    <div class="hero-trust-item"><strong>$2.5M+</strong><span>Sales Volume</span></div>
+                    <div class="hero-trust-item"><strong>4.9★</strong><span>Client Rating</span></div>
+                    <div class="hero-trust-item"><strong>15+</strong><span>Years Experience</span></div>
+                </div>
             </div>
         </div>
     </section>
@@ -1161,7 +338,8 @@
 
     <section class="market-stats">
         <div class="container">
-            <h2 class="section-title">Market Insights</h2>
+            <h2 class="section-title fade-in">Market Insights</h2>
+            <p class="section-subtitle">West Summerlin market snapshot — updated weekly.</p>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-value">$875K</div>
@@ -1184,6 +362,7 @@
                     <div class="stat-change positive">↑ 2% vs last month</div>
                 </div>
             </div>
+            <p class="market-updated">Data refreshed weekly · Last update: July 2026</p>
         </div>
     </section>
 
@@ -1386,20 +565,24 @@
                 <div class="contact-info">
                     <h3>Contact Information</h3>
                     <div class="contact-item">
-                        <i>📞</i>
-                        <span>(555) 123-4567</span>
+                        <span>📞</span>
+                        <span><a href="tel:7022221964">702-222-1964</a></span>
                     </div>
                     <div class="contact-item">
-                        <i>✉️</i>
-                        <span>janet.duffy@realestate.com</span>
+                        <span>✉️</span>
+                        <span>janet@westsummerlinhomes.com</span>
                     </div>
                     <div class="contact-item">
-                        <i>📍</i>
-                        <span>123 Real Estate Plaza, Suite 100<br>Your City, State 12345</span>
+                        <span>📍</span>
+                        <span>BHHS Nevada Properties<br>Las Vegas, NV 89134</span>
                     </div>
                     <div class="contact-item">
-                        <i>🕒</i>
-                        <span>Available 7 days a week<br>8:00 AM - 8:00 PM</span>
+                        <span>🕒</span>
+                        <span>Available 7 days a week<br>8:00 AM – 8:00 PM</span>
+                    </div>
+                    <div class="contact-actions">
+                        <a href="tel:7022221964">Call Now</a>
+                        <a href="https://maps.google.com/?q=Summerlin+Las+Vegas+NV" class="outline" target="_blank" rel="noopener">Directions</a>
                     </div>
                 </div>
                 <div class="contact-form calendly-embed">
@@ -1411,71 +594,44 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 West Summerlin Homes by Dr. Jan Duffy. License #S.0197614.LLC. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <strong>West Summerlin Homes</strong>
+                <span>by Dr. Jan Duffy</span>
+                <p>Luxury real estate in West Summerlin and the greater Las Vegas valley.</p>
+            </div>
+            <div class="footer-nav">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="properties.html">Properties</a></li>
+                    <li><a href="neighborhoods.html">Neighborhoods</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Dr. Jan Duffy<br>BHHS Nevada Properties</p>
+                <p><a href="tel:7022221964">702-222-1964</a></p>
+                <p>License #S.0197614.LLC</p>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; 2026 West Summerlin Homes by Dr. Jan Duffy. All rights reserved. <a href="#" class="calendly-popup">Schedule time with me</a></p>
         </div>
     </footer>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    <div class="sticky-call-bar">
+        <a href="tel:7022221964">Call 702-222-1964</a>
+        <a href="#" class="calendly-popup">Schedule</a>
+    </div>
 
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all elements with fade-in class
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Form submission handling removed — Calendly handles scheduling
-
-        // Header background change on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(44, 62, 80, 0.95)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)';
-            }
-        });
-
-        // Initialize RealScout components
-        document.addEventListener('DOMContentLoaded', function() {
-            // Wait for RealScout components to load
-            setTimeout(() => {
-                const searchComponent = document.querySelector('realscout-advanced-search');
-                if (searchComponent) {
-                    searchComponent.style.opacity = '1';
-                }
-            }, 1000);
-        });
-    </script>
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <script src="/header.js"></script>
+    <script src="/site.js"></script>
     <script src="/calendly.js"></script>
 </body>
 </html>
