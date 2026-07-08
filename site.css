@@ -894,13 +894,13 @@ realscout-advanced-search {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--green);
+  color: #166534;
   font-weight: 600;
   font-size: 0.9rem;
 }
 
 .trust-icon {
-  background: var(--green);
+  background: #166534;
   color: white;
   border-radius: 50%;
   width: 20px;
