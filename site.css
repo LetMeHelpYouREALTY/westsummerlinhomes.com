@@ -608,6 +608,11 @@ realscout-home-value {
   box-shadow: var(--shadow-soft);
 }
 
+.realscout-home-value-section .section-subtitle a {
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
 .realscout-listings {
   background: var(--bg);
 }

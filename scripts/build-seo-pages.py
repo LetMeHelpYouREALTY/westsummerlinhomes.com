@@ -547,54 +547,21 @@ def generate_valuation():
         <div class="container fade-in">
             <p class="section-eyebrow">Home Valuation</p>
             <h1>What's Your Home Worth?</h1>
-            <p>Request a complimentary market analysis for your West Summerlin property.</p>
+            <p>Enter your address below for an instant home value estimate powered by RealScout.</p>
         </div>
     </section>
 
     <section class="realscout-home-value-section">
         <div class="container">
-            <h2 class="section-title">Instant Home Value Estimate</h2>
-            <p class="section-subtitle">Enter your address for a data-driven estimate powered by RealScout.</p>
             <div class="realscout-home-value-wrap fade-in">
                 <realscout-home-value agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-home-value>
             </div>
-        </div>
-    </section>
-
-    <section class="content-page">
-        <div class="container content-body">
-            <h2>Request a Full MLS Valuation</h2>
-            <p>Dr. Jan Duffy prepares seller valuations using recent MLS comparables, current inventory, and village-specific demand — not automated estimates alone.</p>
-            <form id="valuation-form" class="valuation-form" novalidate>
-                <div class="form-group">
-                    <label for="address">Property Address</label>
-                    <input type="text" id="address" name="address" required placeholder="123 Main St, Las Vegas, NV">
-                </div>
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required autocomplete="name">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="702-555-1234">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email (optional)</label>
-                    <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
-                </div>
-                <div class="form-group">
-                    <label for="notes">Additional Details</label>
-                    <textarea id="notes" name="notes" rows="3" placeholder="Bedrooms, recent upgrades, timeline to sell"></textarea>
-                </div>
-                <button type="submit" class="btn-primary">Request Valuation</button>
-            </form>
-            <p style="text-align:center;margin-top:1.5rem;">Or <a href="#" class="calendly-popup calendly-link-btn-dark">schedule an in-person consultation</a></p>
+            <p class="section-subtitle" style="margin-top:2rem;">Want a detailed MLS analysis? <a href="#" class="calendly-popup calendly-link-btn-dark">Schedule a consultation</a> with Dr. Jan Duffy or call <a href="tel:7022221964">702-222-1964</a>.</p>
             {nap_block()}
         </div>
-    </section>
-    <script src="/lead-form.js"></script>"""
+    </section>"""
     write_page("home-valuation.html", "sellers.html", "Free Home Valuation West Summerlin | Dr. Jan Duffy",
-               "Request a free home valuation for your West Summerlin property. MLS-based market analysis from Dr. Jan Duffy.",
+               "Get an instant home value estimate for your West Summerlin property. RealScout-powered valuation with follow-up from Dr. Jan Duffy.",
                [{"name": "Home", "item": NAP["url"]}, {"name": "Home Valuation", "item": f"{NAP['url']}/home-valuation.html"}], body)
 
 
