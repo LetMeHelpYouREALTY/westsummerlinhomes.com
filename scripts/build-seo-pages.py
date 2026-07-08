@@ -14,6 +14,7 @@ SITE_JS = f"/site.js?v={ASSET_VERSION}"
 CALENDLY_JS = f"/calendly.js?v={ASSET_VERSION}"
 LOGO_URL = "/images/logo.png"
 SITE_ORIGIN = "https://www.westsummerlinhomes.com"
+OG_IMAGE = f"{SITE_ORIGIN}/images/dr-janet-duffy-real-estate.jpg"
 GSC_VERIFICATION = os.environ.get("GSC_VERIFICATION", "").strip()
 SITEMAP_URL = "https://www.westsummerlinhomes.com/sitemap.xml"
 TODAY = date.today().isoformat()
@@ -346,16 +347,7 @@ def testimonials_schema() -> list:
             "First-time buyers with a lot of questions. She explained every step clearly and never rushed us.",
         ),
     ]
-    entities = [
-        {
-            "@type": "AggregateRating",
-            "@id": f"{NAP['url']}/testimonials.html#aggregate",
-            "ratingValue": "4.9",
-            "bestRating": "5",
-            "ratingCount": str(len(reviews)),
-            "itemReviewed": {"@id": f"{NAP['url']}/#agent"},
-        }
-    ]
+    entities = []
     for author, text in reviews:
         entities.append(
             {
@@ -426,7 +418,7 @@ def schema_for_homepage() -> str:
         "Dr. Jan Duffy provides personalized home buying, selling, and investment guidance."
     )
     breadcrumb = [{"name": "Home", "item": NAP["url"]}]
-    return schema_graph("WebPage", title, description, url, breadcrumb, [homepage_faq_entity()])
+    return schema_graph("WebPage", title, description, url, breadcrumb)
 
 
 MANUAL_PAGE_SEO = {
@@ -530,7 +522,7 @@ def header_html(active: str) -> str:
     return f"""    <header>
         <nav class="container">
             <a href="/" class="logo">
-                <img src="{LOGO_URL}" alt="" width="42" height="42" loading="eager">
+                <img src="{LOGO_URL}" alt="West Summerlin Homes logo" width="42" height="42" loading="eager">
                 <span class="logo-text">
                     <span class="logo-title">West Summerlin Homes</span>
                     <span class="logo-subtitle">by Dr. Jan Duffy</span>
@@ -613,7 +605,14 @@ def seo_meta_block(title: str, description: str, canonical: str) -> str:
     <meta property="og:title" content="{title}">
     <meta property="og:description" content="{description}">
     <meta property="og:url" content="{canonical}">
-    <meta property="og:type" content="website">"""
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{OG_IMAGE}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{title}">
+    <meta name="twitter:description" content="{description}">
+    <meta name="twitter:image" content="{OG_IMAGE}">"""
 
 
 def perf_head_snippets(preload_hero: bool = False) -> str:
@@ -894,9 +893,15 @@ def generate_faq():
 
     <section class="content-page">
         <div class="container">
+            <h2 class="section-title">Common Questions</h2>
             <div class="faq-list fade-in">
 {faq_items}
             </div>
+{related_links_section([
+    ("buyers.html", "Buyers Guide"),
+    ("sellers.html", "Sellers Guide"),
+    ("contact.html", "Contact"),
+])}
             {nap_block()}
         </div>
     </section>"""
@@ -918,6 +923,12 @@ def generate_market():
         <div class="container content-body">
             <p>Live MLS data updates every 5 minutes on Dr. Jan Duffy's RealScout portal. Use the search and listing tools below, or open the full map experience for saved searches and alerts.</p>
             {realscout_portal_banner()}
+{related_links_section([
+    ("market-update.html", "Market Update"),
+    ("buyers.html", "Buyers Guide"),
+    ("sellers.html", "Sellers Guide"),
+    ("neighborhoods.html", "Neighborhoods"),
+])}
             {nap_block()}
         </div>
     </section>
@@ -977,6 +988,11 @@ def generate_valuation():
                 <realscout-home-value agent-encoded-id="{REALSCOUT_AGENT_ID}"></realscout-home-value>
             </div>
             <p class="section-subtitle" style="margin-top:2rem;">Want a detailed MLS analysis? <a href="#" class="calendly-popup calendly-link-btn-dark">Schedule a consultation</a> with Dr. Jan Duffy, call <a href="tel:7022221964">702-222-1964</a>, or <a href="{REALSCOUT_PORTAL_URL}" target="_blank" rel="noopener noreferrer">search on RealScout</a>.</p>
+{related_links_section([
+    ("sellers.html", "Sellers Guide"),
+    ("market-update.html", "Market Update"),
+    ("contact.html", "Contact"),
+])}
             {nap_block()}
         </div>
     </section>"""

@@ -30,6 +30,76 @@
       "permanent": true
     },
     {
+      "source": "/buyers",
+      "destination": "/buyers.html",
+      "permanent": true
+    },
+    {
+      "source": "/sellers",
+      "destination": "/sellers.html",
+      "permanent": true
+    },
+    {
+      "source": "/neighborhoods",
+      "destination": "/neighborhoods.html",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/faq.html",
+      "permanent": true
+    },
+    {
+      "source": "/luxury-homes",
+      "destination": "/luxury-homes.html",
+      "permanent": true
+    },
+    {
+      "source": "/market-update",
+      "destination": "/market-update.html",
+      "permanent": true
+    },
+    {
+      "source": "/home-valuation",
+      "destination": "/home-valuation.html",
+      "permanent": true
+    },
+    {
+      "source": "/testimonials",
+      "destination": "/testimonials.html",
+      "permanent": true
+    },
+    {
+      "source": "/red-rock-country-club",
+      "destination": "/red-rock-country-club.html",
+      "permanent": true
+    },
+    {
+      "source": "/regency-at-summerlin",
+      "destination": "/regency-at-summerlin.html",
+      "permanent": true
+    },
+    {
+      "source": "/stonebridge-summerlin",
+      "destination": "/stonebridge-summerlin.html",
+      "permanent": true
+    },
+    {
+      "source": "/summerlin-centre",
+      "destination": "/summerlin-centre.html",
+      "permanent": true
+    },
+    {
+      "source": "/the-ridges-summerlin",
+      "destination": "/the-ridges-summerlin.html",
+      "permanent": true
+    },
+    {
+      "source": "/the-trails-summerlin",
+      "destination": "/the-trails-summerlin.html",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "westsummerlinhomes.com" }],
       "destination": "https://www.westsummerlinhomes.com/:path*",
