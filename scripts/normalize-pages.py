@@ -49,9 +49,9 @@ FOOTER = """
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <script src="/site.js"></script>
-    <script src="/calendly.js"></script>
+    <script src="/site.js" defer></script>
+    <script src="/realscout-loader.js" defer></script>
+    <script src="/calendly.js" defer></script>
 </body>
 </html>
 """

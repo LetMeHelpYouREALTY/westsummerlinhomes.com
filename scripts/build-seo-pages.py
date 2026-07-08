@@ -614,7 +614,7 @@ def perf_head_snippets(preload_hero: bool = False) -> str:
     hero_preload = ""
     if preload_hero:
         hero_preload = """
-    <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg" fetchpriority="high">"""
+    <link rel="preload" as="image" href="/images/hero-bg.webp" type="image/webp" fetchpriority="high">"""
     return f"""    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://em.realscout.com">
@@ -1636,7 +1636,7 @@ def patch_index_performance():
                 1,
             )
         else:
-            hero_preload = '    <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg" fetchpriority="high">\n'
+            hero_preload = '    <link rel="preload" as="image" href="/images/hero-bg.webp" type="image/webp" fetchpriority="high">\n'
             html = html.replace(
                 '<link rel="stylesheet" href="/site.css">',
                 hero_preload + '    <link rel="stylesheet" href="/site.css">',

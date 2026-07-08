@@ -277,11 +277,23 @@ section {
   color: #ffffff;
 }
 
+/* Hero — above-fold content must not wait for fade-in JS (LCP) */
+.hero .fade-in {
+  opacity: 1;
+  transform: none;
+}
+
 /* Hero */
 .hero {
   background:
     linear-gradient(135deg, rgba(10, 37, 64, 0.88), rgba(44, 62, 80, 0.78)),
-    url('https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg');
+    url('/images/hero-bg.jpg');
+  background:
+    linear-gradient(135deg, rgba(10, 37, 64, 0.88), rgba(44, 62, 80, 0.78)),
+    image-set(
+      url('/images/hero-bg.webp') type('image/webp'),
+      url('/images/hero-bg.jpg') type('image/jpeg')
+    );
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -350,7 +362,13 @@ section {
 .page-header {
   background:
     linear-gradient(135deg, rgba(10, 37, 64, 0.88), rgba(44, 62, 80, 0.78)),
-    url('https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/hero-bg.jpg');
+    url('/images/hero-bg.jpg');
+  background:
+    linear-gradient(135deg, rgba(10, 37, 64, 0.88), rgba(44, 62, 80, 0.78)),
+    image-set(
+      url('/images/hero-bg.webp') type('image/webp'),
+      url('/images/hero-bg.jpg') type('image/jpeg')
+    );
   background-size: cover;
   background-position: center;
   min-height: 42vh;
