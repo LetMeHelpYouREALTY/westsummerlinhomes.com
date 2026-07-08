@@ -608,9 +608,52 @@ realscout-home-value {
   box-shadow: var(--shadow-soft);
 }
 
-.realscout-home-value-section .section-subtitle a {
+.realscout-portal-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid #e5e7eb;
+}
+
+.realscout-portal-banner h3 {
+  font-family: var(--font-display);
+  color: var(--navy-mid);
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+
+.realscout-portal-banner p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.realscout-portal-note {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.realscout-portal-note a {
   color: var(--blue-dark);
   font-weight: 700;
+}
+
+.search-section .section-title,
+.search-section .section-subtitle {
+  text-align: center;
+}
+
+.search-section .section-subtitle {
+  max-width: 640px;
+  margin: 0 auto 2rem;
 }
 
 .realscout-listings {

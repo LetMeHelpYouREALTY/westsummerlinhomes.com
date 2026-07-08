@@ -21,6 +21,7 @@ FOOTER = """
                     <li><a href="buyers.html">Buyers Guide</a></li>
                     <li><a href="sellers.html">Sellers Guide</a></li>
                     <li><a href="properties.html">Properties</a></li>
+                    <li><a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">MLS Search Portal</a></li>
                     <li><a href="neighborhoods.html">Neighborhoods</a></li>
                     <li><a href="luxury-homes.html">Luxury Homes</a></li>
                     <li><a href="market-update.html">Market Update</a></li>

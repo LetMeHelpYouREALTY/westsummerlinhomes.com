@@ -242,7 +242,7 @@
     }
     </script>
     
-                <header>
+                    <header>
         <nav class="container">
             <a href="index.html" class="logo">
                 <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" alt="West Summerlin Homes by Dr. Jan Duffy" width="42" height="42" loading="eager">
@@ -263,6 +263,7 @@
                 <li><a href="buyers.html">Buy</a></li>
                 <li><a href="sellers.html">Sell</a></li>
                 <li><a href="properties.html">Properties</a></li>
+                <li><a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">MLS Search</a></li>
                 <li><a href="neighborhoods.html">Neighborhoods</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -290,8 +291,8 @@
                 <h1>Your Dream Home Awaits in <span class="text-accent">West Summerlin</span></h1>
                 <p>Expert real estate with Dr. Jan Duffy — buying, selling, and investment guidance across Summerlin West.</p>
                 <div class="hero-actions">
-                    <a href="#" class="cta-button calendly-popup">Schedule Consultation</a>
-                    <a href="properties.html" class="cta-button cta-button-outline">Browse Listings</a>
+                    <a href="https://drjanduffy.realscout.com/" class="cta-button" target="_blank" rel="noopener noreferrer">Search MLS Listings</a>
+                    <a href="#" class="cta-button cta-button-outline calendly-popup">Schedule Consultation</a>
                 </div>
                 <div class="hero-trust">
                     <div class="hero-trust-item"><strong>500+</strong><span>Homes Sold</span></div>
@@ -309,61 +310,35 @@
             <div class="fade-in">
                 <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="STATUS_AND_SIGNIFICANT_CHANGE" listing-status="For Sale" property-types="SFR,MF" price-min="600000" price-max="750000"></realscout-office-listings>
             </div>
+            <p class="realscout-portal-note">Listing data courtesy of GLVAR · <a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">Open full MLS search on RealScout</a></p>
         </div>
     </section>
 
     <section id="search" class="search-section">
         <div class="container">
-            <div class="search-container">
-                <h3>Find Your Perfect Home</h3>
-                <div class="realscout-search-container">
-                    <realscout-advanced-search agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-advanced-search>
-                </div>
-                <div class="search-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">6</div>
-                        <div class="stat-label">Open Houses</div>
+            <h2 class="section-title fade-in">Find Your Perfect Home</h2>
+            <p class="section-subtitle fade-in">Search live MLS inventory across West Summerlin and Las Vegas.</p>
+            <div class="search-container fade-in">
+                <realscout-advanced-search agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-advanced-search>
+                <div class="realscout-portal-banner">
+                    <div>
+                        <h3>Search on Dr. Jan Duffy's RealScout portal</h3>
+                        <p>Map view, saved searches, and listing alerts at drjanduffy.realscout.com — updated every 5 minutes.</p>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">14</div>
-                        <div class="stat-label">Avg Days</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Success Rate</div>
-                    </div>
+                    <a href="https://drjanduffy.realscout.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open MLS Search Portal</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="market-stats">
+    <section class="realscout-home-value-section">
         <div class="container">
-            <h2 class="section-title fade-in">Market Insights</h2>
-            <p class="section-subtitle">West Summerlin market snapshot — updated weekly.</p>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">$875K</div>
-                    <div class="stat-label">Median Price</div>
-                    <div class="stat-change positive">↑ 5.2% vs last month</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">14</div>
-                    <div class="stat-label">Avg Days on Market</div>
-                    <div class="stat-change positive">↓ 3 days vs last month</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">156</div>
-                    <div class="stat-label">Active Listings</div>
-                    <div class="stat-change neutral">↔ Stable inventory</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">98%</div>
-                    <div class="stat-label">List to Sale Ratio</div>
-                    <div class="stat-change positive">↑ 2% vs last month</div>
-                </div>
+            <h2 class="section-title fade-in">What's Your Home Worth?</h2>
+            <p class="section-subtitle fade-in">Instant estimate powered by RealScout MLS data.</p>
+            <div class="realscout-home-value-wrap fade-in">
+                <realscout-home-value agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-home-value>
             </div>
-            <p class="market-updated">Data refreshed weekly · Last update: July 2026</p>
+            <p class="realscout-portal-note fade-in"><a href="home-valuation.html">Full home valuation page</a> · <a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">Browse MLS listings</a></p>
         </div>
     </section>
 
@@ -489,6 +464,7 @@
             <div class="fade-in">
                 <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="SOLD_DATE_NEWEST" listing-status="For Sale" property-types=",SFR,MOBILE" price-min="800000" price-max="1000000"></realscout-office-listings>
             </div>
+            <p class="realscout-portal-note fade-in">Featured luxury inventory · <a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">Search all MLS listings</a></p>
         </div>
     </section>
 
@@ -598,7 +574,7 @@
         </div>
     </section>
 
-                <footer class="site-footer">
+                    <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
                 <strong>West Summerlin Homes</strong>
@@ -612,6 +588,7 @@
                     <li><a href="buyers.html">Buyers Guide</a></li>
                     <li><a href="sellers.html">Sellers Guide</a></li>
                     <li><a href="properties.html">Properties</a></li>
+                    <li><a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">MLS Search Portal</a></li>
                     <li><a href="neighborhoods.html">Neighborhoods</a></li>
                     <li><a href="luxury-homes.html">Luxury Homes</a></li>
                     <li><a href="market-update.html">Market Update</a></li>

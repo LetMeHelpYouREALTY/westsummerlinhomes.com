@@ -22,12 +22,16 @@ NAP = {
     "url": "https://westsummerlinhomes.com",
 }
 
+REALSCOUT_AGENT_ID = "QWdlbnQtMjI1MDUw"
+REALSCOUT_PORTAL_URL = "https://drjanduffy.realscout.com/"
+
 NAV_LINKS = [
     ("index.html", "Home", "index.html"),
     ("about.html", "About", "about.html"),
     ("buyers.html", "Buy", "buyers.html"),
     ("sellers.html", "Sell", "sellers.html"),
     ("properties.html", "Properties", "properties.html"),
+    (REALSCOUT_PORTAL_URL, "MLS Search", "_external"),
     ("neighborhoods.html", "Neighborhoods", "neighborhoods.html"),
     ("faq.html", "FAQ", "faq.html"),
     ("contact.html", "Contact", "contact.html"),
@@ -38,6 +42,7 @@ FOOTER_EXPLORE = [
     ("buyers.html", "Buyers Guide"),
     ("sellers.html", "Sellers Guide"),
     ("properties.html", "Properties"),
+    (REALSCOUT_PORTAL_URL, "MLS Search Portal"),
     ("neighborhoods.html", "Neighborhoods"),
     ("luxury-homes.html", "Luxury Homes"),
     ("market-update.html", "Market Update"),
@@ -188,6 +193,11 @@ def schema_graph(page_type: str, title: str, description: str, url: str, breadcr
 def header_html(active: str) -> str:
     nav_items = []
     for href, label, match in NAV_LINKS:
+        if match == "_external":
+            nav_items.append(
+                f'                <li><a href="{href}" target="_blank" rel="noopener noreferrer">{label}</a></li>'
+            )
+            continue
         cls = ' class="active"' if match == active else ""
         nav_items.append(f'                <li><a href="{href}"{cls}>{label}</a></li>')
     nav_items.append('                <li><a href="#" class="calendly-popup nav-schedule">Schedule</a></li>')
@@ -214,7 +224,15 @@ def header_html(active: str) -> str:
 
 
 def footer_html() -> str:
-    explore = "\n".join(f'                    <li><a href="{href}">{label}</a></li>' for href, label in FOOTER_EXPLORE)
+    explore = []
+    for href, label in FOOTER_EXPLORE:
+        if href.startswith("http"):
+            explore.append(
+                f'                    <li><a href="{href}" target="_blank" rel="noopener noreferrer">{label}</a></li>'
+            )
+        else:
+            explore.append(f'                    <li><a href="{href}">{label}</a></li>')
+    explore_html = "\n".join(explore)
     return f"""    <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
@@ -225,7 +243,7 @@ def footer_html() -> str:
             <div class="footer-nav">
                 <h4>Explore</h4>
                 <ul>
-{explore}
+{explore_html}
                 </ul>
             </div>
             <div class="footer-contact">
@@ -325,13 +343,70 @@ def contact_section(title: str = "Get In Touch") -> str:
     </section>"""
 
 
-def listings_section() -> str:
-    return """    <section class="realscout-listings">
+def realscout_portal_banner(
+    title: str = "Search Live MLS Listings",
+    text: str = "Browse every active listing on Dr. Jan Duffy's RealScout portal — updated every 5 minutes.",
+) -> str:
+    return f"""            <div class="realscout-portal-banner">
+                <div>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                </div>
+                <a href="{REALSCOUT_PORTAL_URL}" class="btn-primary" target="_blank" rel="noopener noreferrer">Open MLS Search Portal</a>
+            </div>"""
+
+
+def realscout_advanced_search_section(
+    title: str = "Find Your Perfect Home",
+    subtitle: str = "Filter by price, beds, baths, and neighborhood across West Summerlin.",
+) -> str:
+    return f"""    <section class="search-section">
         <div class="container">
-            <h2 class="section-title">Current Listings</h2>
-            <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="STATUS_AND_SIGNIFICANT_CHANGE" listing-status="For Sale" property-types="SFR,MF" price-min="600000" price-max="750000"></realscout-office-listings>
+            <h2 class="section-title">{title}</h2>
+            <p class="section-subtitle">{subtitle}</p>
+            <div class="search-container">
+                <realscout-advanced-search agent-encoded-id="{REALSCOUT_AGENT_ID}"></realscout-advanced-search>
+                {realscout_portal_banner("Want the full map experience?", "Save searches, favorite homes, and get alerts on drjanduffy.realscout.com.")}
+            </div>
         </div>
     </section>"""
+
+
+def realscout_listings_section(
+    title: str = "Current Listings",
+    sort_order: str = "STATUS_AND_SIGNIFICANT_CHANGE",
+    price_min: str = "600000",
+    price_max: str = "750000",
+    property_types: str = "SFR,MF",
+    listing_status: str = "For Sale",
+) -> str:
+    return f"""    <section class="realscout-listings">
+        <div class="container">
+            <h2 class="section-title">{title}</h2>
+            <realscout-office-listings agent-encoded-id="{REALSCOUT_AGENT_ID}" sort-order="{sort_order}" listing-status="{listing_status}" property-types="{property_types}" price-min="{price_min}" price-max="{price_max}"></realscout-office-listings>
+            <p class="realscout-portal-note">Data courtesy of GLVAR · <a href="{REALSCOUT_PORTAL_URL}" target="_blank" rel="noopener noreferrer">Search all listings on RealScout</a></p>
+        </div>
+    </section>"""
+
+
+def realscout_home_value_section(
+    title: str = "What's Your Home Worth?",
+    subtitle: str = "Get an instant estimate powered by RealScout MLS data.",
+) -> str:
+    return f"""    <section class="realscout-home-value-section">
+        <div class="container">
+            <h2 class="section-title">{title}</h2>
+            <p class="section-subtitle">{subtitle}</p>
+            <div class="realscout-home-value-wrap fade-in">
+                <realscout-home-value agent-encoded-id="{REALSCOUT_AGENT_ID}"></realscout-home-value>
+            </div>
+            <p class="realscout-portal-note"><a href="home-valuation.html">Full valuation page</a> · <a href="{REALSCOUT_PORTAL_URL}" target="_blank" rel="noopener noreferrer">Browse MLS on RealScout</a></p>
+        </div>
+    </section>"""
+
+
+def listings_section() -> str:
+    return realscout_listings_section()
 
 
 def nap_block() -> str:
@@ -364,11 +439,13 @@ def generate_buyers():
             <h1>Buying a Home in West Summerlin</h1>
             <p>Step-by-step guidance from pre-approval to closing — with local market data and private showings seven days a week.</p>
             <div class="cta-actions">
-                <a href="properties.html" class="cta-button">Browse Listings</a>
+                <a href="{REALSCOUT_PORTAL_URL}" class="cta-button" target="_blank" rel="noopener noreferrer">Search MLS Listings</a>
                 <a href="#" class="cta-button cta-button-outline calendly-popup">Schedule Consultation</a>
             </div>
         </div>
     </section>
+
+{realscout_advanced_search_section("Search West Summerlin Homes", "Live MLS filters for buyers across Summerlin West and Las Vegas.")}
 
     <section class="content-page">
         <div class="container content-body">
@@ -404,11 +481,13 @@ def generate_sellers():
             <h1>Sell Your West Summerlin Home</h1>
             <p>Pricing strategy, staging guidance, and marketing that puts your listing in front of qualified buyers.</p>
             <div class="cta-actions">
-                <a href="home-valuation.html" class="cta-button">Free Home Valuation</a>
+                <a href="home-valuation.html" class="cta-button">Home Value Estimate</a>
                 <a href="#" class="cta-button cta-button-outline calendly-popup">Schedule Listing Consult</a>
             </div>
         </div>
     </section>
+
+{realscout_home_value_section("Instant Home Value", "Start with RealScout, then book a full MLS pricing consult with Dr. Jan Duffy.")}
 
     <section class="content-page">
         <div class="container content-body">
@@ -487,19 +566,15 @@ def generate_market():
 
     <section class="content-page">
         <div class="container content-body">
-            <p>Market conditions change monthly. Dr. Jan Duffy provides verified MLS data — not estimates — during every consultation. Contact for the latest figures dated to your search.</p>
-            <div class="geo-stats">
-                <div class="geo-stat"><strong>VERIFY</strong><span>Median Price</span></div>
-                <div class="geo-stat"><strong>VERIFY</strong><span>Days on Market</span></div>
-                <div class="geo-stat"><strong>VERIFY</strong><span>Active Listings</span></div>
-                <div class="geo-stat"><strong>VERIFY</strong><span>List-to-Sale Ratio</span></div>
-            </div>
-            <p><em>Figures require MLS verification — call {NAP['phone']} for a current market report specific to your neighborhood.</em></p>
+            <p>Live MLS data updates every 5 minutes on Dr. Jan Duffy's RealScout portal. Use the search and listing tools below, or open the full map experience for saved searches and alerts.</p>
+            {realscout_portal_banner()}
             {nap_block()}
         </div>
     </section>
 
-{listings_section()}"""
+{realscout_advanced_search_section("Search the West Summerlin Market", "Filter active listings by price, beds, baths, and area.")}
+
+{realscout_listings_section("Active Listings Snapshot", price_min="400000", price_max="2000000")}"""
     write_page("market-update.html", "market-update.html", "West Summerlin Market Update | Las Vegas Real Estate",
                "West Summerlin and Las Vegas real estate market trends. Current pricing, inventory, and days on market with Dr. Jan Duffy.",
                [{"name": "Home", "item": NAP["url"]}, {"name": "Market Update", "item": f"{NAP['url']}/market-update.html"}], body)
@@ -512,7 +587,7 @@ def generate_luxury():
             <h1>Luxury Homes in West Summerlin</h1>
             <p>Estate properties, golf-course residences, and custom builds from $1M+ across Summerlin's premier villages.</p>
             <div class="cta-actions">
-                <a href="properties.html" class="cta-button">View Luxury Listings</a>
+                <a href="{REALSCOUT_PORTAL_URL}" class="cta-button" target="_blank" rel="noopener noreferrer">Search Luxury MLS</a>
                 <a href="#" class="cta-button cta-button-outline calendly-popup">Private Tour</a>
             </div>
         </div>
@@ -531,12 +606,7 @@ def generate_luxury():
         </div>
     </section>
 
-    <section class="realscout-listings">
-        <div class="container">
-            <h2 class="section-title">Luxury Listings $800K – $1M+</h2>
-            <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="SOLD_DATE_NEWEST" listing-status="For Sale" property-types=",SFR,MOBILE" price-min="800000" price-max="1000000"></realscout-office-listings>
-        </div>
-    </section>"""
+{realscout_listings_section("Luxury Listings $800K – $1M+", sort_order="SOLD_DATE_NEWEST", price_min="800000", price_max="1000000", property_types=",SFR,MOBILE")}"""
     write_page("luxury-homes.html", "properties.html", "Luxury Homes West Summerlin | $1M+ Estates | Dr. Jan Duffy",
                "Luxury homes and estates for sale in West Summerlin — Red Rock Country Club, The Ridges, and premier Summerlin villages.",
                [{"name": "Home", "item": NAP["url"]}, {"name": "Luxury Homes", "item": f"{NAP['url']}/luxury-homes.html"}], body)
@@ -554,9 +624,9 @@ def generate_valuation():
     <section class="realscout-home-value-section">
         <div class="container">
             <div class="realscout-home-value-wrap fade-in">
-                <realscout-home-value agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-home-value>
+                <realscout-home-value agent-encoded-id="{REALSCOUT_AGENT_ID}"></realscout-home-value>
             </div>
-            <p class="section-subtitle" style="margin-top:2rem;">Want a detailed MLS analysis? <a href="#" class="calendly-popup calendly-link-btn-dark">Schedule a consultation</a> with Dr. Jan Duffy or call <a href="tel:7022221964">702-222-1964</a>.</p>
+            <p class="section-subtitle" style="margin-top:2rem;">Want a detailed MLS analysis? <a href="#" class="calendly-popup calendly-link-btn-dark">Schedule a consultation</a> with Dr. Jan Duffy, call <a href="tel:7022221964">702-222-1964</a>, or <a href="{REALSCOUT_PORTAL_URL}" target="_blank" rel="noopener noreferrer">search on RealScout</a>.</p>
             {nap_block()}
         </div>
     </section>"""
