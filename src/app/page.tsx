@@ -7,15 +7,17 @@ import Testimonials from '@/components/Testimonials'
 import ContactCTA from '@/components/ContactCTA'
 import Loading from '@/components/Loading'
 
+const SITE_NAME = 'West Summerlin Homes by Dr. Jan Duffy'
+
 export const metadata: Metadata = {
-  title: 'West Summerlin Homes | Luxury Real Estate in Summerlin, Las Vegas',
+  title: `${SITE_NAME} | Las Vegas & Summerlin Real Estate`,
   description: 'Discover luxury homes for sale in West Summerlin, Las Vegas. Expert real estate services with the latest market insights and exclusive properties.',
   keywords: ['Summerlin homes', 'Las Vegas real estate', 'luxury homes', 'West Summerlin', 'real estate agent', 'Summerlin properties'],
   openGraph: {
-    title: 'West Summerlin Homes | Luxury Real Estate in Summerlin, Las Vegas',
+    title: `${SITE_NAME} | Las Vegas & Summerlin Real Estate`,
     description: 'Discover luxury homes for sale in West Summerlin, Las Vegas. Expert real estate services with the latest market insights and exclusive properties.',
     url: 'https://westsummerlinhomes.com',
-    siteName: 'West Summerlin Homes',
+    siteName: SITE_NAME,
     locale: 'en_US',
     type: 'website',
   },
@@ -31,7 +33,7 @@ export default function HomePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "RealEstateAgent",
-            "name": "West Summerlin Homes",
+            "name": "West Summerlin Homes by Dr. Jan Duffy",
             "description": "Luxury real estate services in West Summerlin, Las Vegas",
             "url": "https://westsummerlinhomes.com",
             "telephone": "+1-702-XXX-XXXX",

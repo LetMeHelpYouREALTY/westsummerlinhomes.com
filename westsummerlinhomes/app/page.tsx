@@ -9,7 +9,7 @@ export default async function HomePage() {
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          West Summerlin Homes
+          West Summerlin Homes by Dr. Jan Duffy
         </h1>
         <p className="text-xl text-gray-600 mb-2">
           {homes.length} Homes Under True Cost

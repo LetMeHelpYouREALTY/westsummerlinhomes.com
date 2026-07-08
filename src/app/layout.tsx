@@ -16,16 +16,18 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
 })
 
+const SITE_NAME = 'West Summerlin Homes by Dr. Jan Duffy'
+
 export const metadata: Metadata = {
   title: {
-    default: 'West Summerlin Homes | Luxury Real Estate in Summerlin, Las Vegas',
-    template: '%s | West Summerlin Homes'
+    default: `${SITE_NAME} | Las Vegas & Summerlin Real Estate`,
+    template: `%s | ${SITE_NAME}`
   },
   description: 'Discover luxury homes for sale in West Summerlin, Las Vegas. Expert real estate services with the latest market insights and exclusive properties.',
   keywords: ['Summerlin homes', 'Las Vegas real estate', 'luxury homes', 'West Summerlin', 'real estate agent', 'Summerlin properties'],
-  authors: [{ name: 'West Summerlin Homes' }],
-  creator: 'West Summerlin Homes',
-  publisher: 'West Summerlin Homes',
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   formatDetection: {
     email: false,
     address: false,
@@ -36,10 +38,10 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'West Summerlin Homes | Luxury Real Estate in Summerlin, Las Vegas',
+    title: `${SITE_NAME} | Las Vegas & Summerlin Real Estate`,
     description: 'Discover luxury homes for sale in West Summerlin, Las Vegas. Expert real estate services with the latest market insights and exclusive properties.',
     url: 'https://westsummerlinhomes.com',
-    siteName: 'West Summerlin Homes',
+    siteName: SITE_NAME,
     locale: 'en_US',
     type: 'website',
     images: [
@@ -47,13 +49,13 @@ export const metadata: Metadata = {
         url: siteImages.og,
         width: 1200,
         height: 630,
-        alt: 'West Summerlin Homes - Luxury Real Estate',
+        alt: `${SITE_NAME} - Luxury Real Estate`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'West Summerlin Homes | Luxury Real Estate in Summerlin, Las Vegas',
+    title: `${SITE_NAME} | Las Vegas & Summerlin Real Estate`,
     description: 'Discover luxury homes for sale in West Summerlin, Las Vegas.',
     images: [siteImages.og],
   },

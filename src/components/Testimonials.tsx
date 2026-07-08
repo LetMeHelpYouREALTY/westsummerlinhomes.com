@@ -94,7 +94,7 @@ export default function Testimonials() {
           </h2>
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
             Don't just take our word for it. Here's what our satisfied clients have to say about 
-            their experience working with West Summerlin Homes.
+            their experience working with West Summerlin Homes by Dr. Jan Duffy.
           </p>
         </div>
 
@@ -224,7 +224,7 @@ export default function Testimonials() {
               Ready to Experience the Difference?
             </h3>
             <p className="text-lg text-neutral-600 mb-8 max-w-2xl mx-auto">
-              Join hundreds of satisfied clients who have found their dream homes with West Summerlin Homes. 
+              Join hundreds of satisfied clients who have found their dream homes with West Summerlin Homes by Dr. Jan Duffy.
               Let us help you navigate the real estate market with confidence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
