@@ -13,6 +13,9 @@ SITE_CSS = f"/site.css?v={ASSET_VERSION}"
 SITE_JS = f"/site.js?v={ASSET_VERSION}"
 CALENDLY_JS = f"/calendly.js?v={ASSET_VERSION}"
 LOGO_URL = "/images/logo.png"
+FAVICON_SNIPPET = """    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/images/favicon-48x48.png" type="image/png" sizes="48x48">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">"""
 SITE_ORIGIN = "https://www.westsummerlinhomes.com"
 OG_IMAGE = f"{SITE_ORIGIN}/images/dr-janet-duffy-real-estate.jpg"
 GSC_VERIFICATION = os.environ.get("GSC_VERIFICATION", "").strip()
@@ -635,7 +638,7 @@ def head_block(title: str, description: str, canonical: str, schema: str, preloa
     <title>{title}</title>
 {seo_meta_block(title, description, canonical)}
 {perf_head_snippets(preload_hero)}
-    <link rel="icon" href="{LOGO_URL}" type="image/png">
+{FAVICON_SNIPPET}
     <link rel="stylesheet" href="{SITE_CSS}">
     <script type="application/ld+json">
 {schema}

@@ -65,7 +65,9 @@ HEAD_TEMPLATE = f"""    <link rel="preconnect" href="https://em.realscout.com">
     <link rel="preconnect" href="https://www.realscout.com">
     <link rel="preload" as="font" type="font/woff2" href="/fonts/playfair-latin.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
-    <link rel="icon" href="{LOGO_URL}" type="image/png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/images/favicon-48x48.png" type="image/png" sizes="48x48">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
     <link rel="stylesheet" href="{SITE_CSS}">
 </head>"""
 
