@@ -35,6 +35,7 @@ NAV_LINKS = [
     ("about.html", "About", "about.html"),
     ("buyers.html", "Buy", "buyers.html"),
     ("sellers.html", "Sell", "sellers.html"),
+    ("services.html", "Services", "services.html"),
     ("properties.html", "Properties", "properties.html"),
     (REALSCOUT_PORTAL_URL, "MLS Search", "_external"),
     ("neighborhoods.html", "Neighborhoods", "neighborhoods.html"),
@@ -46,6 +47,7 @@ FOOTER_EXPLORE = [
     ("/", "Home"),
     ("buyers.html", "Buyers Guide"),
     ("sellers.html", "Sellers Guide"),
+    ("services.html", "Services"),
     ("properties.html", "Properties"),
     (REALSCOUT_PORTAL_URL, "MLS Search Portal"),
     ("neighborhoods.html", "Neighborhoods"),
@@ -1020,6 +1022,614 @@ def generate_neighborhood(page: dict):
                body, [place_schema])
 
 
+def faq_schema_entity(faqs: list[tuple[str, str]], page_id: str) -> dict:
+    return {
+        "@type": "FAQPage",
+        "@id": page_id,
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": q,
+                "acceptedAnswer": {"@type": "Answer", "text": a},
+            }
+            for q, a in faqs
+        ],
+    }
+
+
+def faq_section_html(faqs: list[tuple[str, str]], title: str = "Frequently Asked Questions") -> str:
+    items = "\n".join(
+        f"""                <article class="faq-item">
+                    <h3>{q}</h3>
+                    <p>{a}</p>
+                </article>"""
+        for q, a in faqs
+    )
+    return f"""    <section class="faq-section content-page">
+        <div class="container">
+            <h2 class="section-title">{title}</h2>
+            <div class="faq-list">
+{items}
+            </div>
+        </div>
+    </section>"""
+
+
+def related_links_section(links: list[tuple[str, str]]) -> str:
+    anchors = "\n".join(f'                <a href="{href}">{label}</a>' for href, label in links)
+    return f"""    <section class="content-page">
+        <div class="container">
+            <h2 class="section-title">Related Pages</h2>
+            <div class="related-links">
+{anchors}
+            </div>
+        </div>
+    </section>"""
+
+
+def neighborhood_card_html(page: dict) -> str:
+    tags = "".join(f'<span class="neighborhood-tag">{tag}</span>' for tag in page["highlights"][:3])
+    slug = page["slug"]
+    return f"""                <article class="neighborhood-card">
+                    <div class="neighborhood-image">{page["name"]}</div>
+                    <div class="neighborhood-info">
+                        <h2 class="neighborhood-name">{page["name"]}</h2>
+                        <p class="neighborhood-description">{page["summary"]}</p>
+                        <p class="neighborhood-price">{page["price_range"]}</p>
+                        <div>{tags}</div>
+                        <p class="neighborhood-actions">
+                            <a href="{slug}.html" class="btn-primary">Learn More</a>
+                            <a href="properties.html" class="btn-secondary">Listings</a>
+                        </p>
+                    </div>
+                </article>"""
+
+
+def neighborhoods_grid_section() -> str:
+    cards = "\n".join(neighborhood_card_html(page) for page in NEIGHBORHOOD_PAGES)
+    return f"""    <section class="neighborhoods">
+        <div class="container">
+            <p class="section-subtitle">Each West Summerlin village offers distinct architecture, amenities, and price points across the Summerlin master plan.</p>
+            <div class="neighborhoods-grid fade-in">
+{cards}
+            </div>
+        </div>
+    </section>"""
+
+
+def map_embed_section() -> str:
+    return f"""    <section class="content-page">
+        <div class="container">
+            <h2 class="section-title">Office Location</h2>
+            <p class="section-subtitle">{NAP["business"]} · {NAP["street"]}, {NAP["city"]}, {NAP["region"]} {NAP["postal"]}</p>
+            <div class="map-embed">
+                <iframe title="Map to {NAP["business"]}" src="https://maps.google.com/maps?q={NAP['street']},+{NAP['city']},+{NAP['region']}+{NAP['postal']}&amp;output=embed" width="100%" height="360" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="contact-actions" style="margin-top:1rem;">
+                <a href="tel:7022221964">Call {NAP["phone"]}</a>
+                <a href="https://maps.google.com/?q={NAP['street']},+{NAP['city']},+{NAP['region']}" class="outline" target="_blank" rel="noopener noreferrer">Directions</a>
+            </div>
+        </div>
+    </section>"""
+
+
+def generate_about():
+    faqs = [
+        (
+            "How long has Dr. Jan Duffy served West Summerlin?",
+            "Dr. Jan Duffy has focused on West Summerlin and Summerlin West since 2009, with deep knowledge of village-level pricing, HOA structures, and resale trends.",
+        ),
+        (
+            "What license does Dr. Jan Duffy hold?",
+            f"Nevada real estate license #{NAP['license']} with {NAP['brokerage']}.",
+        ),
+        (
+            "Does Dr. Jan Duffy work with luxury buyers and sellers?",
+            "Yes. Dr. Duffy represents clients in guard-gated golf communities, custom estates, and $1M+ transactions across Summerlin West.",
+        ),
+    ]
+    body = f"""    <section class="page-header">
+        <div class="container fade-in">
+            <p class="section-eyebrow">Meet Your Agent</p>
+            <h1>About Dr. Jan Duffy</h1>
+            <p>Licensed Nevada real estate professional serving West Summerlin buyers, sellers, and investors since 2009.</p>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg" onerror="this.onerror=null;this.src='/images/dr-janet-duffy.jpg';" alt="Dr. Jan Duffy, West Summerlin real estate agent" width="300" height="300" loading="lazy">
+                </div>
+                <div class="about-text">
+                    <h2>West Summerlin Real Estate Expert</h2>
+                    <p>Dr. Jan Duffy combines local market data, negotiation discipline, and seven-day-a-week availability for clients across the Summerlin master plan. From first-time buyers in Summerlin Centre to estate sellers in Red Rock Country Club, every transaction gets the same direct access and preparation.</p>
+                    <p>Based with {NAP["brokerage"]}, Dr. Duffy provides private neighborhood tours, listing strategy, and MLS search support through RealScout — updated every five minutes with GLVAR inventory.</p>
+                    {nap_block()}
+                    <div class="credentials">
+                        <span class="credential">Licensed Realtor</span>
+                        <span class="credential">License #{NAP["license"]}</span>
+                        <span class="credential">West Summerlin Specialist</span>
+                        <span class="credential">BHHS Nevada Properties</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="experience">
+        <div class="container">
+            <h2 class="section-title">Why Clients Choose Dr. Jan Duffy</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-icon">🏘️</div>
+                    <h3>Village-Level Knowledge</h3>
+                    <p>Red Rock, The Ridges, Summerlin Centre, The Trails, Regency, and Stonebridge — pricing, amenities, and resale patterns by community.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-icon">📊</div>
+                    <h3>Data-Driven Strategy</h3>
+                    <p>MLS-backed valuations, comp analysis, and offer strategy built on current West Summerlin inventory — not national averages.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-icon">🤝</div>
+                    <h3>Direct Access</h3>
+                    <p>Call {NAP["phone"]} seven days a week. Private showings, contract review, and closing coordination with one point of contact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="container content-body">
+            <h2>Communities Served in Summerlin West</h2>
+            <p>Dr. Jan Duffy tours and transacts across these West Summerlin villages and surrounding Las Vegas markets:</p>
+            <ul>
+                <li><a href="red-rock-country-club.html">Red Rock Country Club</a> — guard-gated golf estates</li>
+                <li><a href="the-ridges-summerlin.html">The Ridges</a> — ultra-luxury custom homes</li>
+                <li><a href="summerlin-centre.html">Summerlin Centre</a> — walkable urban village living</li>
+                <li><a href="the-trails-summerlin.html">The Trails</a> — established lots and mature landscaping</li>
+                <li><a href="regency-at-summerlin.html">Regency at Summerlin</a> — active-adult community</li>
+                <li><a href="stonebridge-summerlin.html">Stonebridge</a> — golf-side residences near Angel Park</li>
+            </ul>
+        </div>
+    </section>
+
+{faq_section_html(faqs, "About Dr. Jan Duffy — FAQ")}
+
+{listings_section()}
+
+{related_links_section([
+    ("services.html", "Real Estate Services"),
+    ("testimonials.html", "Client Reviews"),
+    ("buyers.html", "Buyers Guide"),
+    ("contact.html", "Contact Dr. Jan Duffy"),
+])}"""
+    schema_extra = [
+        {
+            "@type": "Person",
+            "@id": f"{NAP['url']}/about.html#person",
+            "name": NAP["agent"],
+            "jobTitle": "Real Estate Agent",
+            "worksFor": {"@id": f"{NAP['url']}/#organization"},
+            "url": f"{NAP['url']}/about.html",
+            "image": "https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
+        },
+        faq_schema_entity(faqs, f"{NAP['url']}/about.html#faq"),
+    ]
+    write_page(
+        "about.html",
+        "about.html",
+        "About Dr. Jan Duffy | West Summerlin Real Estate Agent",
+        "Meet Dr. Jan Duffy — licensed West Summerlin real estate agent with BHHS Nevada Properties. Village-level expertise in Red Rock, The Ridges, and Summerlin West since 2009.",
+        [{"name": "Home", "item": NAP["url"]}, {"name": "About", "item": f"{NAP['url']}/about.html"}],
+        body,
+        schema_extra,
+        "AboutPage",
+    )
+
+
+def generate_services():
+    faqs = [
+        (
+            "What real estate services does Dr. Jan Duffy offer?",
+            "Home buying, home selling, luxury listings, investment property analysis, relocation support, and free home valuations across West Summerlin.",
+        ),
+        (
+            "Do you provide market analysis before listing?",
+            "Yes. Every listing and purchase strategy starts with current MLS comps and village-specific demand data.",
+        ),
+        (
+            "Can I schedule a consultation before committing?",
+            f"Absolutely. Call {NAP['phone']} or book an in-person consultation online — no obligation.",
+        ),
+    ]
+    body = f"""    <section class="page-header">
+        <div class="container fade-in">
+            <p class="section-eyebrow">Full-Service Real Estate</p>
+            <h1>Real Estate Services in West Summerlin</h1>
+            <p>Buying, selling, investing, and relocation — tailored to Summerlin West and the greater Las Vegas valley.</p>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <p class="section-subtitle">Every service includes direct access to Dr. Jan Duffy, live MLS search on RealScout, and seven-day-a-week showing availability.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h2>Home Buying</h2>
+                    <p>From pre-approval through closing — neighborhood tours, offer strategy, and inspection negotiation across West Summerlin.</p>
+                    <ul class="service-features">
+                        <li>MLS search and saved listing alerts</li>
+                        <li>Private showings seven days a week</li>
+                        <li>Offer and counter-offer strategy</li>
+                    </ul>
+                    <a href="buyers.html" class="service-cta">Buyers Guide</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h2>Home Selling</h2>
+                    <p>Pricing, staging guidance, professional marketing, and multiple-offer management for West Summerlin sellers.</p>
+                    <ul class="service-features">
+                        <li>Comparative market analysis</li>
+                        <li>Listing prep and launch strategy</li>
+                        <li>Contract-to-close coordination</li>
+                    </ul>
+                    <a href="sellers.html" class="service-cta">Sellers Guide</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h2>Home Valuation</h2>
+                    <p>Instant RealScout estimates plus in-person pricing review for accurate West Summerlin list prices.</p>
+                    <ul class="service-features">
+                        <li>MLS-backed valuation widget</li>
+                        <li>Village-level comp review</li>
+                        <li>Seller net sheet guidance</li>
+                    </ul>
+                    <a href="home-valuation.html" class="service-cta">Get Valuation</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h2>Luxury &amp; Investment</h2>
+                    <p>Estate transactions, guard-gated communities, and rental-demand analysis for investors relocating to Las Vegas.</p>
+                    <ul class="service-features">
+                        <li>$1M+ estate marketing</li>
+                        <li>Cap rate and ROI review</li>
+                        <li>Portfolio acquisition support</li>
+                    </ul>
+                    <a href="luxury-homes.html" class="service-cta">Luxury Homes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="container content-body">
+            <h2>How Dr. Jan Duffy Works With Clients</h2>
+            <p>Unlike large teams where leads get passed around, you work directly with Dr. Duffy from first call to closing. Listings go live on the GLVAR MLS and Dr. Jan Duffy's <a href="{REALSCOUT_PORTAL_URL}" target="_blank" rel="noopener noreferrer">RealScout portal</a> simultaneously. Buyers receive curated searches by village, price, and property type — not generic auto-blasts.</p>
+            <p>Ready to start? <a href="contact.html">Contact Dr. Jan Duffy</a> or read <a href="testimonials.html">client reviews</a> from recent West Summerlin transactions.</p>
+        </div>
+    </section>
+
+{faq_section_html(faqs, "Services FAQ")}
+
+{realscout_advanced_search_section("Search West Summerlin MLS", "Live inventory across every Summerlin West village.")}
+
+{related_links_section([
+    ("about.html", "About Dr. Jan Duffy"),
+    ("properties.html", "MLS Listings"),
+    ("market-update.html", "Market Update"),
+    ("faq.html", "FAQ"),
+])}"""
+    schema_extra = [services_catalog(), faq_schema_entity(faqs, f"{NAP['url']}/services.html#faq")]
+    write_page(
+        "services.html",
+        "services.html",
+        "Real Estate Services | West Summerlin Homes by Dr. Jan Duffy",
+        "Home buying, selling, luxury estates, valuations, and investment services in West Summerlin. Direct access to Dr. Jan Duffy — call 702-222-1964.",
+        [{"name": "Home", "item": NAP["url"]}, {"name": "Services", "item": f"{NAP['url']}/services.html"}],
+        body,
+        schema_extra,
+    )
+
+
+def generate_contact():
+    faqs = [
+        (
+            "What is the best way to reach Dr. Jan Duffy?",
+            f"Call {NAP['phone']} for the fastest response, or schedule an in-person consultation through the Calendly link on this page.",
+        ),
+        (
+            "What are Dr. Jan Duffy's office hours?",
+            "Available seven days a week, 8:00 AM – 8:00 PM. Evening and weekend showings are available by appointment.",
+        ),
+        (
+            "Where is the office located?",
+            f"{NAP['brokerage']}, {NAP['street']}, {NAP['city']}, {NAP['region']} {NAP['postal']}.",
+        ),
+    ]
+    body = f"""    <section class="page-header">
+        <div class="container fade-in">
+            <p class="section-eyebrow">Let's Connect</p>
+            <h1>Contact Dr. Jan Duffy</h1>
+            <p>West Summerlin real estate questions? Call {NAP['phone']} or book an in-person consultation.</p>
+            <div class="cta-actions">
+                <a href="{NAP['phone_tel']}" class="cta-button">Call {NAP['phone']}</a>
+                <a href="#" class="cta-button cta-button-outline calendly-popup">Schedule Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Information</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>{NAP['business']}</h3>
+                    {nap_block()}
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span><a href="{NAP['phone_tel']}">{NAP['phone']}</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <span><a href="mailto:{NAP['email']}">{NAP['email']}</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🕒</span>
+                        <span>Available 7 days a week · 8:00 AM – 8:00 PM</span>
+                    </div>
+                    <div class="contact-actions">
+                        <a href="{NAP['phone_tel']}">Call Now</a>
+                        <a href="https://maps.google.com/?q={NAP['street']},+{NAP['city']},+{NAP['region']}" class="outline" target="_blank" rel="noopener noreferrer">Directions</a>
+                    </div>
+                </div>
+                <div class="contact-form calendly-embed">
+                    <h3>Schedule a Consultation</h3>
+                    <p><a href="#" class="calendly-popup calendly-link-btn">Schedule time with me</a></p>
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/drjanduffy/in-person-real-estate-consultation" style="min-width:320px;height:700px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{map_embed_section()}
+
+    <section class="office-hours">
+        <div class="container">
+            <h2 class="section-title">Office Hours &amp; Response Times</h2>
+            <div class="hours-grid">
+                <div class="hours-card">
+                    <h3>Regular Hours</h3>
+                    <ul class="hours-list">
+                        <li><span>Monday – Friday</span> <span>8:00 AM – 8:00 PM</span></li>
+                        <li><span>Saturday – Sunday</span> <span>8:00 AM – 8:00 PM</span></li>
+                    </ul>
+                </div>
+                <div class="hours-card">
+                    <h3>Showings</h3>
+                    <ul class="hours-list">
+                        <li><span>Private Tours</span> <span>7 days a week</span></li>
+                        <li><span>Evening Appointments</span> <span>Available</span></li>
+                    </ul>
+                </div>
+                <div class="hours-card">
+                    <h3>Response Time</h3>
+                    <ul class="hours-list">
+                        <li><span>Phone</span> <span>Within 1 hour</span></li>
+                        <li><span>Email</span> <span>Within 4 hours</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{faq_section_html(faqs, "Contact FAQ")}
+
+{listings_section()}
+
+{related_links_section([
+    ("about.html", "About Dr. Jan Duffy"),
+    ("services.html", "Services"),
+    ("buyers.html", "Buyers Guide"),
+    ("neighborhoods.html", "Neighborhoods"),
+])}"""
+    schema_extra = [faq_schema_entity(faqs, f"{NAP['url']}/contact.html#faq")]
+    write_page(
+        "contact.html",
+        "contact.html",
+        "Contact Dr. Jan Duffy | West Summerlin Real Estate",
+        f"Contact Dr. Jan Duffy for West Summerlin real estate. Call {NAP['phone']} or schedule an in-person consultation at {NAP['brokerage']}, Summerlin.",
+        [{"name": "Home", "item": NAP["url"]}, {"name": "Contact", "item": f"{NAP['url']}/contact.html"}],
+        body,
+        schema_extra,
+        "ContactPage",
+    )
+
+
+def generate_testimonials():
+    faqs = [
+        (
+            "What do clients say about Dr. Jan Duffy?",
+            "Buyers, sellers, and investors cite responsive communication, local market knowledge, and strong negotiation results across West Summerlin.",
+        ),
+        (
+            "How do I leave a review after closing?",
+            f"After your transaction, you will receive a link to share feedback on Google. You can also call {NAP['phone']} with a testimonial.",
+        ),
+    ]
+    body = f"""    <section class="page-header">
+        <div class="container fade-in">
+            <p class="section-eyebrow">Client Success</p>
+            <h1>Client Testimonials</h1>
+            <p>4.9★ average rating from buyers, sellers, and investors across West Summerlin and Las Vegas.</p>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="container content-body">
+            <p>These reviews come from recent transactions in Red Rock Country Club, The Trails, Summerlin Centre, and investment purchases across the Las Vegas valley. Every client works directly with Dr. Jan Duffy — not an assistant team.</p>
+            <p>Considering a move to West Summerlin? Read <a href="about.html">about Dr. Jan Duffy</a> or explore <a href="services.html">available services</a>.</p>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-grid fade-in">
+                <article class="testimonial testimonial-featured">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Dr. Duffy made our home buying experience seamless and stress-free. Her expertise and dedication are unmatched — we closed on our Red Rock home in 21 days."</p>
+                    <p class="testimonial-author">— Sarah &amp; Mike Johnson, Red Rock Country Club</p>
+                </article>
+                <article class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Sold our home in two weeks at asking price. Dr. Duffy's marketing strategy and negotiation skills are exceptional."</p>
+                    <p class="testimonial-author">— Robert Chen, The Trails</p>
+                </article>
+                <article class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Professional, knowledgeable, and truly cares about her clients. We couldn't have asked for a better realtor."</p>
+                    <p class="testimonial-author">— Maria Rodriguez, Summerlin Centre</p>
+                </article>
+                <article class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"As an investor, I appreciate agents who understand cap rates and rental demand. Dr. Duffy delivered on both."</p>
+                    <p class="testimonial-author">— David Park, Investment Buyer</p>
+                </article>
+                <article class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"First-time buyers with a lot of questions. She explained every step clearly and never rushed us."</p>
+                    <p class="testimonial-author">— Jennifer &amp; Tom Walsh</p>
+                </article>
+                <article class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Relocated from Chicago — Dr. Duffy knew every Summerlin village and matched us to the right community in one weekend."</p>
+                    <p class="testimonial-author">— The Morrison Family</p>
+                </article>
+            </div>
+            <div class="cta-actions fade-in">
+                <a href="#" class="cta-button calendly-popup">Schedule Your Consultation</a>
+                <a href="{NAP['phone_tel']}" class="cta-button cta-button-outline">Call {NAP['phone']}</a>
+            </div>
+        </div>
+    </section>
+
+{faq_section_html(faqs, "Reviews FAQ")}
+
+{related_links_section([
+    ("about.html", "About Dr. Jan Duffy"),
+    ("services.html", "Services"),
+    ("neighborhoods.html", "Neighborhoods"),
+    ("contact.html", "Contact"),
+])}"""
+    schema_extra = testimonials_schema() + [faq_schema_entity(faqs, f"{NAP['url']}/testimonials.html#faq")]
+    write_page(
+        "testimonials.html",
+        "testimonials.html",
+        "Client Testimonials | Dr. Jan Duffy | West Summerlin Real Estate",
+        "Read client reviews for Dr. Jan Duffy, West Summerlin real estate agent. 4.9-star service for buying, selling, and investment transactions in Summerlin.",
+        [{"name": "Home", "item": NAP["url"]}, {"name": "Testimonials", "item": f"{NAP['url']}/testimonials.html"}],
+        body,
+        schema_extra,
+    )
+
+
+def generate_neighborhoods_hub():
+    faqs = [
+        (
+            "What are the best neighborhoods in West Summerlin?",
+            "Top villages include Red Rock Country Club for golf estates, The Ridges for ultra-luxury homes, Summerlin Centre for walkable amenities, and The Trails for established lots.",
+        ),
+        (
+            "How do I choose the right Summerlin village?",
+            "Dr. Jan Duffy provides private driving tours comparing price point, HOA, commute, and amenities before you write an offer.",
+        ),
+        (
+            "Can I search MLS listings by neighborhood?",
+            f"Yes — use the RealScout MLS portal or call {NAP['phone']} for a curated list by village.",
+        ),
+    ]
+    body = f"""    <section class="page-header">
+        <div class="container fade-in">
+            <p class="section-eyebrow">Las Vegas · Summerlin West</p>
+            <h1>West Summerlin Neighborhoods</h1>
+            <p>From championship golf communities to walkable urban villages — compare every major Summerlin West neighborhood.</p>
+            <div class="cta-actions">
+                <a href="#" class="cta-button calendly-popup">Schedule Neighborhood Tour</a>
+                <a href="properties.html" class="cta-button cta-button-outline">View MLS Listings</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="container content-body">
+            <h2>Find Your West Summerlin Community</h2>
+            <p>The Summerlin master plan spans dozens of villages. Dr. Jan Duffy specializes in Summerlin West — including guard-gated golf communities, luxury custom enclaves, and newer urban villages near Downtown Summerlin.</p>
+            <p>Select a neighborhood below for village-specific pricing, amenities, and current MLS inventory. Not sure where to start? <a href="contact.html">Book a consultation</a> for a private driving tour.</p>
+        </div>
+    </section>
+
+{neighborhoods_grid_section()}
+
+{faq_section_html(faqs, "Neighborhood FAQ")}
+
+{realscout_advanced_search_section("Search by Neighborhood", "Filter MLS listings by price, beds, and area across West Summerlin.")}
+
+{related_links_section([
+    ("buyers.html", "Buyers Guide"),
+    ("luxury-homes.html", "Luxury Homes"),
+    ("market-update.html", "Market Update"),
+    ("about.html", "About Dr. Jan Duffy"),
+])}"""
+    schema_extra = [neighborhoods_item_list(), faq_schema_entity(faqs, f"{NAP['url']}/neighborhoods.html#faq")]
+    write_page(
+        "neighborhoods.html",
+        "neighborhoods.html",
+        "West Summerlin Neighborhoods | Dr. Jan Duffy",
+        "Compare West Summerlin neighborhoods — Red Rock Country Club, The Ridges, Summerlin Centre, The Trails, Regency, and Stonebridge. Tours and MLS listings with Dr. Jan Duffy.",
+        [{"name": "Home", "item": NAP["url"]}, {"name": "Neighborhoods", "item": f"{NAP['url']}/neighborhoods.html"}],
+        body,
+        schema_extra,
+        "CollectionPage",
+    )
+
+
+def patch_index_internal_links():
+    path = ROOT / "index.html"
+    if not path.exists():
+        return
+    html = path.read_text(encoding="utf-8")
+    patches = [
+        (
+            '                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <section id="services" class="services">',
+            '                    </div>\n                    <p class="section-cta fade-in"><a href="about.html" class="btn-primary">Read full bio &amp; credentials</a></p>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <section id="services" class="services">',
+        ),
+        (
+            '            </div>\n        </div>\n    </section>\n\n    <!-- Enhanced Author Credentials Section',
+            '            </div>\n            <p class="section-cta fade-in"><a href="services.html" class="btn-primary">View all real estate services</a></p>\n        </div>\n    </section>\n\n    <!-- Enhanced Author Credentials Section',
+        ),
+        (
+            '            </div>\n        </div>\n    </section>\n\n    <section id="testimonials" class="testimonials">',
+            '            </div>\n            <p class="section-cta fade-in"><a href="neighborhoods.html" class="btn-primary">Explore all West Summerlin neighborhoods</a></p>\n        </div>\n    </section>\n\n    <section id="testimonials" class="testimonials">',
+        ),
+        (
+            '            </div>\n        </div>\n    </section>\n\n    <section id="contact" class="contact">',
+            '            </div>\n            <p class="section-cta fade-in"><a href="testimonials.html" class="btn-primary">Read all client reviews</a></p>\n        </div>\n    </section>\n\n    <section id="contact" class="contact">',
+        ),
+        (
+            '            <h2 class="section-title fade-in">Get In Touch</h2>\n            <div class="contact-content fade-in">',
+            '            <h2 class="section-title fade-in">Get In Touch</h2>\n            <p class="section-subtitle fade-in"><a href="contact.html">Visit the full contact page</a> for office hours, map, and scheduling.</p>\n            <div class="contact-content fade-in">',
+        ),
+    ]
+    for old, new in patches:
+        if old in html and new not in html:
+            html = html.replace(old, new, 1)
+    path.write_text(html, encoding="utf-8")
+    print("Patched index.html internal links")
+
+
 def extract_title_description(html: str) -> tuple[str, str]:
     title_match = re.search(r"<title>(.*?)</title>", html, re.DOTALL)
     desc_match = re.search(
@@ -1140,7 +1750,10 @@ def canonical_for(filename: str) -> str:
 
 
 def inject_manual_pages_schema():
+    inject_only = {"properties.html"}
     for filename, meta in MANUAL_PAGE_SEO.items():
+        if filename not in inject_only:
+            continue
         path = ROOT / filename
         if not path.exists():
             continue
@@ -1253,8 +1866,16 @@ def write_sitemap():
     for page in pages:
         loc = NAP["url"] + ("/" if page.name == "index.html" else f"/{page.name}")
         priority = "1.0" if page.name == "index.html" else "0.8"
-        if page.name in ("properties.html", "luxury-homes.html"):
-            priority = "0.9"
+        if page.name in (
+            "about.html",
+            "contact.html",
+            "services.html",
+            "testimonials.html",
+            "neighborhoods.html",
+            "properties.html",
+            "luxury-homes.html",
+        ):
+            priority = "0.95"
         if page.name.startswith(("red-rock", "the-ridges", "summerlin-centre", "the-trails", "regency-at", "stonebridge")):
             priority = "0.85"
         urls.append(f"""  <url>
@@ -1269,6 +1890,11 @@ def write_sitemap():
 
 
 def main():
+    generate_about()
+    generate_services()
+    generate_contact()
+    generate_testimonials()
+    generate_neighborhoods_hub()
     generate_buyers()
     generate_sellers()
     generate_faq()
@@ -1278,6 +1904,7 @@ def main():
     for nbh in NEIGHBORHOOD_PAGES:
         generate_neighborhood(nbh)
     patch_existing_pages()
+    patch_index_internal_links()
     inject_gsc_sitemap_all_pages()
     inject_manual_pages_schema()
     inject_index_schema()

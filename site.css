@@ -1542,6 +1542,17 @@ realscout-advanced-search {
   color: var(--white) !important;
 }
 
+.section-cta {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.map-embed {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
 .neighborhood-hero-card {
   background: linear-gradient(135deg, var(--navy-mid), var(--navy-dark));
   color: var(--white);
