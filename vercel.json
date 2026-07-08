@@ -3,6 +3,14 @@
   "installCommand": "",
   "buildCommand": "",
   "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "westsummerlinhomes.com" }],
+      "destination": "https://www.westsummerlinhomes.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/about", "destination": "/about.html" },
     { "source": "/contact", "destination": "/contact.html" },

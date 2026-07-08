@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 GSC_VERIFICATION = os.environ.get("GSC_VERIFICATION", "").strip()
-SITEMAP_URL = "https://westsummerlinhomes.com/sitemap.xml"
+SITEMAP_URL = "https://www.westsummerlinhomes.com/sitemap.xml"
 TODAY = date.today().isoformat()
 
 NAP = {
@@ -24,7 +24,7 @@ NAP = {
     "region": "NV",
     "postal": "89134",
     "license": "S.0197614.LLC",
-    "url": "https://westsummerlinhomes.com",
+    "url": "https://www.westsummerlinhomes.com",
 }
 
 REALSCOUT_AGENT_ID = "QWdlbnQtMjI1MDUw"
@@ -1087,9 +1087,36 @@ def ensure_seo_head_tags(html: str, title: str, description: str, canonical: str
         head,
         count=1,
     )
+    head = re.sub(
+        r'<meta property="og:url" content="[^"]*"',
+        f'<meta property="og:url" content="{canonical}"',
+        head,
+        count=1,
+    )
+    head = re.sub(
+        r'<meta property="twitter:url" content="[^"]*"',
+        f'<meta property="twitter:url" content="{canonical}"',
+        head,
+        count=1,
+    )
+    head = re.sub(
+        r'<link rel="sitemap"[^>]*href="[^"]*"',
+        f'<link rel="sitemap" type="application/xml" title="Sitemap" href="{SITEMAP_URL}"',
+        head,
+        count=1,
+    )
 
     html = html[: head_match.start(1)] + head + html[head_match.end(1) :]
     return html
+
+
+def normalize_site_urls(html: str) -> str:
+    """Ensure apex domain URLs use www to match the live primary host."""
+    return re.sub(
+        r"https://westsummerlinhomes\.com",
+        "https://www.westsummerlinhomes.com",
+        html,
+    )
 
 
 def inject_schema_script(html: str, schema_json: str) -> str:
@@ -1132,6 +1159,7 @@ def inject_manual_pages_schema():
         if re.search(r"<title>.*?</title>", html):
             html = re.sub(r"<title>.*?</title>", f"<title>{meta['title']}</title>", html, count=1)
         html = inject_schema_script(html, schema)
+        html = normalize_site_urls(html)
         path.write_text(html, encoding="utf-8")
         print(f"Injected schema for {filename}")
 
@@ -1166,6 +1194,7 @@ def inject_index_schema():
         "\n",
         html,
     )
+    html = normalize_site_urls(html)
     path.write_text(html, encoding="utf-8")
     print("Injected unified schema for index.html")
 
@@ -1176,6 +1205,7 @@ def inject_gsc_sitemap_all_pages():
         title, description = extract_title_description(html)
         canonical = canonical_for(path.name)
         updated = ensure_seo_head_tags(html, title, description, canonical)
+        updated = normalize_site_urls(updated)
         if updated != html:
             path.write_text(updated, encoding="utf-8")
             print(f"Updated SEO head tags for {path.name}")
