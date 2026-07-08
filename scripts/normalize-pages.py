@@ -5,8 +5,12 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+ASSET_VERSION = "20260708"
+SITE_CSS = f"/site.css?v={ASSET_VERSION}"
+SITE_JS = f"/site.js?v={ASSET_VERSION}"
+CALENDLY_JS = f"/calendly.js?v={ASSET_VERSION}"
 
-FOOTER = """
+FOOTER = f"""
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
@@ -49,14 +53,14 @@ FOOTER = """
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
-    <script src="/site.js" defer></script>
+    <script src="{SITE_JS}" defer></script>
     <script src="/realscout-loader.js" defer></script>
-    <script src="/calendly.js" defer></script>
+    <script src="{CALENDLY_JS}" defer></script>
 </body>
 </html>
 """
 
-HEAD_TEMPLATE = """    <link rel="preconnect" href="https://fonts.googleapis.com">
+HEAD_TEMPLATE = f"""    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://em.realscout.com">
     <link rel="preconnect" href="https://www.realscout.com">
@@ -65,7 +69,7 @@ HEAD_TEMPLATE = """    <link rel="preconnect" href="https://fonts.googleapis.com
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"></noscript>
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
-    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="{SITE_CSS}">
 </head>"""
 
 

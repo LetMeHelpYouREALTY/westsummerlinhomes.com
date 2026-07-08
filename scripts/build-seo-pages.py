@@ -8,6 +8,10 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+ASSET_VERSION = "20260708"
+SITE_CSS = f"/site.css?v={ASSET_VERSION}"
+SITE_JS = f"/site.js?v={ASSET_VERSION}"
+CALENDLY_JS = f"/calendly.js?v={ASSET_VERSION}"
 GSC_VERIFICATION = os.environ.get("GSC_VERIFICATION", "").strip()
 SITEMAP_URL = "https://www.westsummerlinhomes.com/sitemap.xml"
 TODAY = date.today().isoformat()
@@ -583,9 +587,9 @@ def footer_html() -> str:
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
-    <script src="/site.js" defer></script>
+    <script src="{SITE_JS}" defer></script>
     <script src="/realscout-loader.js" defer></script>
-    <script src="/calendly.js" defer></script>
+    <script src="{CALENDLY_JS}" defer></script>
 </body>
 </html>"""
 
@@ -635,7 +639,7 @@ def head_block(title: str, description: str, canonical: str, schema: str, preloa
 {seo_meta_block(title, description, canonical)}
 {perf_head_snippets(preload_hero)}
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
-    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="{SITE_CSS}">
     <script type="application/ld+json">
 {schema}
     </script>
@@ -1632,14 +1636,14 @@ def patch_index_performance():
         if "preconnect" not in html:
             html = html.replace(
                 '<link rel="stylesheet" href="/site.css">',
-                perf_head_snippets(preload_hero=True) + '\n    <link rel="stylesheet" href="/site.css">',
+                perf_head_snippets(preload_hero=True) + f'\n    <link rel="stylesheet" href="{SITE_CSS}">',
                 1,
             )
         else:
             hero_preload = '    <link rel="preload" as="image" href="/images/hero-bg.webp" type="image/webp" fetchpriority="high">\n'
             html = html.replace(
                 '<link rel="stylesheet" href="/site.css">',
-                hero_preload + '    <link rel="stylesheet" href="/site.css">',
+                hero_preload + f'    <link rel="stylesheet" href="{SITE_CSS}">\n',
                 1,
             )
 
@@ -1683,16 +1687,16 @@ def patch_index_performance():
         "",
         html,
     )
-    html = re.sub(r'<script src="/site\.js"></script>', '<script src="/site.js" defer></script>', html)
+    html = re.sub(r'<script src="/site\.js(\?v=[^"]*)?"></script>', f'<script src="{SITE_JS}" defer></script>', html)
     html = re.sub(
-        r'<script src="/calendly\.js"></script>',
-        '<script src="/realscout-loader.js" defer></script>\n    <script src="/calendly.js" defer></script>',
+        r'<script src="/calendly\.js(\?v=[^"]*)?"></script>',
+        f'<script src="/realscout-loader.js" defer></script>\n    <script src="{CALENDLY_JS}" defer></script>',
         html,
     )
     if "realscout-loader.js" not in html:
         html = html.replace(
-            '<script src="/calendly.js" defer></script>',
-            '<script src="/realscout-loader.js" defer></script>\n    <script src="/calendly.js" defer></script>',
+            f'<script src="{CALENDLY_JS}" defer></script>',
+            f'<script src="/realscout-loader.js" defer></script>\n    <script src="{CALENDLY_JS}" defer></script>',
         )
 
     path.write_text(html, encoding="utf-8")
@@ -1714,9 +1718,9 @@ def patch_performance_heads_all():
             "",
         ),
     ]
-    footer_scripts = """    <script src="/site.js" defer></script>
+    footer_scripts = f"""    <script src="{SITE_JS}" defer></script>
     <script src="/realscout-loader.js" defer></script>
-    <script src="/calendly.js" defer></script>"""
+    <script src="{CALENDLY_JS}" defer></script>"""
 
     for path in sorted(ROOT.glob("*.html")):
         if path.name == "index.html":
@@ -1728,7 +1732,7 @@ def patch_performance_heads_all():
         if "preconnect" not in html:
             html = html.replace(
                 '<link rel="stylesheet" href="/site.css">',
-                perf_head_snippets() + '\n    <link rel="stylesheet" href="/site.css">',
+                perf_head_snippets() + f'\n    <link rel="stylesheet" href="{SITE_CSS}">',
                 1,
             )
         html = re.sub(
@@ -1743,8 +1747,8 @@ def patch_performance_heads_all():
         )
         if "realscout-loader.js" not in html and "/site.js" in html:
             html = html.replace(
-                '<script src="/site.js" defer></script>',
-                '<script src="/site.js" defer></script>\n    <script src="/realscout-loader.js" defer></script>',
+                f'<script src="{SITE_JS}" defer></script>',
+                f'<script src="{SITE_JS}" defer></script>\n    <script src="/realscout-loader.js" defer></script>',
             )
         if html != original:
             path.write_text(html, encoding="utf-8")

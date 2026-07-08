@@ -277,8 +277,10 @@ section {
   color: #ffffff;
 }
 
-/* Hero — above-fold content must not wait for fade-in JS (LCP) */
-.hero .fade-in {
+/* Above-fold / CTA sections must not wait for fade-in JS (LCP + button readability) */
+.hero .fade-in,
+.contact .fade-in,
+.contact .contact-cta-group {
   opacity: 1;
   transform: none;
 }
@@ -1907,4 +1909,42 @@ realscout-advanced-search {
     width: 36px;
     height: 36px;
   }
+}
+
+/* CTA readability — max specificity + iOS text-fill (v20260708) */
+.contact .contact-form a.cta-button.calendly-popup:not(.cta-button-outline),
+.contact .contact-cta-group a.cta-button.calendly-popup:not(.cta-button-outline),
+.contact-form .contact-cta-group a.cta-button:not(.cta-button-outline) {
+  background-color: #ffffff !important;
+  color: #0a2540 !important;
+  -webkit-text-fill-color: #0a2540 !important;
+  border: 2px solid #ffffff !important;
+  text-decoration: none !important;
+}
+
+.contact .contact-cta-group a.cta-button.cta-button-outline,
+.contact-form .contact-cta-group a.cta-button.cta-button-outline {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  text-decoration: none !important;
+}
+
+.site-footer .footer-bottom a.calendly-link-btn.calendly-popup,
+.footer-bottom a.calendly-popup.calendly-link-btn {
+  background-color: #ffffff !important;
+  color: #0a2540 !important;
+  -webkit-text-fill-color: #0a2540 !important;
+  border: 2px solid #ffffff !important;
+  text-decoration: none !important;
+}
+
+header .nav-links a.nav-schedule.calendly-popup,
+.nav-links a.calendly-popup.nav-schedule {
+  background-color: #ffffff !important;
+  color: #0a2540 !important;
+  -webkit-text-fill-color: #0a2540 !important;
+  border: 2px solid #ffffff !important;
+  text-decoration: none !important;
 }

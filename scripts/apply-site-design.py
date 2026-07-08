@@ -5,14 +5,16 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+ASSET_VERSION = "20260708"
+SITE_CSS = f"/site.css?v={ASSET_VERSION}"
 
-HEAD_ASSETS = """    <link rel="stylesheet" href="/site.css">
+HEAD_ASSETS = f"""    <link rel="stylesheet" href="{SITE_CSS}">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">"""
 
-SCRIPT_TAGS = """    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <script src="/site.js"></script>
-    <script src="/calendly.js"></script>"""
+SCRIPT_TAGS = f"""    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script src="/site.js?v={ASSET_VERSION}"></script>
+    <script src="/calendly.js?v={ASSET_VERSION}"></script>"""
 
 PAGES = [
     "index.html",
