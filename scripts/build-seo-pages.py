@@ -4,8 +4,9 @@
 import json
 import os
 import re
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 ASSET_VERSION = "20260708-fonts"
@@ -21,6 +22,15 @@ OG_IMAGE = f"{SITE_ORIGIN}/images/dr-janet-duffy-real-estate.jpg"
 GSC_VERIFICATION = os.environ.get("GSC_VERIFICATION", "").strip()
 SITEMAP_URL = "https://www.westsummerlinhomes.com/sitemap.xml"
 TODAY = date.today().isoformat()
+SITE_LAUNCH = "2025-08-10"
+SITE_TIMEZONE = ZoneInfo("America/Los_Angeles")
+PAGE_DATES: dict[str, dict[str, str]] = {
+    "market-update.html": {"published": "2025-08-10", "modified": TODAY},
+}
+BYLINE_RE = re.compile(
+    r'\s*<p class="page-byline"><time datetime="[^"]*">.*?</time></p>',
+    re.DOTALL,
+)
 
 NAP = {
     "business": "West Summerlin Homes by Dr. Jan Duffy",
@@ -133,6 +143,38 @@ def format_phone_e164(phone: str) -> str:
     if len(digits) == 10:
         return f"+1-{digits[:3]}-{digits[3:6]}-{digits[6:]}"
     return phone
+
+
+def page_dates(filename: str) -> tuple[str, str]:
+    dates = PAGE_DATES.get(filename, {})
+    published = dates.get("published", SITE_LAUNCH)
+    modified = dates.get("modified", TODAY)
+    return published, modified
+
+
+def format_display_date(iso_date: str) -> str:
+    parsed = datetime.strptime(iso_date, "%Y-%m-%d")
+    return parsed.strftime("%B %d, %Y").replace(" 0", " ")
+
+
+def iso8601_pacific(iso_date: str, time: str = "08:00:00") -> str:
+    dt = datetime.fromisoformat(f"{iso_date}T{time}").replace(tzinfo=SITE_TIMEZONE)
+    return dt.isoformat()
+
+
+def byline_visible_text(published: str, modified: str) -> str:
+    published_text = format_display_date(published)
+    if published == modified:
+        return f"Published {published_text}"
+    return f"Published {published_text} · Last updated: {format_display_date(modified)}"
+
+
+def byline_html(published: str, modified: str) -> str:
+    text = byline_visible_text(published, modified)
+    return (
+        f'            <p class="page-byline"><time datetime="{iso8601_pacific(modified)}">'
+        f"{text}</time></p>"
+    )
 
 
 def postal_address() -> dict:
@@ -388,23 +430,34 @@ def schema_graph(
     url: str,
     breadcrumb: list,
     extra: list | None = None,
+    date_published: str | None = None,
+    date_modified: str | None = None,
 ) -> str:
     webpage_types = ["WebPage"] if page_type == "WebPage" else [page_type, "WebPage"]
+    webpage = {
+        "@type": webpage_types,
+        "@id": f"{url}#webpage",
+        "url": url,
+        "name": title,
+        "description": description,
+        "isPartOf": {"@id": f"{NAP['url']}/#website"},
+        "about": {"@id": f"{NAP['url']}/#agent"},
+        "breadcrumb": {"@id": f"{url}#breadcrumb"},
+    }
+    if date_published:
+        webpage["datePublished"] = iso8601_pacific(date_published)
+    if date_modified:
+        webpage["dateModified"] = iso8601_pacific(date_modified)
+    if page_type == "Article":
+        webpage["headline"] = title
+        webpage["author"] = {"@id": f"{NAP['url']}/#agent"}
+        webpage["publisher"] = {"@id": f"{NAP['url']}/#organization"}
     graph = [
         website_entity(),
         organization_entity(),
         agent_entity(),
         local_business_entity(),
-        {
-            "@type": webpage_types,
-            "@id": f"{url}#webpage",
-            "url": url,
-            "name": title,
-            "description": description,
-            "isPartOf": {"@id": f"{NAP['url']}/#website"},
-            "about": {"@id": f"{NAP['url']}/#agent"},
-            "breadcrumb": {"@id": f"{url}#breadcrumb"},
-        },
+        webpage,
         breadcrumb_entity(breadcrumb, url),
     ]
     if extra:
@@ -421,7 +474,16 @@ def schema_for_homepage() -> str:
         "Dr. Jan Duffy provides personalized home buying, selling, and investment guidance."
     )
     breadcrumb = [{"name": "Home", "item": NAP["url"]}]
-    return schema_graph("WebPage", title, description, url, breadcrumb)
+    published, modified = page_dates("index.html")
+    return schema_graph(
+        "WebPage",
+        title,
+        description,
+        url,
+        breadcrumb,
+        date_published=published,
+        date_modified=modified,
+    )
 
 
 MANUAL_PAGE_SEO = {
@@ -771,7 +833,17 @@ def write_page(
     page_type: str = "WebPage",
 ):
     url = f"{NAP['url']}/{filename}" if filename != "index.html" else f"{NAP['url']}/"
-    schema = schema_graph(page_type, title, description, url, breadcrumb, schema_extra)
+    published, modified = page_dates(filename)
+    schema = schema_graph(
+        page_type,
+        title,
+        description,
+        url,
+        breadcrumb,
+        schema_extra,
+        date_published=published,
+        date_modified=modified,
+    )
     content = "\n".join([
         head_block(title, description, url, schema),
         header_html(active),
@@ -941,7 +1013,8 @@ def generate_market():
 {realscout_listings_section("Active Listings Snapshot", price_min="400000", price_max="2000000")}"""
     write_page("market-update.html", "market-update.html", "West Summerlin Market Update | Las Vegas Real Estate",
                "West Summerlin and Las Vegas real estate market trends. Current pricing, inventory, and days on market with Dr. Jan Duffy.",
-               [{"name": "Home", "item": NAP["url"]}, {"name": "Market Update", "item": f"{NAP['url']}/market-update.html"}], body)
+               [{"name": "Home", "item": NAP["url"]}, {"name": "Market Update", "item": f"{NAP['url']}/market-update.html"}], body,
+               page_type="Article")
 
 
 def generate_luxury():
@@ -1934,6 +2007,7 @@ def inject_manual_pages_schema():
         if not path.exists():
             continue
         url = canonical_for(filename)
+        published, modified = page_dates(filename)
         schema = schema_graph(
             meta["page_type"],
             meta["title"],
@@ -1941,6 +2015,8 @@ def inject_manual_pages_schema():
             url,
             meta["breadcrumb"],
             meta.get("extra"),
+            date_published=published,
+            date_modified=modified,
         )
         html = path.read_text(encoding="utf-8")
         html = html.replace("Dr. Janet Duffy", "Dr. Jan Duffy")
@@ -2036,6 +2112,87 @@ def patch_existing_pages():
         print(f"Patched {page.name}")
 
 
+def patch_byline_dates_all():
+    for path in sorted(ROOT.glob("*.html")):
+        html = path.read_text(encoding="utf-8")
+        original = html
+        html = inject_visible_byline(html, path.name)
+        html = patch_schema_dates_in_html(html, path.name)
+        if html != original:
+            path.write_text(html, encoding="utf-8")
+            print(f"Patched byline dates for {path.name}")
+
+
+def inject_visible_byline(html: str, filename: str) -> str:
+    published, modified = page_dates(filename)
+    byline = byline_html(published, modified)
+    html = BYLINE_RE.sub("", html)
+
+    if filename == "index.html":
+        marker = '<h1>Your Dream Home Awaits in <span class="text-accent">West Summerlin</span></h1>'
+        if marker in html:
+            return html.replace(marker, f"{marker}\n{byline}", 1)
+        return html
+
+    match = re.search(
+        r"(<section class=\"page-header\">.*?<h1>.*?</h1>)",
+        html,
+        re.DOTALL,
+    )
+    if match:
+        return html.replace(match.group(1), f"{match.group(1)}\n{byline}", 1)
+    return html
+
+
+def patch_schema_dates_in_html(html: str, filename: str) -> str:
+    published, modified = page_dates(filename)
+    match = re.search(
+        r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>',
+        html,
+        re.DOTALL,
+    )
+    if not match:
+        return html
+    try:
+        data = json.loads(match.group(1))
+    except json.JSONDecodeError:
+        return html
+
+    graph = data.get("@graph", [data])
+    for node in graph:
+        node_id = node.get("@id", "")
+        if not str(node_id).endswith("#webpage"):
+            node.pop("datePublished", None)
+            node.pop("dateModified", None)
+            continue
+        types = node.get("@type", [])
+        if isinstance(types, str):
+            types = [types]
+        if not any(
+            page_type in types
+            for page_type in (
+                "WebPage",
+                "Article",
+                "AboutPage",
+                "ContactPage",
+                "CollectionPage",
+            )
+        ):
+            continue
+        node["datePublished"] = iso8601_pacific(published)
+        node["dateModified"] = iso8601_pacific(modified)
+        if filename == "market-update.html":
+            node["@type"] = ["Article", "WebPage"]
+            node["headline"] = node.get("name", "")
+            node["author"] = {"@id": f"{NAP['url']}/#agent"}
+            node["publisher"] = {"@id": f"{NAP['url']}/#organization"}
+
+    updated_script = (
+        f'<script type="application/ld+json">\n{json.dumps(data, indent=2)}\n    </script>'
+    )
+    return html[: match.start()] + updated_script + html[match.end() :]
+
+
 def write_sitemap():
     pages = sorted(ROOT.glob("*.html"))
     urls = []
@@ -2086,6 +2243,7 @@ def main():
     inject_gsc_sitemap_all_pages()
     inject_manual_pages_schema()
     inject_index_schema()
+    patch_byline_dates_all()
     write_sitemap()
 
 

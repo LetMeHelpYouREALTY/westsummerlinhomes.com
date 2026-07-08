@@ -406,6 +406,22 @@ section {
   margin-bottom: 0.75rem;
 }
 
+.page-byline {
+  font-size: 0.875rem;
+  color: var(--on-dark-muted);
+  margin: 0.25rem 0 0.75rem;
+}
+
+.page-header .page-byline {
+  max-width: 600px;
+  margin: 0.25rem auto 0.75rem;
+}
+
+.hero .page-byline {
+  margin: 0.5rem auto 1rem;
+  opacity: 0.92;
+}
+
 .page-header p {
   font-size: 1.1rem;
   max-width: 600px;
