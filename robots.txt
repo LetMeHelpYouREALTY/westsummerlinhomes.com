@@ -1,4 +1,36 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /auth0-branding/
 
+# Sitemap location
 Sitemap: https://www.westsummerlinhomes.com/sitemap.xml
+
+# Crawl delay (optional — Bing/Yandex; Googlebot ignores this)
+Crawl-delay: 1
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /auth0-branding/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /auth0-branding/
+
+User-agent: Slurp
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /auth0-branding/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /auth0-branding/
