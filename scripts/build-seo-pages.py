@@ -8,7 +8,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ASSET_VERSION = "20260708-psi"
+ASSET_VERSION = "20260708-fonts"
 SITE_CSS = f"/site.css?v={ASSET_VERSION}"
 SITE_JS = f"/site.js?v={ASSET_VERSION}"
 CALENDLY_JS = f"/calendly.js?v={ASSET_VERSION}"
@@ -621,14 +621,10 @@ def perf_head_snippets(preload_hero: bool = False) -> str:
     if preload_hero:
         hero_preload = """
     <link rel="preload" as="image" href="/images/hero-bg.webp" type="image/webp" fetchpriority="high">"""
-    return f"""    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://em.realscout.com">
+    return f"""    <link rel="preconnect" href="https://em.realscout.com">
     <link rel="preconnect" href="https://www.realscout.com">{hero_preload}
-    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiunDXbtM.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap"></noscript>"""
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/playfair-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>"""
 
 
 def head_block(title: str, description: str, canonical: str, schema: str, preload_hero: bool = False) -> str:

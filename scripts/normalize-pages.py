@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ASSET_VERSION = "20260708-psi"
+ASSET_VERSION = "20260708-fonts"
 SITE_CSS = f"/site.css?v={ASSET_VERSION}"
 SITE_JS = f"/site.js?v={ASSET_VERSION}"
 CALENDLY_JS = f"/calendly.js?v={ASSET_VERSION}"
@@ -61,14 +61,10 @@ FOOTER = f"""
 </html>
 """
 
-HEAD_TEMPLATE = f"""    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://em.realscout.com">
+HEAD_TEMPLATE = f"""    <link rel="preconnect" href="https://em.realscout.com">
     <link rel="preconnect" href="https://www.realscout.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://cdn.westsummerlinhomes.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"></noscript>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/playfair-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
     <link rel="icon" href="{LOGO_URL}" type="image/png">
     <link rel="stylesheet" href="{SITE_CSS}">
 </head>"""
