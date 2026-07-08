@@ -4,15 +4,20 @@
   --navy: #0a2540;
   --navy-mid: #2c3e50;
   --navy-dark: #34495e;
-  --blue: #3a8dde;
-  --blue-bright: #3498db;
-  --blue-dark: #2980b9;
-  --green: #16b286;
+  --blue: #2563eb;
+  --blue-bright: #1d4ed8;
+  --blue-dark: #1e3a8a;
+  --blue-light: #93c5fd;
+  --green: #059669;
+  --green-bright: #10b981;
   --bg: #f9fafb;
   --bg-alt: #f3f4f6;
   --text: #111827;
-  --text-muted: #6b7280;
+  --text-muted: #4b5563;
   --white: #ffffff;
+  --on-dark: #ffffff;
+  --on-dark-muted: rgba(255, 255, 255, 0.88);
+  --on-dark-subtle: rgba(255, 255, 255, 0.72);
   --radius: 16px;
   --radius-sm: 12px;
   --shadow-soft: 0 2px 12px rgba(10, 37, 64, 0.08);
@@ -85,7 +90,7 @@ header nav {
   flex: 1 1 auto;
   min-width: 0;
   font-weight: 700;
-  color: var(--blue-bright);
+  color: var(--white);
 }
 
 a.logo {
@@ -118,6 +123,7 @@ a.logo {
   font-family: var(--font-display);
   font-size: clamp(0.85rem, 1.5vw, 1.05rem);
   white-space: nowrap;
+  color: var(--white);
 }
 
 .logo-subtitle {
@@ -131,8 +137,8 @@ a.logo {
   display: none;
   align-items: center;
   gap: 0.35rem;
-  background: var(--blue);
-  color: var(--white);
+  background: var(--navy);
+  color: var(--white) !important;
   text-decoration: none;
   font-size: 0.8rem;
   font-weight: 600;
@@ -185,7 +191,12 @@ a.logo {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--blue-bright);
+  color: var(--blue-light);
+}
+
+.nav-links a.active {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 /* Breadcrumb */
@@ -225,8 +236,17 @@ a.logo {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--blue-bright);
   margin-bottom: 0.75rem;
+}
+
+.hero .section-eyebrow,
+.page-header .section-eyebrow {
+  color: var(--on-dark);
+  background: rgba(255, 255, 255, 0.14);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 .section-title {
@@ -250,7 +270,12 @@ section {
 }
 
 .text-accent {
-  color: var(--blue-bright);
+  color: var(--blue-light);
+}
+
+.hero .text-accent,
+.page-header .text-accent {
+  color: #ffffff;
 }
 
 /* Hero */
@@ -348,47 +373,100 @@ section {
   font-size: 1.1rem;
   max-width: 600px;
   margin: 0 auto;
-  opacity: 0.95;
+  color: var(--on-dark-muted);
 }
 
-/* Buttons */
+/* Dark sections need light headings */
+.hero .section-title,
+.page-header .section-title,
+.contact .section-title,
+.cta .section-title {
+  color: var(--on-dark);
+}
+
+.contact .section-subtitle,
+.cta .section-subtitle,
+.cta p {
+  color: var(--on-dark-muted);
+}
+
+/* Buttons — V0 high-contrast pattern */
 .cta-button {
   display: inline-block;
-  background: var(--blue-bright);
-  color: var(--white);
+  background: var(--navy);
+  color: var(--white) !important;
   padding: 14px 28px;
   text-decoration: none;
   border-radius: 999px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 16px rgba(52, 152, 219, 0.35);
-  border: none;
+  box-shadow: 0 4px 16px rgba(10, 37, 64, 0.25);
+  border: 2px solid transparent;
   cursor: pointer;
 }
 
 .cta-button:hover {
   background: var(--blue-dark);
+  color: var(--white) !important;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(10, 37, 64, 0.3);
+}
+
+/* Primary CTA on dark backgrounds: white fill, dark text */
+.hero .cta-button,
+.page-header .cta-button,
+.contact .cta-button,
+.cta .cta-button {
+  background: var(--white);
+  color: var(--navy) !important;
+  border-color: var(--white);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hero .cta-button:hover,
+.page-header .cta-button:hover,
+.contact .cta-button:hover,
+.cta .cta-button:hover {
+  background: #f3f4f6;
+  color: var(--navy) !important;
 }
 
 .cta-button-outline {
-  background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: transparent !important;
+  color: var(--white) !important;
+  border: 2px solid var(--white);
   box-shadow: none;
 }
 
 .cta-button-outline:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: var(--white) !important;
+  border-color: var(--white);
+}
+
+/* Primary CTA on light backgrounds */
+.testimonials .cta-button,
+.calendly-section .cta-button,
+.intro .cta-button,
+.services + .calendly-section .cta-button {
+  background: var(--navy);
+  color: var(--white) !important;
+}
+
+.testimonials .cta-button:hover,
+.calendly-section .cta-button:hover {
+  background: var(--blue-dark);
+  color: var(--white) !important;
 }
 
 .btn-primary {
-  background: var(--blue-bright);
-  color: white;
+  background: var(--navy);
+  color: var(--white) !important;
   padding: 0.75rem 1.25rem;
   border: none;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
@@ -397,18 +475,24 @@ section {
 
 .btn-primary:hover {
   background: var(--blue-dark);
+  color: var(--white) !important;
 }
 
 .btn-secondary {
-  background: var(--bg-alt);
-  color: var(--text-muted);
+  background: var(--white);
+  color: var(--navy) !important;
+  border: 2px solid #d1d5db;
   padding: 0.75rem 1.25rem;
-  border: none;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+}
+
+.btn-secondary:hover {
+  background: var(--bg);
+  color: var(--navy) !important;
 }
 
 /* Cards & grids */
@@ -482,8 +566,17 @@ realscout-advanced-search {
 }
 
 .search-section {
-  background: linear-gradient(135deg, var(--blue-bright), var(--blue-dark));
+  background: linear-gradient(135deg, var(--navy-mid), var(--navy-dark));
   color: var(--white);
+}
+
+.search-section .section-title,
+.search-section .section-subtitle {
+  color: var(--on-dark);
+}
+
+.search-section .section-subtitle {
+  color: var(--on-dark-muted);
 }
 
 .search-container {
@@ -590,12 +683,12 @@ realscout-advanced-search {
 }
 
 .credential {
-  background: var(--blue-bright);
-  color: white;
+  background: var(--navy);
+  color: var(--white);
   padding: 8px 16px;
   border-radius: 999px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* Author credentials */
@@ -711,13 +804,14 @@ realscout-advanced-search {
 
 .neighborhood-tag {
   background: #dbeafe;
-  color: #1e40af;
+  color: #1e3a8a;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   font-size: 0.75rem;
   margin-right: 0.35rem;
   display: inline-block;
   margin-bottom: 0.35rem;
+  font-weight: 600;
 }
 
 /* Testimonials */
@@ -800,14 +894,25 @@ realscout-advanced-search {
   padding: 0.65rem 1.1rem;
   border-radius: 999px;
   font-size: 0.9rem;
-  font-weight: 600;
-  background: var(--blue-bright);
-  color: white;
+  font-weight: 700;
+  background: var(--white);
+  color: var(--navy) !important;
+}
+
+.contact-actions a:hover {
+  background: #f3f4f6;
+  color: var(--navy) !important;
 }
 
 .contact-actions a.outline {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--white) !important;
+  border: 2px solid var(--white);
+}
+
+.contact-actions a.outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white) !important;
 }
 
 .contact-form {
@@ -825,10 +930,24 @@ realscout-advanced-search {
 .calendly-popup {
   cursor: pointer;
   color: var(--blue-bright);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
-.contact .calendly-popup {
-  color: #93c5fd;
+.contact .calendly-popup,
+.cta .calendly-popup,
+.hero .calendly-popup,
+.page-header .calendly-popup {
+  color: var(--white) !important;
+  text-decoration: underline;
+}
+
+.contact .calendly-popup:hover,
+.cta .calendly-popup:hover,
+.hero .calendly-popup:hover,
+.page-header .calendly-popup:hover {
+  color: var(--blue-light) !important;
 }
 
 .form-group {
@@ -839,6 +958,12 @@ realscout-advanced-search {
   display: block;
   margin-bottom: 0.35rem;
   font-size: 0.9rem;
+  color: var(--text);
+}
+
+.contact .form-group label,
+.contact-form .form-group label {
+  color: var(--on-dark);
 }
 
 .form-group input,
@@ -898,14 +1023,14 @@ realscout-advanced-search {
 }
 
 .footer-nav a:hover {
-  color: var(--blue-bright);
+  color: var(--white);
 }
 
 .footer-contact p,
 .footer-contact a {
   font-size: 0.9rem;
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
 }
 
@@ -913,11 +1038,17 @@ realscout-advanced-search {
   text-align: center;
   padding: 1.25rem 0;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .footer-bottom a {
-  color: var(--blue-bright);
+  color: var(--white);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.footer-bottom a:hover {
+  color: var(--blue-light);
 }
 
 /* Sticky call bar */
@@ -1070,21 +1201,76 @@ realscout-advanced-search {
   margin-bottom: 1rem;
 }
 
+.neighborhoods .contact .section-subtitle {
+  color: var(--on-dark-muted);
+}
+
 .calendly-section {
   background: var(--bg);
   text-align: center;
 }
 
+.calendly-section .section-subtitle,
+.calendly-section > .container > p {
+  color: var(--text-muted);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.calendly-section .service-cta {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--white) !important;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  margin: 1rem 0 1.5rem;
+}
+
+.calendly-section .service-cta:hover {
+  background: var(--blue-dark);
+  color: var(--white) !important;
+}
+
+.cta-actions {
+  text-align: center;
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.page-header .cta-actions {
+  margin-top: 1.5rem;
+}
+
+.contact-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+}
+
 .service-cta {
   display: inline-block;
   margin-top: 1rem;
-  color: var(--blue-bright);
-  font-weight: 600;
-  text-decoration: none;
+  color: var(--navy);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.service-card .service-cta,
+.experience-card .service-cta {
+  color: var(--blue-dark);
 }
 
 .service-cta:hover {
-  color: var(--blue-dark);
+  color: var(--blue-bright);
 }
 
 /* Animations */
