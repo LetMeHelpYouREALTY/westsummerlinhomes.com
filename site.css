@@ -1796,6 +1796,15 @@ realscout-advanced-search {
     font-size: 1rem;
   }
 
+  .nav-links .nav-schedule,
+  .nav-links .calendly-popup.nav-schedule {
+    display: flex !important;
+    width: 100%;
+    margin: 0.5rem 0 0.25rem;
+    justify-content: center;
+    padding: 0.75rem 1rem !important;
+  }
+
   .sticky-call-bar {
     display: grid;
   }
