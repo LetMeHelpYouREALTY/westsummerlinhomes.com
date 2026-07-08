@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "vercel": {
+      "url": "https://mcp.vercel.com"
+    },
+    "v0": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.v0.dev",
+        "--header",
+        "Authorization: Bearer ${env:V0_API_KEY}"
+      ]
+    },
+    "pagespeed": {
+      "command": "npx",
+      "args": ["-y", "pagespeed-insights-mcp"],
+      "env": {
+        "GOOGLE_API_KEY": "${env:GOOGLE_API_KEY}"
+      }
+    },
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${env:github}"
+      }
+    },
+    "git": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@selfagency/git-mcp",
+        "--repo-path",
+        "${workspaceFolder}"
+      ]
+    }
+  }
+}

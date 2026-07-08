@@ -407,7 +407,34 @@ section {
   color: var(--on-dark-muted);
 }
 
-/* Buttons — V0 high-contrast pattern */
+/* Buttons — V0 WCAG AA pattern (min 44px touch targets, 4.5:1 contrast) */
+.cta-button,
+.cta-button-outline,
+.btn-primary,
+.contact-actions a,
+.sticky-call-bar a,
+.calendly-link-btn,
+.calendly-link-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  text-align: center;
+}
+
+.cta-button:focus-visible,
+.cta-button-outline:focus-visible,
+.btn-primary:focus-visible,
+.contact-actions a:focus-visible,
+.sticky-call-bar a:focus-visible,
+.calendly-link-btn:focus-visible,
+.calendly-link-btn-dark:focus-visible,
+.nav-links .nav-schedule:focus-visible {
+  outline: 3px solid #e8c547;
+  outline-offset: 3px;
+}
+
 .cta-button {
   display: inline-block;
   background: var(--navy);
@@ -417,6 +444,8 @@ section {
   border-radius: 999px;
   font-size: 1rem;
   font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
   transition: all 0.25s ease;
   box-shadow: 0 4px 16px rgba(10, 37, 64, 0.25);
   border: 2px solid transparent;
@@ -500,18 +529,21 @@ section {
 .btn-primary {
   background: var(--navy);
   color: var(--white) !important;
-  padding: 0.75rem 1.25rem;
-  border: none;
+  padding: 0.85rem 1.35rem;
+  border: 2px solid var(--navy);
   border-radius: 10px;
   font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
   cursor: pointer;
   text-decoration: none;
-  display: inline-block;
-  transition: background 0.2s;
+  display: inline-flex;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .btn-primary:hover {
-  background: var(--blue-dark);
+  background: #1a4a7a;
+  border-color: #1a4a7a;
   color: var(--white) !important;
 }
 
@@ -1004,12 +1036,14 @@ realscout-advanced-search {
 
 .contact-actions a {
   text-decoration: none;
-  padding: 0.65rem 1.1rem;
+  padding: 0.75rem 1.25rem;
   border-radius: 999px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 700;
+  line-height: 1.25;
   background: var(--white);
   color: var(--navy) !important;
+  border: 2px solid var(--white);
 }
 
 .contact-actions a:hover {
@@ -1082,16 +1116,38 @@ realscout-advanced-search {
   color: var(--white) !important;
 }
 
-.contact .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark),
-.cta .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark),
-.hero .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark),
-.page-header .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark),
-.site-footer .calendly-popup,
-.sticky-call-bar .calendly-popup,
-.nav-links .calendly-popup {
+/* Nav Schedule — pill CTA (V0: readable on dark header, 44px target) */
+.nav-links .nav-schedule,
+.nav-links .calendly-popup.nav-schedule {
+  background: #ffffff !important;
+  color: #0a2540 !important;
+  padding: 0.55rem 1rem !important;
+  border-radius: 999px !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-height: 44px;
+}
+
+.nav-links .nav-schedule:hover,
+.nav-links .calendly-popup.nav-schedule:hover {
+  background: #e8f0fe !important;
+  color: #0a2540 !important;
+  border-color: #e8f0fe !important;
+}
+
+.contact .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark):not(.cta-button):not(.cta-button-outline),
+.cta .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark):not(.cta-button):not(.cta-button-outline),
+.hero .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark):not(.cta-button):not(.cta-button-outline),
+.page-header .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark):not(.cta-button):not(.cta-button-outline),
+.site-footer .calendly-popup:not(.calendly-link-btn):not(.calendly-link-btn-dark),
+.sticky-call-bar .calendly-popup:not(.cta-button) {
   color: var(--white) !important;
   text-decoration: underline;
   text-underline-offset: 0.15em;
+  font-weight: 700;
 }
 
 .site-footer .calendly-popup.calendly-link-btn,
@@ -1234,20 +1290,32 @@ realscout-advanced-search {
 }
 
 .sticky-call-bar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 1rem;
-  color: white;
+  padding: 1rem 0.75rem;
+  color: #ffffff !important;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+  min-height: 48px;
 }
 
 .sticky-call-bar a:first-child {
-  background: var(--green);
+  background: #047857;
 }
 
 .sticky-call-bar a:last-child {
-  background: var(--blue-bright);
+  background: #1d4ed8;
+}
+
+.sticky-call-bar .calendly-popup {
+  background: #1d4ed8 !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  width: 100%;
 }
 
 /* Property cards (properties page) */
@@ -1661,10 +1729,11 @@ realscout-advanced-search {
 }
 
 .footer-bottom .calendly-link-btn {
-  padding: 8px 16px;
-  font-size: 0.85rem;
+  padding: 10px 18px;
+  font-size: 0.95rem;
   margin-left: 0.35rem;
   vertical-align: middle;
+  min-height: 44px;
 }
 
 /* Animations */
