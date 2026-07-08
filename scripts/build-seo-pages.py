@@ -134,7 +134,7 @@ def schema_graph(page_type: str, title: str, description: str, url: str, breadcr
             "@id": f"{NAP['url']}/#agent",
             "name": NAP["agent"],
             "url": NAP["url"],
-            "telephone": f"+1-{NAP['phone'][:3]}-{NAP['phone'][3:6]}-{NAP['phone'][6:]}",
+            "telephone": format_phone_e164(NAP["phone"]),
             "email": NAP["email"],
             "address": {
                 "@type": "PostalAddress",
@@ -153,7 +153,7 @@ def schema_graph(page_type: str, title: str, description: str, url: str, breadcr
             "@id": f"{NAP['url']}/#localbusiness",
             "name": NAP["business"],
             "url": NAP["url"],
-            "telephone": f"+1-{NAP['phone'][:3]}-{NAP['phone'][3:6]}-{NAP['phone'][6:]}",
+            "telephone": format_phone_e164(NAP["phone"]),
             "email": NAP["email"],
             "address": {
                 "@type": "PostalAddress",
@@ -279,9 +279,26 @@ def head_block(title: str, description: str, canonical: str, schema: str) -> str
 <body>"""
 
 
+def format_phone_e164(phone: str) -> str:
+    digits = "".join(ch for ch in phone if ch.isdigit())
+    if len(digits) == 10:
+        return f"+1-{digits[:3]}-{digits[3:6]}-{digits[6:]}"
+    return phone
+
+
 def breadcrumb_html(items: list) -> str:
     crumbs = []
-    for i, (href, label) in enumerate(items):
+    for i, item in enumerate(items):
+        if isinstance(item, dict):
+            label = item["name"]
+            href = item.get("item", "#")
+        else:
+            href, label = item
+
+        if href.startswith(NAP["url"]):
+            path = href[len(NAP["url"]) :].lstrip("/")
+            href = "index.html" if not path else path
+
         if i == len(items) - 1:
             crumbs.append(f'                <li class="breadcrumb-item" aria-current="page">{label}</li>')
         else:
@@ -537,18 +554,22 @@ def generate_valuation():
     <section class="content-page">
         <div class="container content-body">
             <p>Dr. Jan Duffy prepares seller valuations using recent MLS comparables, current inventory, and village-specific demand — not automated estimates.</p>
-            <form class="valuation-form" action="contact.html" method="get">
+            <form id="valuation-form" class="valuation-form" novalidate>
                 <div class="form-group">
                     <label for="address">Property Address</label>
                     <input type="text" id="address" name="address" required placeholder="123 Main St, Las Vegas, NV">
                 </div>
                 <div class="form-group">
                     <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" required autocomplete="name">
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="702-222-1964">
+                    <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="702-555-1234">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email (optional)</label>
+                    <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
                 </div>
                 <div class="form-group">
                     <label for="notes">Additional Details</label>
@@ -559,7 +580,8 @@ def generate_valuation():
             <p style="text-align:center;margin-top:1.5rem;">Or <a href="#" class="calendly-popup calendly-link-btn-dark">schedule an in-person consultation</a></p>
             {nap_block()}
         </div>
-    </section>"""
+    </section>
+    <script src="/lead-form.js"></script>"""
     write_page("home-valuation.html", "sellers.html", "Free Home Valuation West Summerlin | Dr. Jan Duffy",
                "Request a free home valuation for your West Summerlin property. MLS-based market analysis from Dr. Jan Duffy.",
                [{"name": "Home", "item": NAP["url"]}, {"name": "Home Valuation", "item": f"{NAP['url']}/home-valuation.html"}], body)

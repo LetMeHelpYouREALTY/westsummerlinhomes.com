@@ -1508,6 +1508,33 @@ realscout-advanced-search {
   font-family: inherit;
 }
 
+.form-status {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.form-status[hidden] {
+  display: none;
+}
+
+.form-status-pending {
+  background: #eff6ff;
+  color: #1e3a8a;
+}
+
+.form-status-success {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.form-status-error {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
 .nap-block {
   background: var(--bg);
   border-radius: var(--radius-sm);

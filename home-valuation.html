@@ -56,7 +56,7 @@
       "@id": "https://westsummerlinhomes.com/#agent",
       "name": "Dr. Jan Duffy",
       "url": "https://westsummerlinhomes.com",
-      "telephone": "+1-702--22-2-1964",
+      "telephone": "+1-702-222-1964",
       "email": "janet@westsummerlinhomes.com",
       "address": {
         "@type": "PostalAddress",
@@ -85,7 +85,7 @@
       "@id": "https://westsummerlinhomes.com/#localbusiness",
       "name": "West Summerlin Homes by Dr. Jan Duffy",
       "url": "https://westsummerlinhomes.com",
-      "telephone": "+1-702--22-2-1964",
+      "telephone": "+1-702-222-1964",
       "email": "janet@westsummerlinhomes.com",
       "address": {
         "@type": "PostalAddress",
@@ -154,8 +154,8 @@
     <nav class="breadcrumb-nav" aria-label="Breadcrumb">
         <div class="container">
             <ol class="breadcrumb-list">
-                <li class="breadcrumb-item"><a href="name">item</a></li>
-                <li class="breadcrumb-item" aria-current="page">item</li>
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page">Home Valuation</li>
             </ol>
         </div>
     </nav>
@@ -170,18 +170,22 @@
     <section class="content-page">
         <div class="container content-body">
             <p>Dr. Jan Duffy prepares seller valuations using recent MLS comparables, current inventory, and village-specific demand — not automated estimates.</p>
-            <form class="valuation-form" action="contact.html" method="get">
+            <form id="valuation-form" class="valuation-form" novalidate>
                 <div class="form-group">
                     <label for="address">Property Address</label>
                     <input type="text" id="address" name="address" required placeholder="123 Main St, Las Vegas, NV">
                 </div>
                 <div class="form-group">
                     <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" required autocomplete="name">
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="702-222-1964">
+                    <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="702-555-1234">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email (optional)</label>
+                    <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
                 </div>
                 <div class="form-group">
                     <label for="notes">Additional Details</label>
@@ -197,6 +201,7 @@
             </div>
         </div>
     </section>
+    <script src="/lead-form.js"></script>
     <section class="contact">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
