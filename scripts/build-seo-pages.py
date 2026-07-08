@@ -85,6 +85,24 @@ NEIGHBORHOOD_PAGES = [
         "highlights": ["Mature trees", "Larger lots", "Established community", "Strong resale demand"],
         "summary": "The Trails is an established Summerlin village prized for mature landscaping, generous lot sizes, and consistent buyer demand.",
     },
+    {
+        "slug": "regency-at-summerlin",
+        "name": "Regency at Summerlin",
+        "title": "Regency at Summerlin Homes for Sale | 55+ West Summerlin",
+        "description": "Homes for sale in Regency at Summerlin — active-adult living with clubhouse, fitness, and low-maintenance homes in West Summerlin.",
+        "price_range": "$450K – $850K",
+        "highlights": ["55+ community", "Clubhouse", "Fitness center", "Low-maintenance living"],
+        "summary": "Regency at Summerlin is an active-adult village offering clubhouse amenities, fitness facilities, and low-maintenance residences in West Summerlin.",
+    },
+    {
+        "slug": "stonebridge-summerlin",
+        "name": "Stonebridge",
+        "title": "Stonebridge Summerlin Homes for Sale | Golf Community",
+        "description": "Homes for sale in Stonebridge, Summerlin West near Angel Park. Golf-side residences with pool access and strong resale demand.",
+        "price_range": "$600K – $1.4M",
+        "highlights": ["Golf community", "Pool access", "Angel Park proximity", "Summerlin West"],
+        "summary": "Stonebridge is a golf-side Summerlin village near Angel Park, known for resort-style amenities, pool access, and steady resale demand.",
+    },
 ]
 
 
@@ -644,7 +662,7 @@ def write_sitemap():
         priority = "1.0" if page.name == "index.html" else "0.8"
         if page.name in ("properties.html", "luxury-homes.html"):
             priority = "0.9"
-        if page.name.startswith(("red-rock", "the-ridges", "summerlin-centre", "the-trails")):
+        if page.name.startswith(("red-rock", "the-ridges", "summerlin-centre", "the-trails", "regency-at", "stonebridge")):
             priority = "0.85"
         urls.append(f"""  <url>
     <loc>{loc}</loc>
