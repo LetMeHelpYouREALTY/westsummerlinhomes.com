@@ -188,12 +188,12 @@ a.logo {
   transition: color 0.3s ease;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
+.nav-links a:hover:not(.nav-schedule),
+.nav-links a.active:not(.nav-schedule) {
   color: var(--blue-light);
 }
 
-.nav-links a.active {
+.nav-links a.active:not(.nav-schedule) {
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
@@ -1162,17 +1162,46 @@ realscout-advanced-search {
   font-weight: 700;
 }
 
-.contact .calendly-popup:hover,
-.cta .calendly-popup:hover,
-.hero .calendly-popup:hover,
-.page-header .calendly-popup:hover,
-.site-footer .calendly-popup:hover {
+.contact .calendly-popup:hover:not(.calendly-link-btn):not(.calendly-link-btn-dark):not(.cta-button):not(.cta-button-outline),
+.cta .calendly-popup:hover:not(.calendly-link-btn):not(.calendly-link-btn-dark):not(.cta-button):not(.cta-button-outline),
+.hero .calendly-popup:hover:not(.calendly-link-btn):not(.calendly-link-btn-dark):not(.cta-button):not(.cta-button-outline),
+.page-header .calendly-popup:hover:not(.calendly-link-btn):not(.calendly-link-btn-dark):not(.cta-button):not(.cta-button-outline),
+.site-footer .calendly-popup:hover:not(.calendly-link-btn):not(.calendly-link-btn-dark) {
   color: var(--blue-light) !important;
 }
 
-.contact a,
-.contact-form a:not(.calendly-link-btn) {
+.contact a:not(.cta-button):not(.cta-button-outline):not(.calendly-link-btn):not(.calendly-link-btn-dark):not(.btn-primary),
+.contact-form a:not(.calendly-link-btn):not(.cta-button):not(.cta-button-outline):not(.btn-primary) {
   color: var(--white);
+}
+
+/* Contact + footer buttons — prevent white-link rules from hiding label text (V0) */
+.contact-form a.cta-button:not(.cta-button-outline),
+.contact .contact-cta-group a.cta-button:not(.cta-button-outline) {
+  background-color: #ffffff !important;
+  color: #0a2540 !important;
+  border: 2px solid #ffffff !important;
+  text-decoration: none !important;
+}
+
+.contact-form a.cta-button:not(.cta-button-outline):hover,
+.contact .contact-cta-group a.cta-button:not(.cta-button-outline):hover {
+  background-color: #e8eef5 !important;
+  color: #0a2540 !important;
+}
+
+.contact-form a.cta-button.cta-button-outline,
+.contact .contact-cta-group a.cta-button.cta-button-outline {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  text-decoration: none !important;
+}
+
+.contact-form a.cta-button.cta-button-outline:hover,
+.contact .contact-cta-group a.cta-button.cta-button-outline:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
 }
 
 .form-group {
@@ -1266,13 +1295,37 @@ realscout-advanced-search {
   color: rgba(255, 255, 255, 0.75);
 }
 
-.footer-bottom a {
+.footer-bottom a:not(.calendly-link-btn):not(.calendly-link-btn-dark) {
   color: var(--white);
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
 
-.footer-bottom a:hover {
+.footer-bottom a.calendly-link-btn,
+.footer-bottom a.calendly-popup.calendly-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff !important;
+  color: #0a2540 !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 999px;
+  padding: 0.55rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none !important;
+  min-height: 44px;
+  vertical-align: middle;
+  margin-left: 0.35rem;
+}
+
+.footer-bottom a.calendly-link-btn:hover,
+.footer-bottom a.calendly-popup.calendly-link-btn:hover {
+  background-color: #e8eef5 !important;
+  color: #0a2540 !important;
+}
+
+.footer-bottom a:hover:not(.calendly-link-btn):not(.calendly-link-btn-dark) {
   color: var(--blue-light);
 }
 
@@ -1729,11 +1782,8 @@ realscout-advanced-search {
 }
 
 .footer-bottom .calendly-link-btn {
-  padding: 10px 18px;
+  padding: 0.55rem 1.25rem;
   font-size: 0.95rem;
-  margin-left: 0.35rem;
-  vertical-align: middle;
-  min-height: 44px;
 }
 
 /* Animations */
