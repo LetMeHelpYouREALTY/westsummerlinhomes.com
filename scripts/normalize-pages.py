@@ -5,10 +5,11 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ASSET_VERSION = "20260708"
+ASSET_VERSION = "20260708-psi"
 SITE_CSS = f"/site.css?v={ASSET_VERSION}"
 SITE_JS = f"/site.js?v={ASSET_VERSION}"
 CALENDLY_JS = f"/calendly.js?v={ASSET_VERSION}"
+LOGO_URL = "/images/logo.png"
 
 FOOTER = f"""
     <footer class="site-footer">
@@ -68,7 +69,7 @@ HEAD_TEMPLATE = f"""    <link rel="preconnect" href="https://fonts.googleapis.co
     <link rel="preconnect" href="https://cdn.westsummerlinhomes.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"></noscript>
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
+    <link rel="icon" href="{LOGO_URL}" type="image/png">
     <link rel="stylesheet" href="{SITE_CSS}">
 </head>"""
 

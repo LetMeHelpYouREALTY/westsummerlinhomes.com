@@ -8,10 +8,12 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ASSET_VERSION = "20260708"
+ASSET_VERSION = "20260708-psi"
 SITE_CSS = f"/site.css?v={ASSET_VERSION}"
 SITE_JS = f"/site.js?v={ASSET_VERSION}"
 CALENDLY_JS = f"/calendly.js?v={ASSET_VERSION}"
+LOGO_URL = "/images/logo.png"
+SITE_ORIGIN = "https://www.westsummerlinhomes.com"
 GSC_VERIFICATION = os.environ.get("GSC_VERIFICATION", "").strip()
 SITEMAP_URL = "https://www.westsummerlinhomes.com/sitemap.xml"
 TODAY = date.today().isoformat()
@@ -165,7 +167,7 @@ def organization_entity() -> dict:
         "@id": f"{NAP['url']}/#organization",
         "name": NAP["business"],
         "url": NAP["url"],
-        "logo": "https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png",
+        "logo": f"{SITE_ORIGIN}{LOGO_URL}",
         "description": "Premium real estate services in West Summerlin and Las Vegas",
         "address": postal_address(),
         "contactPoint": {
@@ -186,7 +188,7 @@ def agent_entity() -> dict:
         "url": NAP["url"],
         "telephone": format_phone_e164(NAP["phone"]),
         "email": NAP["email"],
-        "image": "https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
+        "image": f"{SITE_ORIGIN}/images/dr-janet-duffy.jpg",
         "address": postal_address(),
         "areaServed": [
             {"@type": "City", "name": "Las Vegas"},
@@ -444,7 +446,7 @@ MANUAL_PAGE_SEO = {
                 "jobTitle": "Real Estate Agent",
                 "worksFor": {"@id": f"{NAP['url']}/#organization"},
                 "url": f"{NAP['url']}/about.html",
-                "image": "https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
+                "image": f"{SITE_ORIGIN}/images/dr-janet-duffy.jpg",
             }
         ],
     },
@@ -528,7 +530,7 @@ def header_html(active: str) -> str:
     return f"""    <header>
         <nav class="container">
             <a href="/" class="logo">
-                <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" alt="West Summerlin Homes by Dr. Jan Duffy" width="42" height="42" loading="eager">
+                <img src="{LOGO_URL}" alt="" width="42" height="42" loading="eager">
                 <span class="logo-text">
                     <span class="logo-title">West Summerlin Homes</span>
                     <span class="logo-subtitle">by Dr. Jan Duffy</span>
@@ -622,9 +624,9 @@ def perf_head_snippets(preload_hero: bool = False) -> str:
     return f"""    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://em.realscout.com">
-    <link rel="preconnect" href="https://www.realscout.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://cdn.westsummerlinhomes.com" crossorigin>{hero_preload}
+    <link rel="preconnect" href="https://www.realscout.com">{hero_preload}
+    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiunDXbtM.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap"></noscript>"""
 
@@ -638,7 +640,7 @@ def head_block(title: str, description: str, canonical: str, schema: str, preloa
     <title>{title}</title>
 {seo_meta_block(title, description, canonical)}
 {perf_head_snippets(preload_hero)}
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
+    <link rel="icon" href="{LOGO_URL}" type="image/png">
     <link rel="stylesheet" href="{SITE_CSS}">
     <script type="application/ld+json">
 {schema}
@@ -1158,7 +1160,7 @@ def generate_about():
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <img src="https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg" onerror="this.onerror=null;this.src='/images/dr-janet-duffy.jpg';" alt="Dr. Jan Duffy, West Summerlin real estate agent" width="300" height="300" loading="lazy">
+                    <img src="/images/dr-janet-duffy.jpg" alt="Dr. Jan Duffy, West Summerlin real estate agent" width="300" height="300" loading="lazy">
                 </div>
                 <div class="about-text">
                     <h2>West Summerlin Real Estate Expert</h2>
@@ -1232,7 +1234,7 @@ def generate_about():
             "jobTitle": "Real Estate Agent",
             "worksFor": {"@id": f"{NAP['url']}/#organization"},
             "url": f"{NAP['url']}/about.html",
-            "image": "https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
+            "image": f"{SITE_ORIGIN}/images/dr-janet-duffy.jpg",
         },
         faq_schema_entity(faqs, f"{NAP['url']}/about.html#faq"),
     ]

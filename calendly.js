@@ -3,6 +3,7 @@
   var WIDGET_JS = 'https://assets.calendly.com/assets/external/widget.js';
   var WIDGET_CSS = 'https://assets.calendly.com/assets/external/widget.css';
   var loadPromise = null;
+  var popupBound = false;
 
   function loadCalendlyAssets() {
     if (loadPromise) {
@@ -37,18 +38,11 @@
     return loadPromise;
   }
 
-  function initCalendly() {
-    if (!window.Calendly) {
+  function bindCalendlyPopups() {
+    if (popupBound) {
       return;
     }
-
-    Calendly.initBadgeWidget({
-      url: CALENDLY_URL,
-      text: 'Schedule time with me',
-      color: '#ffffff',
-      textColor: '#0a2540',
-      branding: false,
-    });
+    popupBound = true;
 
     document.querySelectorAll('.calendly-popup').forEach(function (el) {
       if (el.dataset.calendlyBound === 'true') {
@@ -57,6 +51,10 @@
       el.dataset.calendlyBound = 'true';
       el.addEventListener('click', openCalendlyPopup);
     });
+  }
+
+  function initCalendly() {
+    bindCalendlyPopups();
   }
 
   function openCalendlyPopup(event) {
@@ -77,6 +75,7 @@
   }
 
   window.openCalendlyPopup = openCalendlyPopup;
+  bindCalendlyPopups();
 
   var inlineWidgets = document.querySelectorAll('.calendly-inline-widget');
   if (inlineWidgets.length) {
@@ -99,10 +98,6 @@
 
     inlineWidgets.forEach(function (widget) {
       inlineObserver.observe(widget);
-    });
-  } else if ('requestIdleCallback' in window) {
-    requestIdleCallback(function () {
-      loadCalendlyAssets().then(initCalendly).catch(function () {});
     });
   }
 })();

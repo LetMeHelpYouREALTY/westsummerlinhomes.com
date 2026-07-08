@@ -13,17 +13,22 @@
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.westsummerlinhomes.com/">
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" type="image/png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://em.realscout.com">
     <link rel="preconnect" href="https://www.realscout.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://cdn.westsummerlinhomes.com" crossorigin>
     <link rel="preload" as="image" href="/images/hero-bg.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiunDXbtM.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap"></noscript>
-    <link rel="stylesheet" href="/site.css?v=20260708">
+    <style>
+      .hero{background:linear-gradient(135deg,rgba(10,37,64,.88),rgba(44,62,80,.78)),url('/images/hero-bg.webp') center/cover;min-height:100vh;display:flex;align-items:center;text-align:center;color:#fff;padding-top:72px}
+      .hero .fade-in{opacity:1;transform:none}
+      .hero-content h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(2rem,5vw,3.5rem);margin:0 0 1rem;line-height:1.15;text-shadow:0 2px 16px rgba(0,0,0,.35)}
+    </style>
+    <link rel="stylesheet" href="/site.css?v=20260708-psi">
     <!-- Sitemap -->
         <!-- google-site-verification: set GSC_VERIFICATION env var at deploy time -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.westsummerlinhomes.com/sitemap.xml">
@@ -33,7 +38,7 @@
     <meta property="og:url" content="https://www.westsummerlinhomes.com/">
     <meta property="og:title" content="West Summerlin Homes by Dr. Jan Duffy | Las Vegas & Summerlin Real Estate">
     <meta property="og:description" content="Expert real estate services in Las Vegas and Summerlin. Dr. Jan Duffy provides personalized home buying, selling, and investment guidance with 15+ years of experience.">
-    <meta property="og:image" content="https://cdn.westsummerlinhomes.com/images/dr-janet-duffy-real-estate.jpg">
+    <meta property="og:image" content="https://www.westsummerlinhomes.com/images/dr-janet-duffy-real-estate.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="West Summerlin Homes by Dr. Jan Duffy">
@@ -44,7 +49,7 @@
     <meta property="twitter:url" content="https://www.westsummerlinhomes.com/">
     <meta property="twitter:title" content="West Summerlin Homes by Dr. Jan Duffy | Las Vegas & Summerlin Real Estate">
     <meta property="twitter:description" content="Expert real estate services in Las Vegas and Summerlin. Dr. Jan Duffy provides personalized home buying, selling, and investment guidance with 15+ years of experience.">
-    <meta property="twitter:image" content="https://cdn.westsummerlinhomes.com/images/dr-janet-duffy-real-estate.jpg">
+    <meta property="twitter:image" content="https://www.westsummerlinhomes.com/images/dr-janet-duffy-real-estate.jpg">
     
     <!-- Additional SEO Meta Tags -->
     <meta name="geo.region" content="US-NV">
@@ -84,7 +89,7 @@
       "@id": "https://www.westsummerlinhomes.com/#organization",
       "name": "West Summerlin Homes by Dr. Jan Duffy",
       "url": "https://www.westsummerlinhomes.com",
-      "logo": "https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png",
+      "logo": "https://www.westsummerlinhomes.com/images/logo.png",
       "description": "Premium real estate services in West Summerlin and Las Vegas",
       "address": {
         "@type": "PostalAddress",
@@ -109,7 +114,7 @@
       "url": "https://www.westsummerlinhomes.com",
       "telephone": "+1-702-222-1964",
       "email": "janet@westsummerlinhomes.com",
-      "image": "https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
+      "image": "https://www.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "1234 Summerlin Parkway",
@@ -302,7 +307,7 @@
                     <header>
         <nav class="container">
             <a href="/" class="logo">
-                <img src="https://cdn.jsdelivr.net/gh/LetMeHelpYouREALTY/westsummerlinhomes.com@main/images/logo.png" alt="West Summerlin Homes by Dr. Jan Duffy" width="42" height="42" loading="eager">
+                <img src="/images/logo.png" alt="" width="42" height="42" loading="eager">
                 <span class="logo-text">
                     <span class="logo-title">West Summerlin Homes</span>
                     <span class="logo-subtitle">by Dr. Jan Duffy</span>
@@ -385,7 +390,7 @@
             <h2 class="section-title fade-in">About Dr. Jan Duffy</h2>
             <div class="about-content fade-in">
                 <div class="about-image">
-                    <img src="https://cdn.westsummerlinhomes.com/images/dr-janet-duffy.jpg" onerror="this.onerror=null;this.src='/images/dr-janet-duffy.jpg';" alt="Dr. Jan Duffy, Las Vegas real estate agent" width="300" height="300" loading="lazy">
+                    <img src="/images/dr-janet-duffy.jpg" alt="Dr. Jan Duffy, Las Vegas real estate agent" width="300" height="300" loading="lazy">
                 </div>
                 <div class="about-text">
                     <h3>Licensed Professional with a Doctorate in Excellence</h3>
@@ -515,7 +520,7 @@
                 <div class="neighborhood-card">
                     <div class="neighborhood-image">🏌️ Red Rock Country Club</div>
                     <div class="neighborhood-info">
-                        <h4 class="neighborhood-name">Red Rock Country Club</h4>
+                        <h3 class="neighborhood-name">Red Rock Country Club</h3>
                         <p class="neighborhood-description">Championship golf course living with resort-style amenities</p>
                         <p class="neighborhood-price">$800K - $3M</p>
                         <div class="neighborhood-tags">
@@ -529,7 +534,7 @@
                 <div class="neighborhood-card">
                     <div class="neighborhood-image">🏔️ The Ridges</div>
                     <div class="neighborhood-info">
-                        <h4 class="neighborhood-name">The Ridges</h4>
+                        <h3 class="neighborhood-name">The Ridges</h3>
                         <p class="neighborhood-description">Luxury mountain view homes with premium amenities</p>
                         <p class="neighborhood-price">$1.2M - $5M</p>
                         <div class="neighborhood-tags">
@@ -543,7 +548,7 @@
                 <div class="neighborhood-card">
                     <div class="neighborhood-image">🏙️ Summerlin Centre</div>
                     <div class="neighborhood-info">
-                        <h4 class="neighborhood-name">Summerlin Centre</h4>
+                        <h3 class="neighborhood-name">Summerlin Centre</h3>
                         <p class="neighborhood-description">Urban living with shopping, dining, and entertainment</p>
                         <p class="neighborhood-price">$400K - $1.2M</p>
                         <div class="neighborhood-tags">
@@ -663,8 +668,8 @@
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
-    <script src="/site.js?v=20260708" defer></script>
+    <script src="/site.js?v=20260708-psi" defer></script>
     <script src="/realscout-loader.js" defer></script>
-    <script src="/calendly.js?v=20260708" defer></script>
+    <script src="/calendly.js?v=20260708-psi" defer></script>
 </body>
 </html>
