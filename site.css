@@ -576,9 +576,36 @@ section {
 
 /* RealScout */
 realscout-office-listings,
-realscout-advanced-search {
+realscout-advanced-search,
+realscout-home-value {
   --rs-listing-divider-color: rgb(101, 141, 172);
   width: 100%;
+}
+
+realscout-home-value {
+  --rs-hvw-background-color: #ffffff;
+  --rs-hvw-title-color: var(--navy-mid);
+  --rs-hvw-subtitle-color: rgba(28, 30, 38, 0.5);
+  --rs-hvw-input-text-color: inherit;
+  --rs-hvw-primary-button-text-color: #ffffff;
+  --rs-hvw-primary-button-color: rgb(35, 93, 137);
+  --rs-hvw-secondary-button-text-color: rgb(35, 93, 137);
+  --rs-hvw-secondary-button-color: #ffffff;
+  --rs-hvw-widget-width: 100%;
+}
+
+.realscout-home-value-section {
+  background: var(--bg);
+  padding: 4rem 0;
+}
+
+.realscout-home-value-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
 }
 
 .realscout-listings {
