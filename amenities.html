@@ -88,12 +88,13 @@
       "@id": "https://www.westsummerlinhomes.com/amenities.html#featured-places",
       "name": "Featured amenities near West Summerlin",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "item": { "@type": "ShoppingCenter", "name": "Downtown Summerlin", "address": "1980 Festival Plaza Dr, Las Vegas, NV 89135" } },
-        { "@type": "ListItem", "position": 2, "item": { "@type": "GroceryStore", "name": "Whole Foods Market", "address": "1700 Pavilion Center Dr, Las Vegas, NV 89135" } },
-        { "@type": "ListItem", "position": 3, "item": { "@type": "Hospital", "name": "Summerlin Hospital Medical Center", "address": "657 N Town Center Dr, Las Vegas, NV 89144" } },
-        { "@type": "ListItem", "position": 4, "item": { "@type": "Park", "name": "Exploration Peak Park", "address": "9600 Scenic Desert Dr, Las Vegas, NV 89149" } },
-        { "@type": "ListItem", "position": 5, "item": { "@type": "GolfCourse", "name": "Red Rock Country Club", "address": "4615 S Red Rock Country Club Dr, Las Vegas, NV 89135" } },
-        { "@type": "ListItem", "position": 6, "item": { "@type": "GolfCourse", "name": "Angel Park Golf Club", "address": "1001 S Rampart Blvd, Las Vegas, NV 89145" } }
+        { "@type": "ListItem", "position": 1, "item": { "@type": "ShoppingCenter", "name": "Downtown Summerlin", "address": { "@type": "PostalAddress", "streetAddress": "1980 Festival Plaza Dr", "addressLocality": "Las Vegas", "addressRegion": "NV", "postalCode": "89135" } } },
+        { "@type": "ListItem", "position": 2, "item": { "@type": "GroceryStore", "name": "Whole Foods Market", "address": { "@type": "PostalAddress", "streetAddress": "2475 S Town Center Dr", "addressLocality": "Las Vegas", "addressRegion": "NV", "postalCode": "89135" } } },
+        { "@type": "ListItem", "position": 3, "item": { "@type": "Hospital", "name": "Summerlin Hospital Medical Center", "address": { "@type": "PostalAddress", "streetAddress": "657 N Town Center Dr", "addressLocality": "Las Vegas", "addressRegion": "NV", "postalCode": "89144" } } },
+        { "@type": "ListItem", "position": 4, "item": { "@type": "Park", "name": "Exploration Peak Park", "address": { "@type": "PostalAddress", "streetAddress": "9700 S Buffalo Dr", "addressLocality": "Las Vegas", "addressRegion": "NV", "postalCode": "89178" } } },
+        { "@type": "ListItem", "position": 5, "item": { "@type": "GolfCourse", "name": "Red Rock Country Club", "address": { "@type": "PostalAddress", "streetAddress": "2250-A Red Springs Dr", "addressLocality": "Las Vegas", "addressRegion": "NV", "postalCode": "89135" } } },
+        { "@type": "ListItem", "position": 6, "item": { "@type": "GolfCourse", "name": "Angel Park Golf Club", "address": { "@type": "PostalAddress", "streetAddress": "100 S Rampart Blvd", "addressLocality": "Las Vegas", "addressRegion": "NV", "postalCode": "89145" } } },
+        { "@type": "ListItem", "position": 7, "item": { "@type": "GolfCourse", "name": "TPC Las Vegas", "address": { "@type": "PostalAddress", "streetAddress": "9851 Canyon Run Dr", "addressLocality": "Las Vegas", "addressRegion": "NV", "postalCode": "89144" } } }
       ]
     },
     {
@@ -105,7 +106,7 @@
           "name": "What grocery stores are near West Summerlin?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Whole Foods Market at Downtown Summerlin (1700 Pavilion Center Dr) and Smith's Food and Drug on West Flamingo Rd are common stops for Summerlin West homeowners."
+            "text": "Whole Foods Market at 2475 S Town Center Dr (Downtown Summerlin) and Smith's Food and Drug at 9851 W Charleston Blvd are common grocery stops for Summerlin West residents."
           }
         },
         {
@@ -153,7 +154,15 @@
           "name": "Are there parks and trails near West Summerlin?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Exploration Peak Park and Summerlin Centre Community Park are popular for walking and recreation; Red Rock Canyon National Conservation Area is also a short drive west."
+            "text": "Exploration Peak Park (9700 S Buffalo Dr) and Summerlin Centre Community Park (10588 Marketwalk Pl) are popular for walking and recreation; Red Rock Canyon National Conservation Area is also a short drive west."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which CCSD schools are assigned to West Summerlin addresses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "School assignments depend on the exact street address. Verify with the CCSD Zoning Search before you rely on a school name from a listing or map."
           }
         }
       ]
@@ -236,22 +245,22 @@
     <section class="content-page">
         <div class="container content-body">
             <h2>Dining &amp; Cafes</h2>
-            <p>Downtown Summerlin (1980 Festival Plaza Dr) is the main dining destination for West Summerlin homeowners — national restaurant brands and local favorites in an open-air setting. Many villages are also a short drive to eateries along Charleston Blvd and Rampart Blvd.</p>
+            <p>Downtown Summerlin (1980 Festival Plaza Dr) is the main dining destination for West Summerlin residents — national restaurant brands and local favorites in an open-air setting. Many villages are also a short drive to eateries along Charleston Blvd and Rampart Blvd.</p>
 
             <h2>Parks &amp; Recreation</h2>
-            <p>Exploration Peak Park (9600 Scenic Desert Dr) offers trails and views above the valley. Summerlin Centre Community Park (10588 Discovery Springs Dr) serves families in newer villages. Red Rock Canyon National Conservation Area is west of Summerlin for hiking and scenic drives.</p>
+            <p>Exploration Peak Park (9700 S Buffalo Dr, Clark County) offers trails and views above the valley. Summerlin Centre Community Park (10588 Marketwalk Pl) serves newer Summerlin Centre villages. Red Rock Canyon National Conservation Area is west of Summerlin for hiking and scenic drives.</p>
 
             <h2>Golf</h2>
-            <p>Championship and public courses surround Summerlin West: <strong>Red Rock Country Club</strong> (4615 S Red Rock Country Club Dr), <strong>Angel Park Golf Club</strong> (1001 S Rampart Blvd), and <strong>TPC Las Vegas</strong> (1700 Village Center Cir) are well-known options for residents and guests.</p>
+            <p>Championship and public courses surround Summerlin West: <strong>Red Rock Country Club</strong> (2250-A Red Springs Dr), <strong>Angel Park Golf Club</strong> (100 S Rampart Blvd), and <strong>TPC Las Vegas</strong> (9851 Canyon Run Dr) are well-known options for residents and guests.</p>
 
             <h2>Healthcare</h2>
             <p><strong>Summerlin Hospital Medical Center</strong> (657 N Town Center Dr, Las Vegas, NV 89144) is the primary hospital serving Summerlin. Urgent care and physician offices are also clustered near Downtown Summerlin and along Town Center Drive.</p>
 
             <h2>Shopping &amp; Grocery</h2>
-            <p><strong>Downtown Summerlin</strong> combines department stores, specialty retail, and services. <strong>Whole Foods Market</strong> (1700 Pavilion Center Dr) sits in the district; <strong>Smith's Food and Drug</strong> (4750 W Flamingo Rd) is another frequent grocery stop west of the Strip.</p>
+            <p><strong>Downtown Summerlin</strong> combines department stores, specialty retail, and services. <strong>Whole Foods Market</strong> (2475 S Town Center Dr) sits in the district; <strong>Smith's Food and Drug</strong> (9851 W Charleston Blvd) is another frequent grocery stop serving the west valley.</p>
 
             <h2>Schools</h2>
-            <p>Clark County School District serves Summerlin West. Examples families research include <strong>Palo Verde High School</strong> (333 S Pavilion Center Dr) and charter options such as <strong>Doral Academy Red Rock</strong> (4141 N Buffalo Dr). Always confirm attendance zones with CCSD for a specific address.</p>
+            <p>Clark County School District serves Summerlin West. Buyers often research schools such as <strong>Palo Verde High School</strong> (333 S Pavilion Center Dr). Which CCSD schools are assigned to a West Summerlin address? Verify with the <a href="https://zoning.ccsd.net/" target="_blank" rel="noopener noreferrer">CCSD Zoning Search</a> for that street address before you write an offer.</p>
 
             <h2>Commute &amp; Key Destinations</h2>
             <ul>
@@ -269,7 +278,7 @@
             <div class="faq-grid">
                 <article class="faq-item">
                     <h3>What grocery stores are near West Summerlin?</h3>
-                    <p>Whole Foods at Downtown Summerlin and Smith's on West Flamingo Rd are two of the most common grocery stops for Summerlin West residents.</p>
+                    <p>Whole Foods at 2475 S Town Center Dr and Smith's at 9851 W Charleston Blvd are two common grocery stops for Summerlin West residents.</p>
                 </article>
                 <article class="faq-item">
                     <h3>How far is West Summerlin from the Strip?</h3>
@@ -356,8 +365,8 @@
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
-    <script src="/amenity-map-config.js?v=20260927" defer></script>
-    <script src="/amenity-map.js?v=20260927" defer></script>
+    <script src="/amenity-map-config.js?v=20260927-fix" defer></script>
+    <script src="/amenity-map.js?v=20260927-fix" defer></script>
     <script src="/site.js?v=20260708-fonts" defer></script>
     <script src="/realscout-loader.js" defer></script>
     <script src="/calendly.js?v=20260708-fonts" defer></script>

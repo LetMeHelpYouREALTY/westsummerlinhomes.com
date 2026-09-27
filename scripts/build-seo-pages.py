@@ -648,8 +648,8 @@ def footer_html() -> str:
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
-    <script src="/amenity-map-config.js?v=20260927" defer></script>
-    <script src="/amenity-map.js?v=20260927" defer></script>
+    <script src="/amenity-map-config.js?v=20260927-fix" defer></script>
+    <script src="/amenity-map.js?v=20260927-fix" defer></script>
     <script src="{SITE_JS}" defer></script>
     <script src="/realscout-loader.js" defer></script>
     <script src="{CALENDLY_JS}" defer></script>

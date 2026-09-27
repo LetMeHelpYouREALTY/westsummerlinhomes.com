@@ -7,6 +7,15 @@
   }
 
   var mapsConfigPromise = null;
+  var mapsReady = null;
+  var categorySearchCache = new Map();
+
+  var mapsAuthFailed = false;
+  if (typeof window !== 'undefined') {
+    window.addEventListener('gmaps:auth-failure', function () {
+      mapsAuthFailed = true;
+    });
+  }
 
   function fetchMapsConfig() {
     if (mapsConfigPromise) {
@@ -25,59 +34,102 @@
     return mapsConfigPromise;
   }
 
-  function loadGoogleMapsScript(apiKey) {
-    return new Promise(function (resolve, reject) {
-      if (window.google && window.google.maps) {
-        resolve(window.google.maps);
-        return;
-      }
-      var callbackName = '__westSummerlinMapsInit';
-      window[callbackName] = function () {
-        try {
-          delete window[callbackName];
-        } catch (e) {
-          window[callbackName] = undefined;
-        }
-        if (window.google && window.google.maps) {
-          resolve(window.google.maps);
-        } else {
-          reject(new Error('Google Maps failed to initialize'));
-        }
+  function loadGoogleMaps(apiKey) {
+    if (typeof window === 'undefined') {
+      return Promise.reject(new Error('ssr'));
+    }
+    if (window.google && window.google.maps && typeof window.google.maps.importLibrary === 'function') {
+      return Promise.resolve();
+    }
+    if (mapsReady) {
+      return mapsReady;
+    }
+    mapsReady = new Promise(function (resolve, reject) {
+      var cb = '__gmapsReady';
+      window[cb] = function () {
+        resolve();
+      };
+      window.gm_authFailure = function () {
+        window.dispatchEvent(new Event('gmaps:auth-failure'));
+        reject(new Error('gm_authFailure'));
       };
       var script = document.createElement('script');
-      script.async = true;
-      script.defer = true;
       script.src =
         'https://maps.googleapis.com/maps/api/js?key=' +
         encodeURIComponent(apiKey) +
-        '&libraries=places&loading=async&callback=' +
-        callbackName;
+        '&v=weekly&loading=async&callback=' +
+        cb;
+      script.async = true;
       script.onerror = function () {
-        reject(new Error('Google Maps script failed to load'));
+        mapsReady = null;
+        reject(new Error('maps script failed'));
       };
       document.head.appendChild(script);
     });
+    return mapsReady;
+  }
+
+  function searchCategoryPlaces(center, categoryId, types) {
+    var cached = categorySearchCache.get(categoryId);
+    if (cached) {
+      return cached;
+    }
+    var promise = google.maps
+      .importLibrary('places')
+      .then(function (placesLib) {
+        var Place = placesLib.Place;
+        return Place.searchNearby({
+          fields: ['displayName', 'location', 'formattedAddress', 'googleMapsURI', 'id'],
+          locationRestriction: {
+            center: center,
+            radius: CONFIG.searchRadiusMeters,
+          },
+          includedPrimaryTypes: types,
+          maxResultCount: 10,
+          rankPreference: 'POPULARITY',
+        });
+      })
+      .then(function (response) {
+        return response.places || [];
+      });
+    promise.catch(function () {
+      categorySearchCache.delete(categoryId);
+    });
+    categorySearchCache.set(categoryId, promise);
+    return promise;
   }
 
   function embedFallbackUrl(center) {
     return (
       'https://www.google.com/maps?q=' +
       encodeURIComponent(center.lat + ',' + center.lng) +
-      '&z=13&output=embed'
+      '&z=14&output=embed'
     );
   }
 
   function directionsUrl(place) {
+    if (place.googleMapsURI) {
+      return place.googleMapsURI;
+    }
     if (place.placeId) {
       return (
         'https://www.google.com/maps/dir/?api=1&destination_place_id=' +
         encodeURIComponent(place.placeId)
       );
     }
-    var dest = place.lat != null && place.lng != null
-      ? place.lat + ',' + place.lng
-      : encodeURIComponent(place.address || place.name);
+    var dest =
+      place.lat != null && place.lng != null
+        ? place.lat + ',' + place.lng
+        : encodeURIComponent(place.address || place.name);
     return 'https://www.google.com/maps/dir/?api=1&destination=' + dest;
+  }
+
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
   }
 
   function buildStaticListHtml(categoryId) {
@@ -89,14 +141,15 @@
     }
     var list = items
       .map(function (item) {
-        var mapsQuery = encodeURIComponent(item.name + ', ' + item.address);
+        var href = item.sourceUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(item.name + ', ' + item.address);
+        var addrLine = item.address ? ' — ' + escapeHtml(item.address) : '';
         return (
-          '<li><a href="https://www.google.com/maps/search/?api=1&query=' +
-          mapsQuery +
+          '<li><a href="' +
+          escapeHtml(href) +
           '" target="_blank" rel="noopener noreferrer">' +
           escapeHtml(item.name) +
-          '</a> — ' +
-          escapeHtml(item.address) +
+          '</a>' +
+          addrLine +
           '</li>'
         );
       })
@@ -110,12 +163,18 @@
     );
   }
 
-  function escapeHtml(str) {
-    return String(str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+  function updateStaticList(root, categoryId) {
+    var panel = root.querySelector('.amenity-map-panel');
+    if (!panel) {
+      return;
+    }
+    var existing = root.querySelector('.amenity-map-static-list');
+    var html = buildStaticListHtml(categoryId);
+    if (existing) {
+      existing.outerHTML = html;
+    } else {
+      panel.insertAdjacentHTML('beforeend', html);
+    }
   }
 
   function renderFallback(root, categoryId, message) {
@@ -134,13 +193,7 @@
         message ||
         'Interactive map loads when a Google Maps API key is configured. Showing map preview and featured locations.';
     }
-    var existingList = root.querySelector('.amenity-map-static-list');
-    if (!existingList) {
-      root.querySelector('.amenity-map-panel').insertAdjacentHTML(
-        'beforeend',
-        buildStaticListHtml(categoryId)
-      );
-    }
+    updateStaticList(root, categoryId);
   }
 
   function AmenityMapWidget(root) {
@@ -153,7 +206,55 @@
     this.activeCategory = CONFIG.categoryOrder[0];
     this.mapId = '';
     this.initialized = false;
+    this.fallbackMode = false;
+    this.authFailureHandler = null;
   }
+
+  AmenityMapWidget.prototype.bindAuthFailureListener = function () {
+    var self = this;
+    if (this.authFailureHandler) {
+      return;
+    }
+    this.authFailureHandler = function () {
+      self.switchToFallback('Map preview and featured locations are shown while interactive maps are unavailable.');
+    };
+    window.addEventListener('gmaps:auth-failure', this.authFailureHandler);
+  };
+
+  AmenityMapWidget.prototype.unbindAuthFailureListener = function () {
+    if (this.authFailureHandler) {
+      window.removeEventListener('gmaps:auth-failure', this.authFailureHandler);
+      this.authFailureHandler = null;
+    }
+  };
+
+  AmenityMapWidget.prototype.switchToFallback = function (message) {
+    if (this.fallbackMode) {
+      return;
+    }
+    this.fallbackMode = true;
+    this.teardownInteractiveMap();
+    renderFallback(this.root, this.activeCategory, message);
+  };
+
+  AmenityMapWidget.prototype.teardownInteractiveMap = function () {
+    this.clearMarkers();
+    if (this.communityMarker && this.communityMarker.map) {
+      this.communityMarker.map = null;
+    }
+    this.communityMarker = null;
+    if (this.infoWindow) {
+      this.infoWindow.close();
+    }
+    this.map = null;
+    var canvasWrap = this.root.querySelector('.amenity-map-canvas-wrap');
+    if (canvasWrap) {
+      canvasWrap.innerHTML =
+        '<iframe title="Map of West Summerlin, Las Vegas" src="' +
+        embedFallbackUrl(CONFIG.community.center) +
+        '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>';
+    }
+  };
 
   AmenityMapWidget.prototype.buildShell = function () {
     var filters = CONFIG.categoryOrder
@@ -198,6 +299,10 @@
       var active = btn.getAttribute('data-category') === categoryId;
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
+    if (this.fallbackMode) {
+      updateStaticList(this.root, categoryId);
+      return;
+    }
     if (!skipSearch && this.map) {
       this.searchCategory(categoryId);
     }
@@ -207,6 +312,9 @@
     this.markers.forEach(function (m) {
       if (m.setMap) {
         m.setMap(null);
+      }
+      if (m.map) {
+        m.map = null;
       }
     });
     this.markers = [];
@@ -254,23 +362,27 @@
     if (!this.infoWindow) {
       this.infoWindow = new google.maps.InfoWindow();
     }
-    var ratingLine = place.rating
-      ? '<p style="margin:0.25rem 0">Rating: ' + escapeHtml(String(place.rating)) + '</p>'
-      : '';
-    var addressLine = place.address
-      ? '<p style="margin:0.25rem 0">' + escapeHtml(place.address) + '</p>'
-      : '';
-    var html =
-      '<div style="max-width:220px">' +
-      '<strong>' +
-      escapeHtml(place.name) +
-      '</strong>' +
-      ratingLine +
-      addressLine +
-      '<p style="margin:0.5rem 0 0"><a href="' +
-      directionsUrl(place) +
-      '" target="_blank" rel="noopener noreferrer">Directions</a></p></div>';
-    this.infoWindow.setContent(html);
+    var wrap = document.createElement('div');
+    wrap.style.maxWidth = '220px';
+    var titleEl = document.createElement('strong');
+    titleEl.textContent = place.name || 'Place';
+    wrap.appendChild(titleEl);
+    if (place.address) {
+      var addr = document.createElement('p');
+      addr.style.margin = '0.25rem 0';
+      addr.textContent = place.address;
+      wrap.appendChild(addr);
+    }
+    var link = document.createElement('p');
+    link.style.margin = '0.5rem 0 0';
+    var a = document.createElement('a');
+    a.href = directionsUrl(place);
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = 'Directions';
+    link.appendChild(a);
+    wrap.appendChild(link);
+    this.infoWindow.setContent(wrap);
     if (place.lat != null && place.lng != null) {
       this.infoWindow.setPosition({ lat: place.lat, lng: place.lng });
       this.infoWindow.open(this.map);
@@ -281,8 +393,14 @@
     var lat;
     var lng;
     if (place.location) {
-      lat = typeof place.location.lat === 'function' ? place.location.lat() : place.location.lat;
-      lng = typeof place.location.lng === 'function' ? place.location.lng() : place.location.lng;
+      if (typeof place.location.toJSON === 'function') {
+        var json = place.location.toJSON();
+        lat = json.lat;
+        lng = json.lng;
+      } else {
+        lat = typeof place.location.lat === 'function' ? place.location.lat() : place.location.lat;
+        lng = typeof place.location.lng === 'function' ? place.location.lng() : place.location.lng;
+      }
     }
     var displayName = place.displayName;
     if (displayName && typeof displayName === 'object' && displayName.text) {
@@ -291,10 +409,10 @@
     return {
       name: displayName || place.name || 'Place',
       address: place.formattedAddress || place.vicinity || '',
-      rating: place.rating,
       lat: lat,
       lng: lng,
       placeId: place.id || place.place_id,
+      googleMapsURI: place.googleMapsURI,
     };
   };
 
@@ -318,7 +436,7 @@
     var self = this;
     var cat = CONFIG.categories[categoryId];
     var status = this.root.querySelector('.amenity-map-status');
-    if (!cat || !this.map) {
+    if (!cat || !this.map || this.fallbackMode) {
       return;
     }
     if (status) {
@@ -328,95 +446,72 @@
     this.addCommunityMarker();
 
     var center = CONFIG.community.center;
+    var types = cat.primaryTypes.slice();
 
-    function done(count) {
+    function showCuratedFallback() {
+      updateStaticList(self.root, categoryId);
       if (status) {
         status.textContent =
-          count > 0
-            ? 'Showing ' + count + ' ' + cat.label.toLowerCase() + ' near West Summerlin.'
-            : 'No ' + cat.label.toLowerCase() + ' results in this radius. See featured places below.';
+          'Showing featured ' + cat.label.toLowerCase() + ' near West Summerlin (see list below).';
       }
     }
 
-    if (google.maps.places && google.maps.places.Place && google.maps.places.Place.searchNearby) {
-      var request = {
-        fields: ['displayName', 'location', 'rating', 'formattedAddress', 'id'],
-        locationRestriction: {
-          center: center,
-          radius: CONFIG.searchRadiusMeters,
-        },
-        includedPrimaryTypes: cat.primaryTypes.slice(0, 1),
-        maxResultCount: 15,
-      };
-      google.maps.places.Place.searchNearby(request)
-        .then(function (response) {
-          var places = response.places || [];
-          places.forEach(function (p) {
-            self.addPlaceMarker(self.placeToMarkerData(p));
-          });
-          done(places.length);
-        })
-        .catch(function () {
-          self.legacyNearbySearch(cat, done);
-        });
-      return;
-    }
-
-    this.legacyNearbySearch(cat, done);
-  };
-
-  AmenityMapWidget.prototype.legacyNearbySearch = function (cat, done) {
-    var self = this;
-    var service = new google.maps.places.PlacesService(this.map);
-    service.nearbySearch(
-      {
-        location: CONFIG.community.center,
-        radius: CONFIG.searchRadiusMeters,
-        type: cat.legacyType,
-      },
-      function (results, status) {
-        if (status !== google.maps.places.PlacesServiceStatus.OK || !results) {
-          done(0);
+    searchCategoryPlaces(center, categoryId, types)
+      .then(function (places) {
+        if (self.fallbackMode) {
           return;
         }
-        results.slice(0, 15).forEach(function (r) {
-          self.addPlaceMarker(self.placeToMarkerData(r));
+        places.forEach(function (p) {
+          self.addPlaceMarker(self.placeToMarkerData(p));
         });
-        done(results.length);
-      }
-    );
+        if (status) {
+          status.textContent =
+            places.length > 0
+              ? 'Showing ' + places.length + ' ' + cat.label.toLowerCase() + ' near West Summerlin.'
+              : 'No ' + cat.label.toLowerCase() + ' results in this radius. See featured places below.';
+        }
+        if (!places.length) {
+          showCuratedFallback();
+        }
+      })
+      .catch(function () {
+        if (self.fallbackMode) {
+          return;
+        }
+        showCuratedFallback();
+      });
   };
 
   AmenityMapWidget.prototype.initInteractive = function (apiKey, mapId) {
     var self = this;
     this.mapId = mapId || '';
-    return loadGoogleMapsScript(apiKey).then(function () {
-      return google.maps.importLibrary('places');
-    }).then(function () {
-      if (mapId) {
-        return google.maps.importLibrary('marker');
-      }
-      return null;
-    }).then(function () {
-      var canvas = self.root.querySelector('.amenity-map-canvas');
-      if (!canvas) {
-        return;
-      }
-      var mapOpts = {
-        center: CONFIG.community.center,
-        zoom: CONFIG.community.zoom,
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: true,
-      };
-      if (mapId) {
-        mapOpts.mapId = mapId;
-      }
-      self.map = new google.maps.Map(canvas, mapOpts);
-      self.addCommunityMarker();
-      self.searchCategory(self.activeCategory);
-      self.initialized = true;
-    });
+    return loadGoogleMaps(apiKey)
+      .then(function () {
+        if (mapId) {
+          return google.maps.importLibrary('marker');
+        }
+        return null;
+      })
+      .then(function () {
+        var canvas = self.root.querySelector('.amenity-map-canvas');
+        if (!canvas || self.fallbackMode) {
+          return;
+        }
+        var mapOpts = {
+          center: CONFIG.community.center,
+          zoom: CONFIG.community.zoom,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true,
+        };
+        if (mapId) {
+          mapOpts.mapId = mapId;
+        }
+        self.map = new google.maps.Map(canvas, mapOpts);
+        self.addCommunityMarker();
+        self.searchCategory(self.activeCategory);
+        self.initialized = true;
+      });
   };
 
   AmenityMapWidget.prototype.init = function () {
@@ -424,19 +519,33 @@
       return;
     }
     this.buildShell();
+    this.bindAuthFailureListener();
     var self = this;
+
+    if (mapsAuthFailed) {
+      renderFallback(self.root, self.activeCategory);
+      self.fallbackMode = true;
+      return;
+    }
+
     fetchMapsConfig().then(function (cfg) {
       var key = (cfg && cfg.apiKey) || '';
-      if (!key) {
+      if (!key || mapsAuthFailed) {
         renderFallback(self.root, self.activeCategory);
+        self.fallbackMode = true;
         return;
       }
       self
         .initInteractive(key, cfg.mapId)
         .catch(function () {
-          renderFallback(self.root, self.activeCategory, 'Map could not load. Showing preview and featured locations.');
+          self.switchToFallback('Map could not load. Showing preview and featured locations.');
         });
     });
+  };
+
+  AmenityMapWidget.prototype.destroy = function () {
+    this.unbindAuthFailureListener();
+    this.teardownInteractiveMap();
   };
 
   function observeWidget(el) {
