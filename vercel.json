@@ -45,6 +45,11 @@
       "permanent": true
     },
     {
+      "source": "/amenities",
+      "destination": "/amenities.html",
+      "permanent": true
+    },
+    {
       "source": "/faq",
       "destination": "/faq.html",
       "permanent": true

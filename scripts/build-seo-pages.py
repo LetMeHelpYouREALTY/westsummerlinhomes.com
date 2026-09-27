@@ -59,6 +59,7 @@ NAV_LINKS = [
     ("properties.html", "Properties", "properties.html"),
     (REALSCOUT_PORTAL_URL, "MLS Search", "_external"),
     ("neighborhoods.html", "Neighborhoods", "neighborhoods.html"),
+    ("amenities.html", "Amenities", "amenities.html"),
     ("faq.html", "FAQ", "faq.html"),
     ("contact.html", "Contact", "contact.html"),
 ]
@@ -71,6 +72,7 @@ FOOTER_EXPLORE = [
     ("properties.html", "Properties"),
     (REALSCOUT_PORTAL_URL, "MLS Search Portal"),
     ("neighborhoods.html", "Neighborhoods"),
+    ("amenities.html", "Nearby Amenities"),
     ("luxury-homes.html", "Luxury Homes"),
     ("market-update.html", "Market Update"),
     ("home-valuation.html", "Home Valuation"),
@@ -646,6 +648,8 @@ def footer_html() -> str:
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
+    <script src="/amenity-map-config.js?v=20260927" defer></script>
+    <script src="/amenity-map.js?v=20260927" defer></script>
     <script src="{SITE_JS}" defer></script>
     <script src="/realscout-loader.js" defer></script>
     <script src="{CALENDLY_JS}" defer></script>
@@ -2092,6 +2096,7 @@ def patch_existing_pages():
         "services.html": "services.html",
         "properties.html": "properties.html",
         "neighborhoods.html": "neighborhoods.html",
+        "amenities.html": "amenities.html",
         "testimonials.html": "testimonials.html",
         "contact.html": "contact.html",
         "buyers.html": "buyers.html",
@@ -2205,6 +2210,7 @@ def write_sitemap():
             "services.html",
             "testimonials.html",
             "neighborhoods.html",
+            "amenities.html",
             "properties.html",
             "luxury-homes.html",
         ):
