@@ -30,6 +30,7 @@
     <link rel="icon" href="/images/favicon-48x48.png" type="image/png" sizes="48x48">
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
     <link rel="stylesheet" href="/site.css?v=20260708-fonts">
+    <link rel="stylesheet" href="/amenity-map.css?v=20260927">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -234,7 +235,7 @@
     </script>
 </head>
 <body>
-        <header>
+                <header>
         <nav class="container">
             <a href="/" class="logo">
                 <img src="/images/logo.png" alt="West Summerlin Homes logo" width="42" height="42" loading="eager">
@@ -258,6 +259,7 @@
                 <li><a href="properties.html">Properties</a></li>
                 <li><a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">MLS Search</a></li>
                 <li><a href="neighborhoods.html">Neighborhoods</a></li>
+                <li><a href="amenities.html">Amenities</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="#" class="calendly-popup nav-schedule">Schedule</a></li>
@@ -320,10 +322,20 @@
             </div>
             <div class="related-links">
                 <a href="neighborhoods.html">Neighborhoods</a>
+                <a href="amenities.html">Nearby Amenities</a>
                 <a href="luxury-homes.html">Luxury Homes</a>
                 <a href="market-update.html">Market Update</a>
                 <a href="faq.html">FAQ</a>
             </div>
+        </div>
+    </section>
+
+    <section class="amenity-map-section" id="whats-nearby" aria-labelledby="buyers-amenities-title">
+        <div class="container">
+            <h2 id="buyers-amenities-title" class="section-title">What's Near Your Next Home</h2>
+            <p class="section-subtitle">Filter grocery, golf, parks, and healthcare around West Summerlin before you choose a village.</p>
+            <div class="amenity-map-widget amenity-map-compact" id="amenity-map-buyers"></div>
+            <p class="amenity-map-section-cta"><a href="amenities.html" class="btn-primary">Nearby amenities guide</a></p>
         </div>
     </section>
 
@@ -344,7 +356,7 @@
             </div>
         </div>
     </section>
-        <footer class="site-footer">
+                <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
                 <strong>West Summerlin Homes</strong>
@@ -361,6 +373,7 @@
                     <li><a href="properties.html">Properties</a></li>
                     <li><a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">MLS Search Portal</a></li>
                     <li><a href="neighborhoods.html">Neighborhoods</a></li>
+                    <li><a href="amenities.html">Nearby Amenities</a></li>
                     <li><a href="luxury-homes.html">Luxury Homes</a></li>
                     <li><a href="market-update.html">Market Update</a></li>
                     <li><a href="home-valuation.html">Home Valuation</a></li>
@@ -387,6 +400,8 @@
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
+    <script src="/amenity-map-config.js?v=20260927-fix" defer></script>
+    <script src="/amenity-map.js?v=20260927-fix" defer></script>
     <script src="/site.js?v=20260708-fonts" defer></script>
     <script src="/realscout-loader.js" defer></script>
     <script src="/calendly.js?v=20260708-fonts" defer></script>
