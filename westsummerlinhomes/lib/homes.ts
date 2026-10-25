@@ -161,7 +161,7 @@ const sampleHomes = [
     propertyType: 'Single Family',
     status: 'Active',
     imageUrl: '/api/placeholder/800/600',
-    description: 'Charming home in a family-friendly neighborhood',
+    description: 'Charming home in a park-rich neighborhood',
     features: ['Family Room', 'Updated Kitchen', 'Backyard', '2-Car Garage'],
     lastUpdated: new Date('2024-01-07T14:30:00Z')
   },
