@@ -23,9 +23,9 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Visit Our Office',
-    details: ['1234 Summerlin Pkwy', 'Las Vegas, NV 89134'],
+    details: ['8850 W Sunset Rd, Suite 200', 'Las Vegas, NV 89148'],
     action: 'Get Directions',
-    href: 'https://maps.google.com/?q=1234+Summerlin+Parkway+Las+Vegas+NV+89134',
+    href: 'https://maps.google.com/?q=8850+W+Sunset+Rd+Suite+200+Las+Vegas+NV+89148',
   },
   {
     icon: Clock,
