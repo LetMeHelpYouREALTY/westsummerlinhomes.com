@@ -87,15 +87,15 @@ export default function HeroSection() {
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                 <Home className="w-8 h-8 mx-auto mb-3 text-primary-300" />
                 <div className="text-3xl font-bold mb-1">500+</div>
-                <div className="text-neutral-200">Properties Sold</div>
+                <div className="text-neutral-200">Team Career Sales</div>
               </div>
             </div>
             
             <div className="text-center">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                 <DollarSign className="w-8 h-8 mx-auto mb-3 text-primary-300" />
-                <div className="text-3xl font-bold mb-1">$2.5M+</div>
-                <div className="text-neutral-200">Total Sales Volume</div>
+                <div className="text-3xl font-bold mb-1">$127M+</div>
+                <div className="text-neutral-200">Team Career Volume</div>
               </div>
             </div>
             

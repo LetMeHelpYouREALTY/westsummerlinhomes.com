@@ -39,10 +39,10 @@ NAP = {
     "phone": "702-222-1964",
     "phone_tel": "tel:7022221964",
     "email": "janet@westsummerlinhomes.com",
-    "street": "1234 Summerlin Parkway",
+    "street": "8850 W Sunset Rd, Suite 200",
     "city": "Las Vegas",
     "region": "NV",
-    "postal": "89134",
+    "postal": "89148",
     "license": "S.0197614.LLC",
     "url": "https://www.westsummerlinhomes.com",
 }
