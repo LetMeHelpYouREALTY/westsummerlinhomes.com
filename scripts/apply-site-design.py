@@ -66,7 +66,7 @@ def add_nav_call(content: str) -> str:
         return content
     return content.replace(
         '            </a>\n            <button type="button" class="nav-toggle"',
-        '            </a>\n            <a href="tel:7022221964" class="nav-call">📞 702-222-1964</a>\n            <button type="button" class="nav-toggle"',
+        '            </a>\n            <a href="tel:7025001955" class="nav-call">📞 702-500-1955</a>\n            <button type="button" class="nav-toggle"',
     )
 
 
