@@ -36,8 +36,8 @@ NAP = {
     "business": "West Summerlin Homes by Dr. Jan Duffy",
     "agent": "Dr. Jan Duffy",
     "brokerage": "BHHS Nevada Properties",
-    "phone": "702-222-1964",
-    "phone_tel": "tel:7022221964",
+    "phone": "702-500-1955",
+    "phone_tel": "tel:7025001955",
     "email": "janet@westsummerlinhomes.com",
     "street": "1234 Summerlin Parkway",
     "city": "Las Vegas",
@@ -509,7 +509,7 @@ MANUAL_PAGE_SEO = {
     },
     "contact.html": {
         "title": "Contact Dr. Jan Duffy | West Summerlin Real Estate",
-        "description": "Contact Dr. Jan Duffy for West Summerlin real estate. Call 702-222-1964 or schedule an in-person consultation seven days a week.",
+        "description": "Contact Dr. Jan Duffy for West Summerlin real estate. Call 702-500-1955 or schedule an in-person consultation seven days a week.",
         "page_type": "ContactPage",
         "breadcrumb": [
             {"name": "Home", "item": NAP["url"]},
@@ -1063,7 +1063,7 @@ def generate_valuation():
             <div class="realscout-home-value-wrap fade-in">
                 <realscout-home-value agent-encoded-id="{REALSCOUT_AGENT_ID}"></realscout-home-value>
             </div>
-            <p class="section-subtitle" style="margin-top:2rem;">Want a detailed MLS analysis? <a href="#" class="calendly-popup calendly-link-btn-dark">Schedule a consultation</a> with Dr. Jan Duffy, call <a href="tel:7022221964">702-222-1964</a>, or <a href="{REALSCOUT_PORTAL_URL}" target="_blank" rel="noopener noreferrer">search on RealScout</a>.</p>
+            <p class="section-subtitle" style="margin-top:2rem;">Want a detailed MLS analysis? <a href="#" class="calendly-popup calendly-link-btn-dark">Schedule a consultation</a> with Dr. Jan Duffy, call <a href="tel:7025001955">702-500-1955</a>, or <a href="{REALSCOUT_PORTAL_URL}" target="_blank" rel="noopener noreferrer">search on RealScout</a>.</p>
 {related_links_section([
     ("sellers.html", "Sellers Guide"),
     ("market-update.html", "Market Update"),
@@ -1214,7 +1214,7 @@ def map_embed_section() -> str:
                 <iframe title="Map to {NAP["business"]}" src="https://maps.google.com/maps?q={NAP['street']},+{NAP['city']},+{NAP['region']}+{NAP['postal']}&amp;output=embed" width="100%" height="360" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="contact-actions" style="margin-top:1rem;">
-                <a href="tel:7022221964">Call {NAP["phone"]}</a>
+                <a href="tel:7025001955">Call {NAP["phone"]}</a>
                 <a href="https://maps.google.com/?q={NAP['street']},+{NAP['city']},+{NAP['region']}" class="outline" target="_blank" rel="noopener noreferrer">Directions</a>
             </div>
         </div>
@@ -1436,7 +1436,7 @@ def generate_services():
         "services.html",
         "services.html",
         "Real Estate Services | West Summerlin Homes by Dr. Jan Duffy",
-        "Home buying, selling, luxury estates, valuations, and investment services in West Summerlin. Direct access to Dr. Jan Duffy — call 702-222-1964.",
+        "Home buying, selling, luxury estates, valuations, and investment services in West Summerlin. Direct access to Dr. Jan Duffy — call 702-500-1955.",
         [{"name": "Home", "item": NAP["url"]}, {"name": "Services", "item": f"{NAP['url']}/services.html"}],
         body,
         schema_extra,

@@ -61,7 +61,7 @@
           showStatus(
             form,
             'error',
-            error.message || 'Unable to submit right now. Please call 702-222-1964.'
+            error.message || 'Unable to submit right now. Please call 702-500-1955.'
           );
         })
         .finally(function () {

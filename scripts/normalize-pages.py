@@ -40,7 +40,7 @@ FOOTER = f"""
             <div class="footer-contact">
                 <h4>Contact</h4>
                 <p>Dr. Jan Duffy<br>BHHS Nevada Properties</p>
-                <p><a href="tel:7022221964">702-222-1964</a></p>
+                <p><a href="tel:7025001955">702-500-1955</a></p>
                 <p>License #S.0197614.LLC</p>
             </div>
         </div>
@@ -50,7 +50,7 @@ FOOTER = f"""
     </footer>
 
     <div class="sticky-call-bar">
-        <a href="tel:7022221964">Call 702-222-1964</a>
+        <a href="tel:7025001955">Call 702-500-1955</a>
         <a href="#" class="calendly-popup">Schedule</a>
     </div>
 
