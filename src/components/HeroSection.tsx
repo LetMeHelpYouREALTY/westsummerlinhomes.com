@@ -102,8 +102,8 @@ export default function HeroSection() {
             <div className="text-center">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                 <div className="w-8 h-8 mx-auto mb-3 text-primary-300 text-2xl font-bold">⭐</div>
-                <div className="text-3xl font-bold mb-1">4.9</div>
-                <div className="text-neutral-200">Client Rating</div>
+                <div className="text-3xl font-bold mb-1">5.0</div>
+                <div className="text-neutral-200">Realtor.com (50 reviews)</div>
               </div>
             </div>
           </div>
