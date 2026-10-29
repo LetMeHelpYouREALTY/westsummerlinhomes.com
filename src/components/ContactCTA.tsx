@@ -9,9 +9,9 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Call Us',
-    details: ['702-222-1964'],
+    details: ['702-500-1955'],
     action: 'Call Now',
-    href: 'tel:7022221964',
+    href: 'tel:7025001955',
   },
   {
     icon: Mail,

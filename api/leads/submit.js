@@ -104,12 +104,12 @@ export default async function handler(req, res) {
     if (!response.ok) {
       const errorText = await response.text();
       console.error('FUB submit failed', response.status, errorText);
-      return res.status(502).json({ error: 'Unable to submit your request right now. Please call 702-222-1964.' });
+      return res.status(502).json({ error: 'Unable to submit your request right now. Please call 702-500-1955.' });
     }
 
     return res.status(200).json({ success: true });
   } catch (error) {
     console.error('Lead submit error', error);
-    return res.status(500).json({ error: 'Something went wrong. Please call 702-222-1964.' });
+    return res.status(500).json({ error: 'Something went wrong. Please call 702-500-1955.' });
   }
 }
