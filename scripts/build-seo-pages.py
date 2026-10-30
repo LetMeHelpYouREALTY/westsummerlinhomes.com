@@ -1572,7 +1572,7 @@ def generate_testimonials():
         <div class="container fade-in">
             <p class="section-eyebrow">Client Success</p>
             <h1>Client Testimonials</h1>
-            <p>4.9★ average rating from buyers, sellers, and investors across West Summerlin and Las Vegas.</p>
+            <p>5.0★ on Realtor.com from 50 verified reviews by buyers, sellers, and investors.</p>
         </div>
     </section>
 
