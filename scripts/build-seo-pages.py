@@ -370,40 +370,9 @@ def homepage_faq_entity() -> dict:
 
 
 def testimonials_schema() -> list:
-    reviews = [
-        (
-            "Sarah & Mike Johnson",
-            "Dr. Duffy made our home buying experience seamless and stress-free. Her expertise and dedication are unmatched — we closed on our Red Rock home in 21 days.",
-        ),
-        (
-            "Robert Chen",
-            "Sold our home in two weeks at asking price. Dr. Duffy's marketing strategy and negotiation skills are exceptional.",
-        ),
-        (
-            "Maria Rodriguez",
-            "Professional, knowledgeable, and truly cares about her clients. We couldn't have asked for a better realtor.",
-        ),
-        (
-            "David Park",
-            "As an investor, I appreciate agents who understand cap rates and rental demand. Dr. Duffy delivered on both.",
-        ),
-        (
-            "Jennifer & Tom Walsh",
-            "First-time buyers with a lot of questions. She explained every step clearly and never rushed us.",
-        ),
-    ]
-    entities = []
-    for author, text in reviews:
-        entities.append(
-            {
-                "@type": "Review",
-                "author": {"@type": "Person", "name": author},
-                "reviewBody": text,
-                "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
-                "itemReviewed": {"@id": f"{NAP['url']}/#agent"},
-            }
-        )
-    return entities
+    # Review markup removed 2026-11-01: the old entries were template placeholders,
+    # not verified clients. Add real, attributable reviews here only with permission.
+    return []
 
 
 def neighborhoods_item_list() -> dict:
@@ -556,7 +525,7 @@ MANUAL_PAGE_SEO = {
     },
     "testimonials.html": {
         "title": "Client Testimonials | Dr. Jan Duffy | West Summerlin Real Estate",
-        "description": "Read client reviews for Dr. Jan Duffy, West Summerlin real estate agent. 4.9-star service across buying, selling, and investment transactions.",
+        "description": "Read client reviews for Dr. Jan Duffy, West Summerlin real estate agent. 5.0★ on Realtor.com from 50 reviews across buying, selling, and investment transactions.",
         "page_type": "WebPage",
         "breadcrumb": [
             {"name": "Home", "item": NAP["url"]},
@@ -1578,44 +1547,15 @@ def generate_testimonials():
 
     <section class="content-page">
         <div class="container content-body">
-            <p>These reviews come from recent transactions in Red Rock Country Club, The Trails, Summerlin Centre, and investment purchases across the Las Vegas valley. Every client works directly with Dr. Jan Duffy — not an assistant team.</p>
+            <p>Every client works directly with Dr. Jan Duffy, not an assistant team.</p>
             <p>Considering a move to West Summerlin? Read <a href="about.html">about Dr. Jan Duffy</a> or explore <a href="services.html">available services</a>.</p>
         </div>
     </section>
 
     <section class="testimonials">
         <div class="container">
-            <div class="testimonials-grid fade-in">
-                <article class="testimonial testimonial-featured">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Dr. Duffy made our home buying experience seamless and stress-free. Her expertise and dedication are unmatched — we closed on our Red Rock home in 21 days."</p>
-                    <p class="testimonial-author">— Sarah &amp; Mike Johnson, Red Rock Country Club</p>
-                </article>
-                <article class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Sold our home in two weeks at asking price. Dr. Duffy's marketing strategy and negotiation skills are exceptional."</p>
-                    <p class="testimonial-author">— Robert Chen, The Trails</p>
-                </article>
-                <article class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Professional, knowledgeable, and truly cares about her clients. We couldn't have asked for a better realtor."</p>
-                    <p class="testimonial-author">— Maria Rodriguez, Summerlin Centre</p>
-                </article>
-                <article class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"As an investor, I appreciate agents who understand cap rates and rental demand. Dr. Duffy delivered on both."</p>
-                    <p class="testimonial-author">— David Park, Investment Buyer</p>
-                </article>
-                <article class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"First-time buyers with a lot of questions. She explained every step clearly and never rushed us."</p>
-                    <p class="testimonial-author">— Jennifer &amp; Tom Walsh</p>
-                </article>
-                <article class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Relocated from Chicago — Dr. Duffy knew every Summerlin village and matched us to the right community in one weekend."</p>
-                    <p class="testimonial-author">— The Morrison Family</p>
-                </article>
+            <div class="content-body fade-in">
+                <p>Dr. Jan Duffy's verified client reviews are published on Realtor.com, where she holds a 5.0★ rating from 50 reviews. We don't repost reviews here without each client's permission.</p>
             </div>
             <div class="cta-actions fade-in">
                 <a href="#" class="cta-button calendly-popup">Schedule Your Consultation</a>
@@ -1637,7 +1577,7 @@ def generate_testimonials():
         "testimonials.html",
         "testimonials.html",
         "Client Testimonials | Dr. Jan Duffy | West Summerlin Real Estate",
-        "Read client reviews for Dr. Jan Duffy, West Summerlin real estate agent. 4.9-star service for buying, selling, and investment transactions in Summerlin.",
+        "Read client reviews for Dr. Jan Duffy, West Summerlin real estate agent. 5.0★ on Realtor.com from 50 reviews for buying, selling, and investment transactions in Summerlin.",
         [{"name": "Home", "item": NAP["url"]}, {"name": "Testimonials", "item": f"{NAP['url']}/testimonials.html"}],
         body,
         schema_extra,
