@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summerlin West 3D Neighborhood Tour | West Summerlin Homes</title>
+    <meta name="description" content="Look around a 360° AI-generated street scene inspired by Summerlin West, Las Vegas, with Red Rock Canyon on the horizon. Then tour real homes with Dr. Jan Duffy.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.westsummerlinhomes.com/3d-tour.html">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.westsummerlinhomes.com/sitemap.xml">
+        <!-- google-site-verification: set GSC_VERIFICATION env var at deploy time -->
+    <meta name="geo.region" content="US-NV">
+    <meta name="geo.placename" content="Las Vegas, Summerlin">
+    <meta property="og:title" content="Summerlin West 3D Neighborhood Tour | West Summerlin Homes">
+    <meta property="og:description" content="Look around a 360° AI-generated street scene inspired by Summerlin West, Las Vegas, with Red Rock Canyon on the horizon. Then tour real homes with Dr. Jan Duffy.">
+    <meta property="og:url" content="https://www.westsummerlinhomes.com/3d-tour.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.westsummerlinhomes.com/images/3d-tour/summerlin-west-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Summerlin West 3D Neighborhood Tour | West Summerlin Homes">
+    <meta name="twitter:description" content="Look around a 360° AI-generated street scene inspired by Summerlin West, Las Vegas, with Red Rock Canyon on the horizon. Then tour real homes with Dr. Jan Duffy.">
+    <meta name="twitter:image" content="https://www.westsummerlinhomes.com/images/3d-tour/summerlin-west-og.jpg">
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/playfair-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/images/favicon-48x48.png" type="image/png" sizes="48x48">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="preload" as="image" href="/images/3d-tour/summerlin-west-pano.jpg">
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.min.js" crossorigin>
+    <link rel="stylesheet" href="/site.css?v=20260708-fonts">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.westsummerlinhomes.com/#website",
+      "url": "https://www.westsummerlinhomes.com",
+      "name": "West Summerlin Homes by Dr. Jan Duffy",
+      "description": "Premium real estate services in West Summerlin and Las Vegas",
+      "publisher": {
+        "@id": "https://www.westsummerlinhomes.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://drjanduffy.realscout.com/"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.westsummerlinhomes.com/#organization",
+      "name": "West Summerlin Homes by Dr. Jan Duffy",
+      "url": "https://www.westsummerlinhomes.com",
+      "logo": "https://www.westsummerlinhomes.com/images/logo.png",
+      "description": "Premium real estate services in West Summerlin and Las Vegas",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1234 Summerlin Parkway",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "NV",
+        "postalCode": "89134",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-702-500-1955",
+        "contactType": "customer service",
+        "areaServed": "US-NV",
+        "availableLanguage": "English"
+      }
+    },
+    {
+      "@type": "RealEstateAgent",
+      "@id": "https://www.westsummerlinhomes.com/#agent",
+      "name": "Dr. Jan Duffy",
+      "url": "https://www.westsummerlinhomes.com",
+      "telephone": "+1-702-500-1955",
+      "email": "janet@westsummerlinhomes.com",
+      "image": "https://www.westsummerlinhomes.com/images/dr-janet-duffy.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1234 Summerlin Parkway",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "NV",
+        "postalCode": "89134",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Las Vegas"
+        },
+        {
+          "@type": "City",
+          "name": "Summerlin"
+        },
+        "West Summerlin"
+      ],
+      "memberOf": {
+        "@type": "Organization",
+        "name": "BHHS Nevada Properties"
+      },
+      "identifier": "S.0197614.LLC",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Real Estate Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Home Buying Services",
+              "description": "Expert guidance through the West Summerlin home buying process",
+              "provider": {
+                "@id": "https://www.westsummerlinhomes.com/#agent"
+              },
+              "areaServed": "West Summerlin, Las Vegas"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Home Selling Services",
+              "description": "Professional home selling and marketing in Summerlin",
+              "provider": {
+                "@id": "https://www.westsummerlinhomes.com/#agent"
+              },
+              "areaServed": "West Summerlin, Las Vegas"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Investment Property Services",
+              "description": "Real estate investment consultation in Las Vegas",
+              "provider": {
+                "@id": "https://www.westsummerlinhomes.com/#agent"
+              },
+              "areaServed": "Las Vegas"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": [
+        "LocalBusiness",
+        "RealEstateAgent"
+      ],
+      "@id": "https://www.westsummerlinhomes.com/#localbusiness",
+      "name": "West Summerlin Homes by Dr. Jan Duffy",
+      "url": "https://www.westsummerlinhomes.com",
+      "telephone": "+1-702-500-1955",
+      "email": "janet@westsummerlinhomes.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1234 Summerlin Parkway",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "NV",
+        "postalCode": "89134",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 36.1699,
+        "longitude": -115.3338
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "priceRange": "$$$"
+    },
+    {
+      "@type": [
+        "WebPage"
+      ],
+      "@id": "https://www.westsummerlinhomes.com/3d-tour.html#webpage",
+      "url": "https://www.westsummerlinhomes.com/3d-tour.html",
+      "name": "Summerlin West 3D Neighborhood Tour | West Summerlin Homes",
+      "description": "Look around a 360\u00b0 AI-generated street scene inspired by Summerlin West, Las Vegas, with Red Rock Canyon on the horizon. Then tour real homes with Dr. Jan Duffy.",
+      "isPartOf": {
+        "@id": "https://www.westsummerlinhomes.com/#website"
+      },
+      "about": {
+        "@id": "https://www.westsummerlinhomes.com/#agent"
+      },
+      "breadcrumb": {
+        "@id": "https://www.westsummerlinhomes.com/3d-tour.html#breadcrumb"
+      },
+      "primaryImageOfPage": "https://www.westsummerlinhomes.com/images/3d-tour/summerlin-west-og.jpg",
+      "datePublished": "2026-11-03T08:00:00-08:00",
+      "dateModified": "2026-11-03T08:00:00-08:00"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.westsummerlinhomes.com/3d-tour.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.westsummerlinhomes.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Neighborhoods",
+          "item": "https://www.westsummerlinhomes.com/neighborhoods.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "3D Tour",
+          "item": "https://www.westsummerlinhomes.com/3d-tour.html"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <style>
+        .tour-viewer {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            max-height: 70vh;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--navy);
+            box-shadow: var(--shadow-medium);
+            cursor: grab;
+            touch-action: none;
+        }
+        .tour-viewer:active { cursor: grabbing; }
+        .tour-viewer canvas { display: block; width: 100%; height: 100%; }
+        .tour-viewer .tour-fallback { width: 100%; height: 100%; object-fit: cover; }
+        .tour-hint {
+            position: absolute;
+            left: 50%;
+            bottom: 1rem;
+            transform: translateX(-50%);
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(10, 37, 64, 0.72);
+            color: var(--on-dark);
+            font-size: 0.875rem;
+            pointer-events: none;
+        }
+        .tour-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 1.5rem 0; }
+        .tour-note { font-size: 0.9rem; color: var(--text-muted); }
+        @media (max-width: 640px) { .tour-viewer { aspect-ratio: 4 / 5; } }
+    </style>
+</head>
+<body>
+        <header>
+        <nav class="container">
+            <a href="/" class="logo">
+                <img src="/images/logo.png" alt="West Summerlin Homes logo" width="42" height="42" loading="eager">
+                <span class="logo-text">
+                    <span class="logo-title">West Summerlin Homes</span>
+                    <span class="logo-subtitle">by Dr. Jan Duffy</span>
+                </span>
+            </a>
+            <a href="tel:7025001955" class="nav-call">📞 702-500-1955</a>
+            <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <ul class="nav-links" id="site-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="buyers.html">Buy</a></li>
+                <li><a href="sellers.html">Sell</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="properties.html">Properties</a></li>
+                <li><a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">MLS Search</a></li>
+                <li><a href="neighborhoods.html">Neighborhoods</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="calendly-popup nav-schedule">Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="neighborhoods.html">Neighborhoods</a></li>
+                <li class="breadcrumb-item" aria-current="page">3D Tour</li>
+            </ol>
+        </div>
+    </nav>
+    <section class="page-header">
+        <div class="container fade-in">
+            <p class="section-eyebrow">Summerlin West</p>
+            <h1>Summerlin West in 3D</h1>
+            <p class="page-byline"><time datetime="2026-11-03T08:00:00-08:00">Published November 3, 2026 · Last updated: November 3, 2026</time></p>
+            <p>Drag to look around a golden-hour street scene inspired by Summerlin West: stucco homes with tile roofs, desert landscaping, and the sandstone cliffs of Red Rock Canyon on the horizon.</p>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="container">
+            <div class="tour-viewer" id="tour-viewer" role="img" aria-label="360° view of a Summerlin West-style street at golden hour">
+                <img class="tour-fallback" src="/images/3d-tour/summerlin-west-og.jpg" alt="Summerlin West-style street at golden hour with Red Rock Canyon behind" width="1200" height="600">
+                <span class="tour-hint">Drag to look around</span>
+            </div>
+            <div class="tour-actions">
+                <a href="https://marble.worldlabs.ai/world/62a13b09-0470-4f5f-a61c-abf5f29428ad" class="cta-button" target="_blank" rel="noopener noreferrer">Walk Through the Full 3D World</a>
+                <a href="#" class="cta-button cta-button-outline calendly-popup">Tour Real Homes</a>
+            </div>
+            <div class="content-body">
+                <p class="tour-note">This scene is an AI-generated illustration created with World Labs Marble. It is inspired by the look of Summerlin West and does not depict a specific street, home, or listing. Actual homes, views, and landscaping vary.</p>
+                <h2>About Summerlin West</h2>
+                <p>Summerlin West is the newest part of the Summerlin master-planned community on the western edge of the Las Vegas Valley. Neighborhoods sit close to Red Rock Canyon National Conservation Area, with trails, parks, and mountain views throughout. Dr. Jan Duffy provides private driving tours and current MLS listings across Summerlin West.</p>
+                <div class="related-links">
+                    <a href="neighborhoods.html">All Neighborhoods</a>
+                    <a href="properties.html">View Listings</a>
+                    <a href="buyers.html">Buyers Guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Call 702-500-1955 or book an in-person consultation with Dr. Jan Duffy.</p>
+            <div class="contact-cta-group">
+                <a href="#" class="cta-button calendly-popup">Schedule Consultation</a>
+                <a href="tel:7025001955" class="cta-button cta-button-outline">Call 702-500-1955</a>
+            </div>
+        </div>
+    </section>
+        <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <strong>West Summerlin Homes</strong>
+                <span>by Dr. Jan Duffy</span>
+                <p>Luxury real estate in West Summerlin and the greater Las Vegas valley.</p>
+            </div>
+            <div class="footer-nav">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="buyers.html">Buyers Guide</a></li>
+                    <li><a href="sellers.html">Sellers Guide</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="properties.html">Properties</a></li>
+                    <li><a href="https://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">MLS Search Portal</a></li>
+                    <li><a href="neighborhoods.html">Neighborhoods</a></li>
+                    <li><a href="luxury-homes.html">Luxury Homes</a></li>
+                    <li><a href="market-update.html">Market Update</a></li>
+                    <li><a href="home-valuation.html">Home Valuation</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Dr. Jan Duffy</p>
+                <p><a href="tel:7025001955">702-500-1955</a></p>
+                </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; 2026 West Summerlin Homes by Dr. Jan Duffy. All rights reserved. Berkshire Hathaway HomeServices Nevada Properties since September 2008 · License S.0197614.LLC. <a href="#" class="calendly-popup calendly-link-btn">Schedule time with me</a></p>
+        </div>
+    </footer>
+
+    <div class="sticky-call-bar">
+        <a href="tel:7025001955">Call 702-500-1955</a>
+        <a href="#" class="calendly-popup">Schedule</a>
+    </div>
+
+    <script src="/site.js?v=20260708-fonts" defer></script>
+    <script src="/calendly.js?v=20260708-fonts" defer></script>
+    <script type="importmap">
+        {"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.min.js"}}
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+
+        // Drag-to-look equirectangular panorama viewer. The static image stays if WebGL is unavailable.
+        const mount = document.getElementById('tour-viewer');
+        const probe = document.createElement('canvas');
+        if (mount && (probe.getContext('webgl2') || probe.getContext('webgl'))) {
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(mount.clientWidth, mount.clientHeight);
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, mount.clientWidth / mount.clientHeight, 0.1, 100);
+            const geometry = new THREE.SphereGeometry(10, 60, 40);
+            geometry.scale(-1, 1, 1); // view the texture from inside the sphere
+
+            new THREE.TextureLoader().load('/images/3d-tour/summerlin-west-pano.jpg', (texture) => {
+                texture.colorSpace = THREE.SRGBColorSpace;
+                scene.add(new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ map: texture })));
+                mount.querySelector('.tour-fallback')?.remove();
+                mount.prepend(renderer.domElement);
+            });
+
+            let lon = -30; // start facing the Red Rock cliffs
+            let lat = 0;
+            let dragging = false;
+            let lastX = 0;
+            let lastY = 0;
+            let idle = true;
+
+            mount.addEventListener('pointerdown', (e) => {
+                dragging = true;
+                idle = false;
+                lastX = e.clientX;
+                lastY = e.clientY;
+                mount.setPointerCapture(e.pointerId);
+            });
+            mount.addEventListener('pointermove', (e) => {
+                if (!dragging) return;
+                lon -= (e.clientX - lastX) * 0.15;
+                lat = Math.max(-80, Math.min(80, lat + (e.clientY - lastY) * 0.15));
+                lastX = e.clientX;
+                lastY = e.clientY;
+            });
+            const stop = () => { dragging = false; };
+            mount.addEventListener('pointerup', stop);
+            mount.addEventListener('pointercancel', stop);
+            mount.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                camera.fov = Math.max(35, Math.min(90, camera.fov + e.deltaY * 0.05));
+                camera.updateProjectionMatrix();
+            }, { passive: false });
+            window.addEventListener('resize', () => {
+                camera.aspect = mount.clientWidth / mount.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(mount.clientWidth, mount.clientHeight);
+            });
+
+            const target = new THREE.Vector3();
+            renderer.setAnimationLoop(() => {
+                if (idle) lon += 0.03;
+                target.setFromSphericalCoords(1, THREE.MathUtils.degToRad(90 - lat), THREE.MathUtils.degToRad(lon));
+                camera.lookAt(target);
+                renderer.render(scene, camera);
+            });
+        }
+    </script>
+</body>
+</html>
