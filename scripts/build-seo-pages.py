@@ -26,6 +26,7 @@ SITE_LAUNCH = "2025-08-10"
 SITE_TIMEZONE = ZoneInfo("America/Los_Angeles")
 PAGE_DATES: dict[str, dict[str, str]] = {
     "market-update.html": {"published": "2025-08-10", "modified": TODAY},
+    "3d-tour.html": {"published": "2026-11-03"},
 }
 BYLINE_RE = re.compile(
     r'\s*<p class="page-byline"><time datetime="[^"]*">.*?</time></p>',
@@ -1690,6 +1691,7 @@ def generate_neighborhoods_hub():
     ("luxury-homes.html", "Luxury Homes"),
     ("market-update.html", "Market Update"),
     ("about.html", "About Dr. Jan Duffy"),
+    ("3d-tour.html", "3D Neighborhood Tour"),
 ])}"""
     schema_extra = [neighborhoods_item_list(), faq_schema_entity(faqs, f"{NAP['url']}/neighborhoods.html#faq")]
     write_page(
