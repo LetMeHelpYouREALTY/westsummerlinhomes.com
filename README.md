@@ -30,9 +30,9 @@ Set in the Vercel project dashboard, never committed. See `.env.example`:
 
 | Variable | Used for |
 |---|---|
-| `FUB_API_KEY` | Follow Up Boss lead submission (`api/leads/submit.js`) |
-| `GSC_VERIFICATION` | Google Search Console verification |
-| `NEXT_PUBLIC_IMAGE_CDN_URL` | Image CDN origin |
+| `FUB_API_KEY` | Follow Up Boss lead submission (`api/leads/submit.js`). **The only variable the live site reads.** |
+| `GSC_VERIFICATION` | Listed in `.env.example`, but not read by the static site (there is no build step to inject it). To verify Search Console, add the `google-site-verification` meta tag to `index.html` by hand. |
+| `NEXT_PUBLIC_IMAGE_CDN_URL` | Only used by the undeployed Next.js code. The static site's CDN origin is set in `image-cdn.js` (default `https://cdn.westsummerlinhomes.com`, overridable with `window.IMAGE_CDN`). |
 
 ## Lead capture
 
